@@ -1,18 +1,28 @@
 import { isLogin, accessToken, ISLOGIN, ACCESS_TOKEN } from "../actions/index";
 import { initialState } from "./initialState";
 
-type ActionType = ReturnType<typeof isLogin> | ReturnType<typeof accessToken>;
+type ActionA = ReturnType<typeof isLogin>;
+// { type: typeof ISLOGIN; payload: boolean }
+type ActionB = ReturnType<typeof accessToken>;
+// { type: typeof ACCESS_TOKEN; payload: string }
+type Action = ActionA | ActionB;
 
-const userReducer = (state = initialState, action: ActionType) => {
+type Return = {
+	isLogin: boolean;
+	accessToken: string;
+};
+
+const userReducer = (state = initialState, action: Action): Return => {
 	switch (action.type) {
+		// action.type => typeof ISLOGIN("ISLOGIN") | typeof ACCESS_TOKEN("ACCESS_TOKEN")
 		case ISLOGIN:
-			return { isLogin: action.payload };
+			// action.type => const ISLOGIN=> "ISLOGIN"
+			return { isLogin: action.payload, accessToken: state.accessToken };
 		case ACCESS_TOKEN:
-			return { accessToken: action.payload };
-
+			// action.type => const ACCESS_TOKEN=> "ACCESS_TOKEN"
+			return { isLogin: state.isLogin, accessToken: action.payload };
 		default:
 			return state;
 	}
 };
-
 export default userReducer;

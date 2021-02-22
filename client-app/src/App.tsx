@@ -1,21 +1,74 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState, useEffect, ReactElement } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import axios from "axios";
 
-function App() {
+import {
+	Manual,
+	SignIn,
+	Paint,
+	Diary,
+	Application,
+	DiariesView,
+	DiaryView,
+	DiariesViewPublic,
+	DiaryViewPublic,
+	Calendar,
+	CalendarRows,
+	UserInfo,
+} from "./pages/index";
+
+function App(): ReactElement {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-					Learn React
-				</a>
-			</header>
-		</div>
+		<>
+			<Router>
+				<Main>
+					{/* <Container className="App"> */}
+					<Switch>
+						<Route exact path="/">
+							<Manual />
+							<SignIn />
+						</Route>
+						<Route exact path="/signup">
+							<Manual />
+							<Application />
+						</Route>
+						<Route exact path="/creatediary">
+							<Paint />
+							<Diary />
+						</Route>
+						<Route exact path="/diaryview">
+							<DiariesView />
+							<DiaryView />
+						</Route>
+						<Route exact path="/diarypublic">
+							<DiariesViewPublic />
+							<DiaryViewPublic />
+						</Route>
+						<Route exact path="/userinfo/calendar">
+							<Calendar />
+							<UserInfo />
+						</Route>
+						<Route path="/userinfo/calendarrows">
+							<CalendarRows />
+							<UserInfo />
+						</Route>
+					</Switch>
+					{/* </Container> */}
+				</Main>
+			</Router>
+		</>
 	);
 }
+// 아래 스타일을 적용한 컴포넌트를 만들어준다.
+const Main = styled.div`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	border: 10px solid blue;
+	height: 70rem;
+	max-width: 2000px;
+	// max-height: 4000px;
+`;
 
 export default App;
