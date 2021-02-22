@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
 
-export default function Nav(): ReactElement {
+export default function Application(): ReactElement {
 	const Main = styled.div`
-		border: 10px solid black;
+		flex-grow: 1;
 	`;
-	return <Main>Nav bar</Main>;
+
+	return <Main />;
 }
