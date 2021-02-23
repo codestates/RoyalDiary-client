@@ -6,8 +6,8 @@ import logoImg from "../assets/images/royalschool.png";
 
 export default function Application(): ReactElement {
 	const Main = styled.div`
-		background: smokewhite;
-		border: 10px solid black;
+		background: #f3f3e9;
+		// border: 10px solid black;
 		margin-right: 50px;
 		display: flex;
 		flex-direction: column;
@@ -56,8 +56,9 @@ export default function Application(): ReactElement {
 
 	const Date = styled.div`
 		// border: 5px solid red;
-		flex-grow: 0.5;
+		flex-grow: 0.7;
 		width: 25rem;
+		margin-bottom: 0.8rem;
 		font-size: 1.5rem;
 		font-weight: bold;
 		letter-spacing: 0.3rem;
@@ -86,7 +87,7 @@ export default function Application(): ReactElement {
 	const Footer = styled.div`
 		// border: 3px solid black;
 		text-align: center;
-		flex-grow: 0.2;
+		flex-grow: 0.5;
 		display: flex;
 		// flex-direction: row;
 		height: 2rem;
