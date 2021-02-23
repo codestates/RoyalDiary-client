@@ -23,7 +23,6 @@ function App(): ReactElement {
 		<>
 			<Router>
 				<Main>
-					{/* <Container className="App"> */}
 					<Switch>
 						<Route exact path="/">
 							<Manual />
@@ -65,8 +64,8 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	border: 10px solid blue;
-	height: 60rem;
+	// border: 10px solid blue;
+	height: 55rem;
 	max-width: 2000px;
 	// max-height: 4000px;
 `;

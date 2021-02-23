@@ -10,11 +10,11 @@ export default function SignIn(): ReactElement {
 	const Main = styled.div`
 		background: smokewhite;
 		// border: 10px solid black;
-		margin-right: 50px;
+		margin-right: 0rem;
 		display: flex;
 		flex-direction: row;
 		flex-grow: 1;
-		max-width: 55rem;
+		max-width: 50rem;
 	`;
 	const Purple = styled.div`
 		// border: 10px solid purple;
