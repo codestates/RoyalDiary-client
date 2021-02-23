@@ -3,59 +3,66 @@ import styled, { keyframes } from "styled-components";
 
 export default function Signin(): ReactElement {
 	const Main = styled.div`
-		position: relative;
-		bottom: 50px;
-		margin: auto;
 		// border: 10px solid black;
+		position: relative;
+		left: -2rem;
+		bottom: 1rem;
+		margin: auto;
 		display: flex;
+		height: 25%;
+		width: 80%;
 	`;
 	const Input = styled.div`
-		// border: 1px solid red;
+		// border: 3px solid red;
 		position: relative;
-		left: -10px;
-		margin: auto;
+		left: 0rem;
+		margin: 2rem 0rem 3rem 1rem;
 		padding: auto;
-		width: 400px;
-		height: 120px;
+		width: 28rem;
+		height: 10rem;
 	`;
 	const InputBox = styled.div`
 		// border: 1px solid blue;
-		font-size: 16px;
+		font-size: 1rem;
 		display: flex;
-		margin: 25px;
+		margin: 2rem;
+		width: 100%;
 	`;
 	const InputInfo = styled.input`
 		// color: palevioletred;
 		font-size: 1.2em;
 		border: 2px solid palevioletred;
 		// border-radius: 3px;
-		margin-left: 10px;
-		maring-top: 50px;
+		margin-left: 1rem;
+		maring-top: 5rem;
 		background-color: #dcdcdc;
 	`;
 	const Button = styled.div`
-		// border: 1px solid green;
-		width: 4rem;
-		padding-bottom: 10px;
+		// border: 4px solid green;
+		width: 10rem;
+		height: 10rem;
+		margin: 1rem 0rem 3rem 3rem;
+		padding: 1rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 	`;
 	const ClickButton = styled.div`
 		// border: 1px solid black;
-		width: 100px;
-		height: 50px;
-		margin-top: 9px;
+		width: 8rem;
+		height: 4rem;
+		margin-top: -1rem;
 		display: flex;
 		justify-content: space-around;
 	`;
 	const ButtonSole = styled.button`
+		white-space: normal;
 		width: 3rem;
 		height: 3rem;
-		font-size: 0.8rem;
-		margin: 10px 10px
+		font-size: 1rem;
+		margin: 1rem 0.5rem;
 		padding: 0.5px;
-  `;
+	`;
 	const fontSize = {
 		fontSize: "18px",
 	};
@@ -83,7 +90,9 @@ export default function Signin(): ReactElement {
 				</ClickButton>
 				<ClickButton>
 					<ButtonSole type="button">집에 가기</ButtonSole>
-					<ButtonSole type="button">소샬 로그인</ButtonSole>
+					<ButtonSole type="button" style={{ fontSize: "0.9rem" }}>
+						소샬 로그인
+					</ButtonSole>
 				</ClickButton>
 			</Button>
 		</Main>

@@ -3,14 +3,12 @@ import styled from "styled-components";
 
 function Comment() {
 	const CommentBox = styled.div`
-		margin-left: 10px;
+		margin-top: 0.5rem;
 	`;
 	const CommentStyle = styled.div`
-		background: #ededed;
+		background: #edede9;
 		display: inline-block;
-		justify-content: space-between;
-		align-items: center;
-		width: 450px;
+		width: 500px;
 		height: 80px;
 		border: 1px solid black;
 	`;
