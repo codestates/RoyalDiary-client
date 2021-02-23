@@ -66,7 +66,7 @@ const Main = styled.div`
 	flex-direction: row;
 	flex-wrap: wrap;
 	border: 10px solid blue;
-	height: 70rem;
+	height: 55rem;
 	max-width: 2000px;
 	// max-height: 4000px;
 `;
