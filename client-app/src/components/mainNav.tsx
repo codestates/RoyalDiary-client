@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function Mainnav(): ReactElement {
 	const Main = styled.div`
-		// border: 10px solid black;
+		border: 5px solid black;
 		position: relative;
 		// bottom: 1rem;
 		margin: auto;
