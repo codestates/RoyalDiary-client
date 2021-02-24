@@ -1,5 +1,6 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import Calendar from "../components/calendar";
 
 export default function CalendarRows(): ReactElement {
 	const Main = styled.div`
@@ -7,13 +8,9 @@ export default function CalendarRows(): ReactElement {
 		width: 50%;
 	`;
 
-	const A = styled.div`
-		border: 1px solid black;
-	`;
-
 	return (
 		<Main>
-			<A>dd</A>
+			<Calendar />
 		</Main>
 	);
 }
