@@ -23,8 +23,8 @@ function App(): ReactElement {
 	return (
 		<>
 			<Router>
-				<Mainnav color="" />
 				<Main>
+					<Mainnav color="" />
 					<Switch>
 						<Route exact path="/">
 							<Manual />
@@ -63,11 +63,14 @@ function App(): ReactElement {
 // 아래 스타일을 적용한 컴포넌트를 만들어준다.
 const Main = styled.div`
 	display: flex;
+	position: relative;
 	flex-direction: row;
 	flex-wrap: wrap;
-	// border: 10px solid blue;
-	height: 55rem;
-	max-width: 2000px;
+	border: 10px solid blue;
+	height: 90vh;
+	width: 90vw;
+	margin-left: 4rem;
+	// max-width: 1800px;
 	// max-height: 4000px;
 `;
 
