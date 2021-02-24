@@ -66,11 +66,9 @@ const Main = styled.div`
 	position: relative;
 	flex-direction: row;
 	flex-wrap: wrap;
-	border: 10px solid blue;
-	height: 90vh;
-	width: 90vw;
-	margin-left: 4rem;
-	// max-width: 1800px;
+	// border: 10px solid blue;
+	height: 60rem;
+	max-width: 1800px;
 	// max-height: 4000px;
 `;
 

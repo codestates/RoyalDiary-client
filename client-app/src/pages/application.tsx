@@ -8,11 +8,11 @@ export default function Application(): ReactElement {
 	const Main = styled.div`
 		background: #f3f3e9;
 		// border: 10px solid black;
-		margin-right: 7rem;
+		margin-right: 50px;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-		max-width: 47rem;
+		max-width: 50rem;
 	`;
 
 	const Header = styled.div`
@@ -22,42 +22,52 @@ export default function Application(): ReactElement {
 		padding-left: 4rem;
 		flex-grow: 0.1;
 		align-items: center;
-		font-size: 3rem;
-		// font-weight: bold;
+		font-size: 4rem;
 		letter-spacing: 0.5rem;
 	`;
 	const Body = styled.div`
 		// border: 3px solid blue;
+		flex-grow: 0.4;
+		height: 5rem;
 		display: flex;
 	`;
 	const Content = styled.div`
 		// border: 3px solid black;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
 		padding-left: 3rem;
 		line-height: 2.5rem;
+		font-size: 1rem;
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
+		// flex-wrap: wrap;
+		// align-items: center;
 	`;
 
 	const Text = styled.div`
 		// border: 3px solid red;
+		flex-grow: 3.5;
+		// margin: auto -0.1rem;
 		padding-left: 1rem;
 		width: 25rem;
-		font-size: 1.3rem;
+		font-size: 1.4rem;
 	`;
 
-	const Todaydate = styled.div`
+	const Date = styled.div`
 		// border: 5px solid red;
+		flex-grow: 0.7;
 		width: 25rem;
 		margin-bottom: 0.8rem;
 		font-size: 1.5rem;
 		font-weight: bold;
-		text-align: right;
 		letter-spacing: 0.3rem;
+		text-align: right;
 	`;
 	const Principal = styled.div`
 		// border: 5px solid red;
 		width: 25rem;
+		// flex-grow: 3;
 		font-size: 1.8rem;
 		font-weight: bold;
 		text-align: right;
@@ -77,10 +87,13 @@ export default function Application(): ReactElement {
 	const Footer = styled.div`
 		// border: 3px solid black;
 		text-align: center;
+		flex-grow: 0.5;
 		display: flex;
+		// flex-direction: row;
 		height: 2rem;
 		margin-right: -0.2rem;
-		margin-top: 3rem;
+		// align-itmes: center;
+		// justify-content: center;
 	`;
 
 	const Logo = styled.div`
@@ -114,12 +127,12 @@ export default function Application(): ReactElement {
 		borderRadius: "1rem",
 	};
 
-	const Today = (): string => {
-		const year: number = new Date().getFullYear();
-		const month = new Date().getMonth() + 1;
-		const day = new Date().getDate();
-		return `${year}년 ${month}월 ${day}일`;
-	};
+	// const Today = (): string => {
+	// 	const year: number = new Date().getFullYear();
+	// 	const month = new Date().getMonth() + 1;
+	// 	const day = new Date().getDate();
+	// 	return `${year}년 ${month}월 ${day}일`;
+	// };
 
 	return (
 		<Main>
@@ -131,7 +144,7 @@ export default function Application(): ReactElement {
 						<br />
 						지원합니다.
 					</Text>
-					<Todaydate>{Today()}</Todaydate>
+					<Date>2021년 2월 24일</Date>
 					<Principal>
 						<span style={pstyle1}>로얄 국민학교</span>
 						<span style={pstyle2}>교장귀하</span>

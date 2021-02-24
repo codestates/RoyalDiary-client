@@ -2,16 +2,19 @@ import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
 import PropTypes from "prop-types";
 
-export default function Mainnav(): ReactElement {
+export default function SubNav(): ReactElement {
 	const Main = styled.div`
-		border: 3px solid red;
+		// border: 3px solid red;
 		position: relative;
 		// bottom: 1rem;
-		right: 0.9rem;
+		right: -23rem;
+		bottom: 5rem;
 		margin: auto;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		height: 50%;
+		width: 15%;
 	`;
 
 	const Navsole = styled.div`
@@ -22,14 +25,14 @@ export default function Mainnav(): ReactElement {
 	`;
 	const Navin = styled.div`
 		// border: 1px solid black;
-		width: 28%;
+		width: 40%;
 		background: ${(props) => props.color};
 		// flex-grow: 1.3;
 	`;
 
 	const Navout = styled.div`
 		// border: 1px solid blue;
-		width: 50%;
+		width: 60%;
 		background: ${(props) => props.color};
 		// flex-grow: 2;
 	`;
@@ -73,6 +76,6 @@ export default function Mainnav(): ReactElement {
 	);
 }
 
-Mainnav.propTypes = {
+SubNav.propTypes = {
 	color: PropTypes.string.isRequired,
 };

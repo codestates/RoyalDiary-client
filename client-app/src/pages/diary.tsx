@@ -7,11 +7,14 @@ export default function Diary(): ReactElement {
 	const Main = styled.div`
 		background: #f6f6ee;
 		// border: 5px solid black;
-		margin-right: 8rem;
+		margin-left: 8rem;
+		margin-right: 1rem;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-		max-width: 50rem;
+		max-width: 45rem;
+		max-height: 70rem;
+		// over-flow: visible;
 	`;
 
 	const Buttons = styled.div`

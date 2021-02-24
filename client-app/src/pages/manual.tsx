@@ -110,6 +110,20 @@ export default function Manual(): ReactElement {
 		flex-direction: column;
 		// margin: -0.1rem;
 	`;
+	const Logo = styled.div`
+		// border: 5px solid red;
+		flex-grow: 4;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: -10px;
+	`;
+	// const Lesson = styled.div`
+	// 	border: 1px solid black;
+	// 	flex-grow: 1;
+	// 	text-align: center;
+	// 	font-weight: bold;
+	// `;
 
 	const imgstyle = { width: "80%", height: "80%" };
 

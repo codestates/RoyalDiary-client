@@ -7,17 +7,32 @@ import CPaint from "../components/paint";
 export default function Paint(): ReactElement {
 	const Main = styled.div`
 		background: #f6f6ee;
+<<<<<<< HEAD
 		border-right: 5px solid black;
 		margin-left: 6rem;
 		flex-grow: 0.68;
 		display: flex;
 		flex-direction: column;
 		height: 89vh;
+=======
+		border: 5px solid black;
+		margin-left: 8rem;
+		margin-right: 1rem;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		max-width: 50rem;
+		max-height: 70rem;
+>>>>>>> 45b89df328ee405a08afaae645e769c63c3db5fe
 	`;
 	const Paintbox = styled.div`
 		border: 5px solid black;
 		border-radius: 2rem;
+<<<<<<< HEAD
 		margin: 3rem 2rem 3rem 2rem;
+=======
+		margin: 5rem 2rem 3rem 2rem;
+>>>>>>> 45b89df328ee405a08afaae645e769c63c3db5fe
 		height: 90%;
 		display: flex;
 		flex-direction: column;
