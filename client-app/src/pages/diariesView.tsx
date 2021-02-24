@@ -64,7 +64,6 @@ export default function DiariesView(): ReactElement {
 				<DiaryCard />
 				<DiaryCard />
 				<DiaryCard />
-				<DiaryCard />
 			</Cards>
 		</Main>
 	);
