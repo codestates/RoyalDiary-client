@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 
 export default function Mainnav(): ReactElement {
 	const Main = styled.div`
-		border: 5px solid black;
+		border: 3px solid red;
 		position: relative;
 		// bottom: 1rem;
+		right: 0.9rem;
 		margin: auto;
 		display: flex;
 		flex-direction: column;
