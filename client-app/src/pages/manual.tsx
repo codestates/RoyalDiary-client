@@ -8,78 +8,97 @@ export default function Manual(): ReactElement {
 	const Main = styled.div`
 		background: smokewhite;
 		border: 5px solid black;
-		margin-left: 8rem;
+		margin-left: 6rem;
 		margin-right: 1rem;
+		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
-		max-width: 50rem;
-		max-height: 70rem;
+		// width: 35rem;
+		height: 89vh;
 	`;
 
 	const Header = styled.div`
 		// border: 5px solid black;
 		display: flex;
 		flex-direction: row;
-		height: 7rem;
-		width: 100%;
-		// flex-grow: 0.1;
+		flex-grow: 0.1;
 	`;
+	const Logo = styled.div`
+		// border: 5px solid red;
+		flex-grow: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 7vw;
+		padding: -10px;
+	`;
+
+	const Title = styled.div`
+		// border: 5px solid black;
+		flex-grow: 7;
+		justify-content: center;
+		margin: auto;
+		font-size: 2rem;
+		font-weight: bold;
+		letter-spacing: 2rem;
+		display: flex;
+	`;
+
+	const Contactinfo = styled.div`
+		border-left: 3px solid black;
+		flex-grow: 0.3;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		font-size: 0.7rem;
+	`;
+
 	const Notification = styled.div`
-		// border: 3px solid black;
-		flex-grow: 0.4;
-		height: 5rem;
+		// border: 3px solid red;
 	`;
 	const Ntitle = styled.div`
 		border: 3px solid black;
-		// flex-grow: 0.5;
-		font-size: 1.3rem;
+		flex-grow: 0.5;
 		text-align: center;
 		letter-spacing: 0.3rem;
 		margin-left: -0.2rem;
 		margin-right: -0.3rem;
+		font-size: 1rem;
 	`;
 	const Ncontent = styled.div`
 		border-bottom: 3px solid black;
-		height: 8rem;
+		flex-grow: 0.5;
 		padding-left: 1rem;
 		margin-left: -0.1rem;
 		margin-right: -0.2rem;
-
-		// position: relative;
-		// top: 1rem;
-		// left: -0.1rem;
-		// right: 1rem;
-		font-size: 1rem;
+		font-size: 0.8rem;
 	`;
 
 	const Developerinfo = styled.div`
 		border-top: 3px solid black;
-		flex-grow: 0.3;
+		flex-grow: 0.1;
 		margin: auto -0.1rem;
+		font-size: 0.8rem;
 	`;
 	const Footer = styled.div`
 		border-top: 3px solid black;
+		margin: 0rem -0.1rem;
 		text-align: center;
-		flex-grow: 0.3;
+		flex-grow: 0.1;
 		display: flex;
 		flex-direction: column;
-		height: 2rem;
-		margin-right: -0.2rem;
-		// align-itmes: center;
-		// justify-content: center;
 	`;
 	const Fdate = styled.div`
 		// border: 5px solid red;
 		flex-grow: 1;
-		font-size: 1.5rem;
-		font-weight: bold;
 		letter-spacing: 0.3rem;
+		font-weight: bold;
+		font-size: 1rem;
 	`;
 	const Fprincipal = styled.div`
 		// border: 5px solid red;
 		flex-grow: 3;
-		font-size: 3rem;
+		font-size: 2rem;
 		font-weight: bold;
 		letter-spacing: 1rem;
 	`;
@@ -91,40 +110,8 @@ export default function Manual(): ReactElement {
 		flex-direction: column;
 		// margin: -0.1rem;
 	`;
-	const Logo = styled.div`
-		// border: 5px solid red;
-		flex-grow: 4;
-		// text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: -10px;
-	`;
-	// const Lesson = styled.div`
-	// 	border: 1px solid black;
-	// 	flex-grow: 1;
-	// 	text-align: center;
-	// 	font-weight: bold;
-	// `;
 
-	const Title = styled.div`
-		// border: 5px solid black;
-		flex-grow: 1;
-		text-align: center;
-		margin: auto;
-		font-size: 3rem;
-		font-weight: bold;
-		letter-spacing: 2rem;
-	`;
-	const Contactinfo = styled.div`
-		border-left: 3px solid black;
-		flex-grow: 0.3;
-		margin: -0.1rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		font-size: 0.8rem;
-	`;
+	const imgstyle = { width: "80%", height: "80%" };
 
 	const Today = () => {
 		const year = new Date().getFullYear();
@@ -138,9 +125,8 @@ export default function Manual(): ReactElement {
 			<Header>
 				<Logolesson>
 					<Logo>
-						<img src={logoImg} width="100rem" height="100rem" alt="" />
+						<img src={logoImg} style={imgstyle} alt="" />
 					</Logo>
-					{/* <Lesson>행복하게 살자</Lesson> */}
 				</Logolesson>
 				<Title>가정통신문</Title>
 				<Contactinfo>
