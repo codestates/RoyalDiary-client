@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
 import { relative } from "path";
 import Signin from "../components/signin";
-import Mainnav from "../components/mainNav";
 import childrenImg from "../assets/images/children.png";
 import titleImg from "../assets/images/title.png";
 
@@ -10,7 +9,7 @@ export default function SignIn(): ReactElement {
 	const Main = styled.div`
 		background: smokewhite;
 		// border: 10px solid black;
-		margin-right: 0rem;
+		margin-right: 4rem;
 		display: flex;
 		flex-direction: row;
 		flex-grow: 1;
@@ -19,43 +18,37 @@ export default function SignIn(): ReactElement {
 	const Purple = styled.div`
 		// border: 10px solid purple;
 		background: rgb(73, 65, 126);
-		width: 5rem;
+		width: 6rem;
 	`;
 	const RedWhite = styled.div`
-		// border: 1px solid black;
-		width: 100%;
+		// border: 5px solid black;
+		width: 41rem;
 		display: flex;
-		// flex-direction: column;
-		flex-wrap: wrap;
+		flex-direction: column;
 	`;
 	const Red = styled.div`
-		// border-right: 1px solid red;
-		height: 25%;
-		width: 75%;
-		padding-left: 100px;
-		align-items: center;
-		font-size: 1.5em;
-		background: #eb6262;
-	`;
-	const Imgnav = styled.div`
-		// border: 10px solid blue;
-		display: flex;
-		width: 100%;
-	`;
-	const Image = styled.div`
-		// border: 10px solid black;
-		height: 90%;
-		width: 75%;
-		margin: 1rem 1rem 1rem 3rem;
-		padding: auto 10rem;
+		// border: 10px solid green;
+		flex-grow: 1;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		flex-wrap: wrap;
+		overflow: hidden;
+		font-size: 1.5rem;
+		background: #eb6262;
+	`;
+	const Image = styled.div`
+		// border: 10px solid black;
+		flex-grow: 4;
+		// margin: 1rem 3rem 1rem 4.5rem;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	`;
 	const imageStyle = {
 		border: "1px solid black",
-		padding: "0px 40px 10px 60px",
+		display: "flex",
+		justifyContent: "center",
 	};
 
 	return (
@@ -63,16 +56,13 @@ export default function SignIn(): ReactElement {
 			<Purple />
 			<RedWhite>
 				<Red>
-					<img className="title_image" src={titleImg} width="80%" height="100%" alt="" />
+					<img className="title_image" src={titleImg} width="420rem" height="auto" alt="" />
 				</Red>
-				<Imgnav>
-					<Image>
-						<div style={imageStyle}>
-							<img className="children_image" src={childrenImg} width="100%" height="100%" alt="" />
-						</div>
-					</Image>
-					<Mainnav color="#000000" />
-				</Imgnav>
+				<Image>
+					<div style={imageStyle}>
+						<img className="children_image" src={childrenImg} width="400rem" height="auto" alt="" />
+					</div>
+				</Image>
 				<Signin />
 			</RedWhite>
 		</Main>

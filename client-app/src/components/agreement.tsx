@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 export default function Agreement(): ReactElement {
 	const Main = styled.div`
 		// border: 1px solid red;
-		margin-top: 3rem;
+		// flex-grow: 1;
 		display: flex;
 		flex-direction: column;
 	`;
@@ -13,12 +13,11 @@ export default function Agreement(): ReactElement {
 		margin: 1rem auto;
 		height: 10rem;
 		flex-grow: 1;
-		width: 80%;
+		width: 38rem;
 		display: flex;
 		flex-direction: row;
-		// flex-wrap: wrap;
 		border-radius: 2rem;
-		// align-items: center;
+		background: white;
 	`;
 	const Title = styled.div`
 		// border: 3px solid red;
@@ -70,11 +69,11 @@ export default function Agreement(): ReactElement {
 		margin-top: -0.05rem;
 	`;
 	const Input = styled.input`
-		border: 1px solid #f3f3e9;
+		border: 1px solid white;
 		margin: 0.4rem 0.3rem 0.3rem 0.3rem;
 		width: 100%
 		font-size: 1.2rem;
-		background: #f3f3e9;
+		// background: #f3f3e9;
 	`;
 
 	// const lastline = {
@@ -92,6 +91,7 @@ export default function Agreement(): ReactElement {
 		padding-left: 2rem;
 		justify-content: space-around;
 		font-size: 1.2rem;
+		background: white;
 	`;
 
 	const Checkstyle = {

@@ -2,6 +2,7 @@ import React, { useState, useEffect, ReactElement } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
+import Mainnav from "./components/mainNav";
 
 import {
 	Manual,
@@ -23,6 +24,7 @@ function App(): ReactElement {
 		<>
 			<Router>
 				<Main>
+					<Mainnav color="" />
 					<Switch>
 						<Route exact path="/">
 							<Manual />
@@ -53,7 +55,6 @@ function App(): ReactElement {
 							<UserInfo />
 						</Route>
 					</Switch>
-					{/* </Container> */}
 				</Main>
 			</Router>
 		</>
@@ -62,11 +63,14 @@ function App(): ReactElement {
 // 아래 스타일을 적용한 컴포넌트를 만들어준다.
 const Main = styled.div`
 	display: flex;
+	position: relative;
 	flex-direction: row;
 	flex-wrap: wrap;
-	// border: 10px solid blue;
-	height: 60rem;
-	max-width: 1800px;
+	border: 10px solid blue;
+	height: 90vh;
+	width: 90vw;
+	margin-left: 4rem;
+	// max-width: 1800px;
 	// max-height: 4000px;
 `;
 
