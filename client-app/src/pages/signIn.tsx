@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
 import { relative } from "path";
 import Signin from "../components/signin";
-import Mainnav from "../components/mainNav";
 import childrenImg from "../assets/images/children.png";
 import titleImg from "../assets/images/title.png";
 
@@ -71,7 +70,6 @@ export default function SignIn(): ReactElement {
 							<img className="children_image" src={childrenImg} width="100%" height="100%" alt="" />
 						</div>
 					</Image>
-					<Mainnav color="#000000" />
 				</Imgnav>
 				<Signin />
 			</RedWhite>

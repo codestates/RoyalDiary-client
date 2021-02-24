@@ -2,6 +2,7 @@ import React, { useState, useEffect, ReactElement } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
+import Mainnav from "./components/mainNav";
 
 import {
 	Manual,
@@ -22,8 +23,8 @@ function App(): ReactElement {
 	return (
 		<>
 			<Router>
+				<Mainnav color="" />
 				<Main>
-					{/* <Container className="App"> */}
 					<Switch>
 						<Route exact path="/">
 							<Manual />
@@ -54,7 +55,6 @@ function App(): ReactElement {
 							<UserInfo />
 						</Route>
 					</Switch>
-					{/* </Container> */}
 				</Main>
 			</Router>
 		</>

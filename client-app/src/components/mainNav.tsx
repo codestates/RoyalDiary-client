@@ -6,13 +6,13 @@ export default function Mainnav(): ReactElement {
 	const Main = styled.div`
 		// border: 10px solid black;
 		position: relative;
-		// bottom: 1rem;
+		right: -47rem;
+		top: 35rem;
+		width: 9rem;
 		margin: auto;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		height: 50%;
-		width: 15%;
 	`;
 
 	const Navsole = styled.div`
