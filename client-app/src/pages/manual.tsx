@@ -94,7 +94,6 @@ export default function Manual(): ReactElement {
 	const Logo = styled.div`
 		// border: 5px solid red;
 		flex-grow: 4;
-		// text-align: center;
 		display: flex;
 		align-items: center;
 		justify-content: center;
