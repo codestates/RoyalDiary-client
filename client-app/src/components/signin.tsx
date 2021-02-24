@@ -3,84 +3,74 @@ import styled, { keyframes } from "styled-components";
 
 export default function Signin(): ReactElement {
 	const Main = styled.div`
-		// border: 10px solid black;
-		position: relative;
-		left: -2rem;
-		bottom: 1rem;
-		margin: auto;
+		// border: 10px solid yellow;
+		flex-grow: 0.1;
 		display: flex;
-		height: 25%;
-		width: 80%;
+		justify-content: space-around;
+		margin-bottom: 2rem;
+		padding: 1rem;
 	`;
 	const Input = styled.div`
-		// border: 3px solid red;
-		position: relative;
-		left: 0rem;
-		margin: 2rem 0rem 3rem 1rem;
-		padding: auto;
-		width: 28rem;
-		height: 10rem;
+		// border: 3px solid black;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	`;
 	const InputBox = styled.div`
 		// border: 1px solid blue;
 		font-size: 1rem;
 		display: flex;
-		margin: 2rem;
-		width: 100%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		margin-top: 0.5vw;
 	`;
 	const InputInfo = styled.input`
 		// color: palevioletred;
-		font-size: 1.2em;
+		font-size: 1.2rem;
 		border: 2px solid palevioletred;
-		// border-radius: 3px;
-		margin-left: 1rem;
+		width: 13vw;
 		maring-top: 5rem;
 		background-color: #dcdcdc;
 	`;
 	const Button = styled.div`
 		// border: 4px solid green;
-		width: 10rem;
-		height: 10rem;
-		margin: 1rem 0rem 3rem 3rem;
-		padding: 1rem;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		justify-content: space-around;
+		width: 7vw;
 	`;
 	const ClickButton = styled.div`
 		// border: 1px solid black;
 		width: 8rem;
 		height: 4rem;
-		margin-top: -1rem;
 		display: flex;
-		justify-content: space-around;
+		align-items: center;
 	`;
 	const ButtonSole = styled.button`
-		white-space: normal;
-		width: 3rem;
+		// border: 1px solid black;
+		width: 5rem;
 		height: 3rem;
-		font-size: 1rem;
-		margin: 1rem 0.5rem;
-		padding: 0.5px;
+		margin: 0.3rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	`;
-	const fontSize = {
-		fontSize: "18px",
+	const fontstyle = {
+		fontSize: "1rem",
+		marginRight: "0.2rem",
 	};
 
 	return (
 		<Main>
 			<Input>
 				<InputBox>
-					<div style={fontSize}>이름 쓰는곳</div>
-					<div>
-						<InputInfo className="inputInfo" placeholder="전자우편을 입력하세요" />
-					</div>
+					<div style={fontstyle}>이름 쓰는곳</div>
+					<InputInfo className="inputInfo" placeholder="전자우편을 입력하세요" />
 				</InputBox>
 				<InputBox>
-					<div style={fontSize}>암호 쓰는곳</div>
-					<div>
-						<InputInfo className="inputInfo" placeholder="암호를 입력하세요" />
-					</div>
+					<div style={fontstyle}>암호 쓰는곳</div>
+					<InputInfo className="inputInfo" placeholder="암호를 입력하세요" />
 				</InputBox>
 			</Input>
 			<Button>
@@ -90,9 +80,7 @@ export default function Signin(): ReactElement {
 				</ClickButton>
 				<ClickButton>
 					<ButtonSole type="button">집에 가기</ButtonSole>
-					<ButtonSole type="button" style={{ fontSize: "0.9rem" }}>
-						소샬 로그인
-					</ButtonSole>
+					<ButtonSole type="button">소샬 로그인</ButtonSole>
 				</ClickButton>
 			</Button>
 		</Main>
