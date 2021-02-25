@@ -2,9 +2,14 @@ import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
 
 const Main = styled.div`
-	margin: 10%;
-	width: 80%;
-	height: 40%;
+	border: 0.15rem solid black;
+	width: 100%;
+`;
+
+const Info = styled.div`
+	margin: 10% 15%;
+	width: 70%;
+	height: 40.5%;
 	border-top: 0.2rem solid black;
 	border-bottom: 0.2rem solid black;
 `;
@@ -14,6 +19,15 @@ const InfoBox = styled.div`
 	height: 3.5rem;
 	border-bottom: 0.15rem solid black;
 	display: flex;
+	@media only screen and (max-width: 768px) {
+		background: skyblue;
+		max-width: 100%;
+		word-break: break-all;
+	}
+	@media only screen and (max-width: 480px) {
+		background: pink;
+		margin: 15%;
+	}
 `;
 
 const ExchangeBox = styled.div`
@@ -25,13 +39,13 @@ const Exchange = styled.div`
 	height: 3%;
 	border-top: 0.15rem solid black;
 	display: flex;
-	font-size: 2.5rem;
+	font-size: 170%;
 	justify-content: space-around;
 	align-items: center;
 `;
 
 const ExchangeTitle1 = styled.span`
-	font-size: 80%;
+	font-size: 60%;
 	width: 33%;
 	display: flex;
 	border-right: 0.15rem solid black;
@@ -39,7 +53,7 @@ const ExchangeTitle1 = styled.span`
 `;
 
 const ExchangeTitle2 = styled.span`
-	font-size: 80%;
+	font-size: 60%;
 	width: 33%;
 	display: flex;
 	justify-content: center;
@@ -74,7 +88,7 @@ const ExchangeListContent = styled.span`
 `;
 
 const Option = styled.span`
-	font-size: 130%;
+	font-size: 120%;
 	border-right: 0.15rem solid black;
 	width: 13%;
 	display: flex;
@@ -83,7 +97,7 @@ const Option = styled.span`
 `;
 
 const Content1 = styled.span`
-	font-size: 180%;
+	font-size: 120%;
 	border-right: 0.15rem solid black;
 	width: 35%;
 	display: flex;
@@ -92,7 +106,7 @@ const Content1 = styled.span`
 `;
 
 const Content2 = styled.span`
-	font-size: 130%;
+	font-size: 120%;
 	width: 35%;
 	display: flex;
 	justify-content: center;
@@ -107,7 +121,7 @@ const Collection = styled.div`
 const CollectionTitle = styled.span`
 	height: 88%;
 	width: 13%;
-	font-size: 2rem;
+	font-size: 140%;
 	border-right: 0.15rem solid black;
 	display: flex;
 	justify-content: center;
@@ -119,34 +133,36 @@ const CollectionTitle = styled.span`
 export default function User(): ReactElement {
 	return (
 		<Main>
-			<InfoBox>
-				<Option>성명</Option>
-				<Content1>송정현</Content1>
-				<Option>전자우편</Option>
-				<Content2>sdfsf@naver.com</Content2>
-			</InfoBox>
-			<InfoBox>
-				<Option>별명</Option>
-				<Content1>면목동 꿀주먹</Content1>
-				<Option>휴대전화</Option>
-				<Content2>010-5488-5468</Content2>
-			</InfoBox>
-			<Collection>
-				<CollectionTitle>콜렉숀</CollectionTitle>
-			</Collection>
-			<ExchangeBox>
-				<Exchange>교환일기</Exchange>
-				<Exchange>
-					<ExchangeTitle1>별명</ExchangeTitle1>
-					<ExchangeTitle1>날짜</ExchangeTitle1>
-					<ExchangeTitle2>내용</ExchangeTitle2>
-				</Exchange>
-			</ExchangeBox>
-			<ExchangeLists>
-				<ExchangeListName>송정현</ExchangeListName>
-				<ExchangeListDate>2021년 2월 21일</ExchangeListDate>
-				<ExchangeListContent>햄버거를 먹은날.</ExchangeListContent>
-			</ExchangeLists>
+			<Info>
+				<InfoBox>
+					<Option>성명</Option>
+					<Content1>홍길동</Content1>
+					<Option>전자우편</Option>
+					<Content2>sdfsf@naver.com</Content2>
+				</InfoBox>
+				<InfoBox>
+					<Option>별명</Option>
+					<Content1>면목동 꿀주먹</Content1>
+					<Option>휴대전화</Option>
+					<Content2>010-5555-6666</Content2>
+				</InfoBox>
+				<Collection>
+					<CollectionTitle>콜렉숀</CollectionTitle>
+				</Collection>
+				<ExchangeBox>
+					<Exchange>교환일기</Exchange>
+					<Exchange>
+						<ExchangeTitle1>별명</ExchangeTitle1>
+						<ExchangeTitle1>날짜</ExchangeTitle1>
+						<ExchangeTitle2>내용</ExchangeTitle2>
+					</Exchange>
+				</ExchangeBox>
+				<ExchangeLists>
+					<ExchangeListName>송정현</ExchangeListName>
+					<ExchangeListDate>2021년 2월 21일</ExchangeListDate>
+					<ExchangeListContent>햄버거를 먹은날.</ExchangeListContent>
+				</ExchangeLists>
+			</Info>
 		</Main>
 	);
 }

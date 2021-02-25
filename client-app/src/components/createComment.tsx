@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 function CreateComment() {
 	const CommentBox = styled.div`
-		width: 450px;
-		height: 200px;
-		border: 1px solid black;
-		margin-left: 10px;
+		width: 31.2rem;
+		height: 8rem;
+		border: 0.1rem solid black;
+		margin-top: 1%;
 		background: #ededed;
 	`;
 	const CommentBoxTitle = styled.h3`
@@ -14,8 +14,8 @@ function CreateComment() {
 	`;
 
 	const CommentInput = styled.textarea`
-		width: 400px;
-		height: 120px;
+		width: 90%;
+		height: 30%;
 		background: white;
 		margin-top: 10px;
 		margin-left: 20px;
@@ -26,17 +26,16 @@ function CreateComment() {
 	const CommentStampSend = styled.div`
 		display: flex;
 		align-items: center;
-		justify-content: flex-end;
+		margin-left: 1.3rem;
 	`;
 
 	const CommentSendButton = styled.button`
-		width: 70px;
-		height: 30px;
+		width: 5em;
+		height: 2em;
 		align-items: center;
 		justify-content: center;
 		display: flex;
-		margin-right: 22px;
-		margin-left: 220px;
+		margin-left: 20em;
 	`;
 
 	return (

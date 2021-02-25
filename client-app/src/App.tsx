@@ -21,57 +21,60 @@ import {
 
 function App(): ReactElement {
 	return (
-		<>
-			<Router>
-				<Main>
-					<Mainnav color="" />
-					<Switch>
-						<Route exact path="/">
-							<Manual />
-							<SignIn />
-						</Route>
-						<Route exact path="/signup">
-							<Manual />
-							<Application />
-						</Route>
-						<Route exact path="/creatediary">
-							<Paint />
-							<Diary />
-						</Route>
-						<Route exact path="/diaryview">
-							<DiariesView />
-							<DiaryView />
-						</Route>
-						<Route exact path="/diarypublic">
-							<DiariesViewPublic />
-							<DiaryViewPublic />
-						</Route>
-						<Route exact path="/userinfo/calendar">
-							<Calendar />
-							<UserInfo />
-						</Route>
-						<Route path="/userinfo/calendarrows">
-							<CalendarRows />
-							<UserInfo />
-						</Route>
-					</Switch>
-				</Main>
-			</Router>
-		</>
+		<Router>
+			<Main>
+				<Mainnav color="" />
+				<Switch>
+					<Route exact path="/">
+						<Manual />
+						<SignIn />
+					</Route>
+					<Route exact path="/signup">
+						<Manual />
+						<Application />
+					</Route>
+					<Route exact path="/creatediary">
+						<Paint />
+						<Diary />
+					</Route>
+					<Route exact path="/diaryview">
+						<DiariesView />
+						<DiaryView />
+					</Route>
+					<Route exact path="/diarypublic">
+						<DiariesViewPublic />
+						<DiaryViewPublic />
+					</Route>
+					<Route exact path="/userinfo/calendar">
+						<Calendar />
+						<UserInfo />
+					</Route>
+					<Route path="/userinfo/calendarrows">
+						<CalendarRows />
+						<UserInfo />
+					</Route>
+				</Switch>
+			</Main>
+		</Router>
 	);
 }
 // 아래 스타일을 적용한 컴포넌트를 만들어준다.
+
 const Main = styled.div`
 	display: flex;
 	position: relative;
 	flex-direction: row;
 	flex-wrap: wrap;
-	border: 10px solid blue;
+	//border: 10px solid blue;
 	height: 90vh;
 	width: 90vw;
-	margin-left: 4rem;
-	// max-width: 1800px;
+	//margin: 2% 7%;
+	max-width: 105rem;
 	// max-height: 4000px;
+
+	@media only screen and (max-width: 768px) {
+		border: 0px;
+	}
 `;
 
 export default App;

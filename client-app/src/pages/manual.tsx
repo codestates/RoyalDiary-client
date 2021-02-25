@@ -8,7 +8,8 @@ export default function Manual(): ReactElement {
 	const Main = styled.div`
 		background: smokewhite;
 		border: 5px solid black;
-		margin-left: 6rem;
+		max-width: 50rem;
+		//margin-left: 6rem;
 		margin-right: 1rem;
 		flex-grow: 1;
 		display: flex;
@@ -23,39 +24,39 @@ export default function Manual(): ReactElement {
 		flex-direction: row;
 		flex-grow: 0.1;
 	`;
-	
+
 	const Logo = styled.div`
-	  // border: 5px solid red;
-  	flex-grow: 1;
-  	display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  width: 7vw;
-	  padding: -10px;
-  `;
+		// border: 5px solid red;
+		flex-grow: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 7vw;
+		padding: -10px;
+	`;
 
-  const Title = styled.div`
-	  // border: 5px solid black;
-	  flex-grow: 7;
-	  justify-content: center;
-	  margin: auto;
-	  font-size: 2rem;
-	  font-weight: bold;
-	  letter-spacing: 2rem;
-	  display: flex;
-  `;
+	const Title = styled.div`
+		// border: 5px solid black;
+		flex-grow: 7;
+		justify-content: center;
+		margin: auto;
+		font-size: 2rem;
+		font-weight: bold;
+		letter-spacing: 2rem;
+		display: flex;
+	`;
 
-  const Contactinfo = styled.div`
-  	border-left: 3px solid black;
-  	flex-grow: 0.3;
-  	display: flex;
-  	flex-direction: column;
-  	justify-content: center;
-  	font-size: 0.7rem;
-  	`;
+	const Contactinfo = styled.div`
+		border-left: 3px solid black;
+		flex-grow: 0.3;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		font-size: 0.7rem;
+	`;
 
 	const Notification = styled.div`
-	// border: 3px solid red;
+		// border: 3px solid red;
 	`;
 
 	const Ntitle = styled.div`
@@ -116,7 +117,7 @@ export default function Manual(): ReactElement {
 		flex-direction: column;
 		// margin: -0.1rem;
 	`;
-	
+
 	const imgstyle = { width: "80%", height: "80%" };
 
 	const Today = () => {
@@ -131,7 +132,7 @@ export default function Manual(): ReactElement {
 			<Header>
 				<Logolesson>
 					<Logo>
-						<img src={logoImg} style={imgstyle}  alt="" />
+						<img src={logoImg} style={imgstyle} alt="" />
 					</Logo>
 				</Logolesson>
 				<Title>가정통신문</Title>

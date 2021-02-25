@@ -4,17 +4,21 @@ import DiaryCard from "../components/diaryCard";
 
 export default function DiariesView(): ReactElement {
 	const Main = styled.div`
-		display: flex;
-		flex-direction: column;
 		background: #f3f3e9;
-		width: 50%;
+		display: flex;
+		margin-left: 4rem;
+		flex-direction: column;
+		flex-grow: 1;
+		max-width: 50rem;
+		max-height: 53.5rem;
+		border: 0.15rem solid black;
 	`;
 
 	const Content = styled.div`
-		margin-top: 8%;
-		margin-left: 11.5%;
+		margin-top: 5%;
+		margin-left: 3.5%;
 		display: flex;
-		width: 50rem;
+		width: rem;
 		height: 2.5rem;
 		justify-content: space-between;
 	`;
@@ -22,7 +26,7 @@ export default function DiariesView(): ReactElement {
 		width: 45rem;
 		height: 45rem;
 		border: 1px solid black;
-		margin-left: 11.5%;
+		margin-left: 3.5%;
 		flex-direction: row;
 		display: flex;
 		flex-wrap: wrap;
@@ -43,7 +47,7 @@ export default function DiariesView(): ReactElement {
 		height: 2rem;
 		border: 0.1rem solid black;
 		background: white;
-		out-line: 0rem;
+		//out-line: 0rem;
 	`;
 
 	return (
@@ -64,9 +68,8 @@ export default function DiariesView(): ReactElement {
 				<DiaryCard />
 				<DiaryCard />
 				<DiaryCard />
+				<DiaryCard />
 			</Cards>
 		</Main>
 	);
-
-	return <Main />;
 }
