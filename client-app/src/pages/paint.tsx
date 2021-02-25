@@ -1,25 +1,22 @@
 import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
-import Mainnav from "../components/mainNav";
 import Diaryinfo from "../components/diaryInfo";
 import CPaint from "../components/paint";
 
 export default function Paint(): ReactElement {
 	const Main = styled.div`
 		background: #f6f6ee;
-		border: 5px solid black;
-		margin-left: 8rem;
-		margin-right: 1rem;
+		border-right: 5px solid black;
+		margin-left: 6rem;
+		flex-grow: 0.68;
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
-		max-width: 50rem;
-		max-height: 70rem;
+		height: 89vh;
 	`;
 	const Paintbox = styled.div`
 		border: 5px solid black;
 		border-radius: 2rem;
-		margin: 5rem 2rem 3rem 2rem;
+		margin: 3rem 2rem 3rem 2rem;
 		height: 90%;
 		display: flex;
 		flex-direction: column;

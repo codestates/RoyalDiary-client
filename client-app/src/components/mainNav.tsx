@@ -4,16 +4,14 @@ import PropTypes from "prop-types";
 
 export default function Mainnav(): ReactElement {
 	const Main = styled.div`
-		border: 3px solid red;
-		position: relative;
-		// bottom: 1rem;
-		right: 0.9rem;
-		margin: auto;
+		// border: 3px solid red;
+		position: absolute;
+		width: 10vw;
+		top: 20rem;
+		right: -2rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		height: 50%;
-		width: 15%;
 	`;
 
 	const Navsole = styled.div`
@@ -24,14 +22,14 @@ export default function Mainnav(): ReactElement {
 	`;
 	const Navin = styled.div`
 		// border: 1px solid black;
-		width: 40%;
+		width: 20%;
 		background: ${(props) => props.color};
 		// flex-grow: 1.3;
 	`;
 
 	const Navout = styled.div`
 		// border: 1px solid blue;
-		width: 60%;
+		width: 45%;
 		background: ${(props) => props.color};
 		// flex-grow: 2;
 	`;
