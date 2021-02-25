@@ -4,6 +4,7 @@ import { relative } from "path";
 import Signin from "../components/signin";
 import childrenImg from "../assets/images/children.png";
 import titleImg from "../assets/images/title.png";
+// import SSignin from "../components/socialSignin";
 
 export default function SignIn(): ReactElement {
 	const Main = styled.div`
