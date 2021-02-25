@@ -10,7 +10,7 @@ export default function SignIn(): ReactElement {
 	const Main = styled.div`
 		background: smokewhite;
 		// border: 10px solid black;
-		margin-right: 4rem;
+		//margin-right: 4rem;
 		display: flex;
 		flex-direction: row;
 		flex-grow: 1;
