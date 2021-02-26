@@ -8,6 +8,7 @@ export default function DiaryRows(): ReactElement {
 		flex-direction: row;
 		background: #f3f3e9;
 		width: 90%;
+		height: 13%;
 		max-width: 100%;
 		max-height: 100%;
 		border: 0.15em solid black;
@@ -16,7 +17,7 @@ export default function DiaryRows(): ReactElement {
 	`;
 
 	const DateBox = styled.div`
-		width: 10%;
+		width: 15%;
 		height: 100%;
 		flex-direction: row;
 	`;
@@ -30,7 +31,7 @@ export default function DiaryRows(): ReactElement {
 		border-bottom: 0.01em solid black;
 		border-right: 0.01em solid black;
 		height: 40%;
-		font-size: 100%;
+		font-size: 130%;
 	`;
 
 	const Date = styled.div`
@@ -40,11 +41,11 @@ export default function DiaryRows(): ReactElement {
 		align-items: center;
 		display: flex;
 		border-right: 0.01em solid black;
-		font-size: 170%;
+		font-size: 220%;
 	`;
 
 	const Content = styled.span`
-		width: 100%;
+		width: 90%;
 		align-items: center;
 		display: flex;
 		margin-left: 1em;

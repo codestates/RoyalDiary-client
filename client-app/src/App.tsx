@@ -65,12 +65,15 @@ const Main = styled.div`
 	position: relative;
 	flex-direction: row;
 	flex-wrap: wrap;
+	//box-sizing: border-box;
 	//border: 10px solid blue;
-	height: 90vh;
-	width: 90vw;
-	//margin: 2% 7%;
-	max-width: 105rem;
-	// max-height: 4000px;
+	margin: 2.5rem auto;
+	height: 80vh;
+	width: 80.4vw;
+
+	@media only screen and (max-width: 1200px) {
+		justify-content: center;
+	}
 
 	@media only screen and (max-width: 768px) {
 		border: 0px;
