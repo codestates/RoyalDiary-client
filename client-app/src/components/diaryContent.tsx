@@ -21,7 +21,7 @@ const Info = styled.div`
 const Date = styled.span`
 	border: 0.01rem solid black;
 	width: 10%;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	display: flex;
 	justify-content: center;
 `;

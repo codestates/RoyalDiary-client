@@ -47,7 +47,6 @@ export default function DiariesViewPublic(): ReactElement {
 		height: 2rem;
 		border: 0.1rem solid black;
 		background: white;
-		out-line: 0rem;
 	`;
 
 	return (

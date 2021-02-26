@@ -7,13 +7,16 @@ export default function DiaryView(): ReactElement {
 	const Main = styled.div`
 		background: #f3f3e9;
 		display: flex;
+		width: 50%;
+		max-height: 54rem;
+		box-sizing: border-box;
 		//margin-right: 4rem;
 		border: 0.15rem solid black;
 		flex-direction: column;
 		flex-grow: 1;
-
-		max-width: 50rem;
-		max-height: 53.5rem;
+		@media only screen and (max-width: 1200px) {
+			width: 80%;
+		}
 	`;
 
 	const Button = styled.button`

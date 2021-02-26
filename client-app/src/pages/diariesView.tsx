@@ -6,25 +6,27 @@ export default function DiariesView(): ReactElement {
 	const Main = styled.div`
 		background: #f3f3e9;
 		display: flex;
-		margin-left: 4rem;
 		flex-direction: column;
 		flex-grow: 1;
-		max-width: 50rem;
-		max-height: 53.5rem;
+		width: 50%;
+		box-sizing: border-box;
 		border: 0.15rem solid black;
+		@media only screen and (max-width: 1200px) {
+			width: 80%;
+		}
 	`;
 
 	const Content = styled.div`
 		margin-top: 5%;
 		margin-left: 3.5%;
 		display: flex;
-		width: rem;
+		width: 100%;
 		height: 2.5rem;
 		justify-content: space-between;
 	`;
 	const Cards = styled.div`
-		width: 45rem;
-		height: 45rem;
+		width: 88%;
+		height: 85%;
 		border: 1px solid black;
 		margin-left: 3.5%;
 		flex-direction: row;
