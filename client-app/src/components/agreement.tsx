@@ -3,99 +3,104 @@ import styled, { keyframes } from "styled-components";
 
 export default function Agreement(): ReactElement {
 	const Main = styled.div`
-		// border: 1px solid red;
-		// flex-grow: 1;
+		/* border: 3px solid red; */
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		flex-grow: 1;
 	`;
 	const Inputinfo = styled.div`
 		border: 5px solid black;
-		margin: 1rem auto;
-		height: 10rem;
-		flex-grow: 1;
-		width: 38rem;
+		margin: 1rem 0rem;
+		/* height: 10rem; */
+		width: 80%;
 		display: flex;
-		flex-direction: row;
 		border-radius: 2rem;
 		background: white;
+		@media only screen and (max-width: 480px) {
+			width: 90%;
+		}
 	`;
 	const Title = styled.div`
-		// border: 3px solid red;
+		// border: 3px solid #313030;
 		flex-grow: 0.5;
 		writing-mode: tb-rl;
-		width: 2rem;
-		text-align: center;
-		padding-right: 1rem;
+		padding: 1rem;
+		padding-top: 1.2rem;
 		font-size: 1.5rem;
 		letter-spacing: 1rem;
+		@media only screen and (max-width: 480px) {
+			font-size: 1rem;
+		}
 	`;
 	const Infobox = styled.div`
-		// border: 3px solid black;
-		// border-radius: 2rem;
-		margin: -0.25rem;
-		// margin-right: 1rem;
+		/* border: 3px solid red; */
+		width: 100%;
+		margin-bottom: -0.1rem;
 		display: flex;
-		flex-grow: 1;
 		flex-direction: column;
-		justify-content: center;
-		// margin-top: 0rem;
+		justify-content: space-around;
+		flex-wrap: nowrap;
 	`;
 	const Linesolo = styled.div`
-		border-bottom: 1px solid black;
+		/* border-right: 1px solid black; */
+		border-top: 1px solid rgb(0, 0, 0);
+		flex-grow: 4;
+		margin-top: -0.1rem;
+		margin-bottom: -0.1rem;
 		display: flex;
-		flex-grow: 1;
-		padding: auto;
-		vertical-align: middle;
-	`;
-
-	const Linelastsolo = styled.div`
-		// border-bottom: 0.5px solid black;
-		display: flex;
-		flex-grow: 1;
-		// align-items: center;
-		padding: auto;
-		vertical-align: middle;
-	`;
-
-	const Item = styled.div`
-		border-top: 1px solid black;
-		border-right: 1px solid black;
-		border-left: 1px solid black;
-		width: 4rem;
-		height: 82%;
-		text-align: center;
 		align-items: center;
-		padding-top: 0.5rem;
-		margin-top: -0.05rem;
+		flex-wrap: wrap;
+		/* border: 1px solid red; */
+	`;
+	const Item = styled.div`
+		border-left: 1px solid black;
+		border-right: 1px solid black;
+		/* border: 1px solid red; */
+		margin-top: -0.2rem;
+		height: 2.5rem;
+		width: 4rem;
+		display: flex;
+		align-items: center;
 	`;
 	const Input = styled.input`
 		border: 1px solid white;
-		margin: 0.4rem 0.3rem 0.3rem 0.3rem;
-		width: 100%
-		font-size: 1.2rem;
-		// background: #f3f3e9;
+		width: 25%;
+		height: 70%;
+		margin-top: -0.2rem;
+		@media only screen and (max-width: 480px) {
+			width: 20%;
+		}
 	`;
-
-	// const lastline = {
-	// 	border: "1px solid blue",
-	// };
-
+	const Inputpwd = styled.input`
+		border: 1px solid white;
+		width: 50%;
+		height: 70%;
+		margin-top: -0.2rem;
+	`;
 	const Checkagreement = styled.div`
 		border: 5px solid black;
 		width: 77%;
-		height: 10rem;
+		height: 7rem;
 		margin: 1rem auto;
+		padding-left: 2rem;
+		padding-bottom: 1rem;
 		border-radius: 2rem;
 		display: flex;
 		flex-direction: column;
-		padding-left: 2rem;
 		justify-content: space-around;
 		font-size: 1.2rem;
 		background: white;
+		@media only screen and (max-width: 480px) {
+			font-size: 1rem;
+			width: 82%;
+		}
 	`;
-
 	const Checkstyle = {
 		zoom: 1.3,
+	};
+	const FirstLine = {
+		borderTop: "none",
 	};
 
 	return (
@@ -103,7 +108,7 @@ export default function Agreement(): ReactElement {
 			<Inputinfo>
 				<Title>지원자</Title>
 				<Infobox>
-					<Linesolo>
+					<Linesolo style={FirstLine}>
 						<Item>이름</Item>
 						<Input placeholder="예) 홍길동" />
 						<Item>별명</Item>
@@ -117,12 +122,12 @@ export default function Agreement(): ReactElement {
 					</Linesolo>
 					<Linesolo>
 						<Item>암호</Item>
-						<Input placeholder="영문+숫자+특수문자 8자이상" />
+						<Inputpwd placeholder="영문+숫자+특수문자 8자이상" />
 					</Linesolo>
-					<Linelastsolo>
+					<Linesolo>
 						<Item>암호확인</Item>
-						<Input placeholder="암호를 확인합니다." />
-					</Linelastsolo>
+						<Inputpwd placeholder="암호를 확인합니다." />
+					</Linesolo>
 				</Infobox>
 			</Inputinfo>
 			<Checkagreement>

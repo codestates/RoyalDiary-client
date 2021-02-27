@@ -8,14 +8,16 @@ import windy from "../assets/images/weather/5.png";
 
 export default function Diaryinfo(): ReactElement {
 	const Main = styled.div`
-		// border: 5px solid black;
+		/* border: 5px solid black; */
 		flex-grow: 0.3;
 		display: flex;
+		@media only screen and (max-width: 480px) {
+			height: 20%;
+		}
 	`;
 	const DateWeather = styled.div`
 		// border: 3px solid black;
 		flex-grow: 1;
-		max-width: 220rem;
 		display: flex;
 		flex-direction: column;
 	`;
@@ -28,6 +30,12 @@ export default function Diaryinfo(): ReactElement {
 		font-size: 1.3rem;
 		font-weight: bold;
 		letter-spacing: 0.5rem;
+
+		@media (max-width: 480px) {
+			font-size: 1rem;
+			padding-left: 1rem;
+			letter-spacing: 0.4rem;
+		}
 	`;
 	const Weather = styled.div`
 		border-bottom: 3px solid black;
@@ -35,19 +43,43 @@ export default function Diaryinfo(): ReactElement {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		flex-wrap: wrap;
+		@media only screen and (max-width: 480px) {
+			width: 100%;
+			height: 60%;
+		}
 	`;
 	const Image = styled.div`
 		margin-right: 1rem;
+		@media only screen and (max-width: 480px) {
+			margin-right: 0rem;
+		}
 	`;
-
+	const WeatherImg = styled.img`
+		/* border: 3px solid black; */
+		width: 3.5rem;
+		alt: "";
+		@media (max-width: 480px) {
+			width: 2rem;
+			margin: 0.1rem;
+		}
+	`;
 	const Userinfo = styled.div`
 		border-left: 3px solid black;
 		border-bottom: 3px solid black;
 		flex-grow: 1;
-		text-align: left;
 		padding-top: 2rem;
 		padding-left: 1rem;
 		font-size: 1.1rem;
+
+		@media (max-width: 480px) {
+			font-size: 0.9rem;
+			padding: 0rem;
+			width: 50%;
+			height: 97%;
+			display: flex;
+			align-items: center;
+		}
 	`;
 
 	const Today = () => {
@@ -62,22 +94,24 @@ export default function Diaryinfo(): ReactElement {
 	return (
 		<Main>
 			<DateWeather>
-				<Todaydate>{Today()}</Todaydate>
+				<Todaydate>
+					<div>{Today()}</div>
+				</Todaydate>
 				<Weather>
 					<Image>
-						<img src={cloudy} alt="" width="60rem" height="60rem" />
+						<WeatherImg src={cloudy} />
 					</Image>
 					<Image>
-						<img src={sunny} alt="" width="60rem" height="60rem" />
+						<WeatherImg src={sunny} />
 					</Image>
 					<Image>
-						<img src={rainy} alt="" width="60rem" height="60rem" />
+						<WeatherImg src={rainy} />
 					</Image>
 					<Image>
-						<img src={snowy} alt="" width="60rem" height="60rem" />
+						<WeatherImg src={snowy} />
 					</Image>
 					<Image>
-						<img src={windy} alt="" width="60rem" height="60rem" />
+						<WeatherImg src={windy} />
 					</Image>
 				</Weather>
 			</DateWeather>

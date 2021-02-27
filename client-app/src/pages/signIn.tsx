@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
 import { relative } from "path";
+import MainNav from "../components/mainNav";
 import Signin from "../components/signin";
 import childrenImg from "../assets/images/children.png";
 import titleImg from "../assets/images/title.png";
@@ -8,62 +9,97 @@ import titleImg from "../assets/images/title.png";
 
 export default function SignIn(): ReactElement {
 	const Main = styled.div`
-		background: smokewhite;
-		// border: 10px solid black;
-		//margin-right: 4rem;
+		// border: 10px solid #8f4f4f;
+		width: 50%;
 		display: flex;
 		flex-direction: row;
 		flex-grow: 1;
-		max-width: 50rem;
+		@media only screen and (max-width: 1200px) {
+			width: 80%;
+			height: 100%;
+		}
+		@media only screen and (max-width: 770px) {
+			width: 80%;
+			height: 100%;
+		}
+		@media only screen and (max-width: 480px) {
+			width: 80%;
+			height: 70%;
+		}
 	`;
 	const Purple = styled.div`
 		// border: 10px solid purple;
 		background: rgb(73, 65, 126);
-		width: 6rem;
+		width: 12%;
 	`;
 	const RedWhite = styled.div`
 		// border: 5px solid black;
-		width: 41rem;
+		background: white;
+		width: 80%;
 		display: flex;
 		flex-direction: column;
+		@media only screen and (max-width: 480px) {
+			width: 90%;
+		}
 	`;
 	const Red = styled.div`
-		// border: 10px solid green;
-		flex-grow: 1;
+		/* border: 10px solid green; */
+		flex-grow: 0.6;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		overflow: hidden;
 		font-size: 1.5rem;
 		background: #eb6262;
+		@media only screen and (max-width: 480px) {
+			/* width: 110%; */
+		}
+	`;
+	const ImageNav = styled.div`
+		/* border: 3px solid red; */
+		flex-grow: 3;
+		display: flex;
+		padding-left: 2rem;
 	`;
 	const Image = styled.div`
-		// border: 10px solid black;
+		/* border: 10px solid black; */
 		flex-grow: 4;
-		// margin: 1rem 3rem 1rem 4.5rem;
-		overflow: hidden;
+		width: 50%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	`;
-	const imageStyle = {
-		border: "1px solid black",
-		display: "flex",
-		justifyContent: "center",
-	};
+	const MainImg = styled.img`
+		border: 1px solid black;
+		width: 80%;
+		height: 70%;
+		@media only screen and (max-width: 480px) {
+			width: 120%;
+			height: 80%;
+		}
+	`;
+	const TitleImg = styled.img`
+		/* border: 1px solid blue; */
+		width: 420rem;
+		@media only screen and (max-width: 480px) {
+			/* margin-left: 4rem; */
+			width: 100%;
+		}
+	`;
 
 	return (
 		<Main>
 			<Purple />
 			<RedWhite>
 				<Red>
-					<img className="title_image" src={titleImg} width="420rem" height="auto" alt="" />
+					<TitleImg className="title_image" src={titleImg} alt="" />
 				</Red>
-				<Image>
-					<div style={imageStyle}>
-						<img className="children_image" src={childrenImg} width="400rem" height="auto" alt="" />
-					</div>
-				</Image>
+				<ImageNav>
+					<Image>
+						<MainImg className="children_image" src={childrenImg} alt="" />
+					</Image>
+					<MainNav color="" />
+				</ImageNav>
 				<Signin />
 			</RedWhite>
 		</Main>

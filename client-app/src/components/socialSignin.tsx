@@ -21,8 +21,8 @@ export default function SocialModal(props: Props): ReactElement {
 	const ModalStyles = {
 		content: {
 			margin: "auto",
-			width: "35rem",
-			height: "25rem",
+			width: "30rem",
+			height: "20rem",
 			background: "#f3f3e9",
 			display: "flex",
 			alignItems: "center",

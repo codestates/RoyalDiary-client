@@ -7,94 +7,111 @@ import logoImg from "../assets/images/royalschool.png";
 export default function Application(): ReactElement {
 	const Main = styled.div`
 		background: #f3f3e9;
-		// border: 10px solid black;
-		margin-right: 7.8rem;
+		/* border: 10px solid black; */
+		width: 50%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
-		max-width: 47rem;
+		/* flex-wrap: wrap; */
+		@media only screen and (max-width: 1200px) {
+			width: 100%;
+			height: 100%;
+		}
+		@media only screen and (max-width: 480px) {
+			width: 100%;
+			height: 70%;
+		}
 	`;
-
 	const Header = styled.div`
-		// border: 5px solid red;
+		/* border: 5px solid red; */
+		flex-grow: 0.5;
 		display: flex;
-		height: 6rem;
+		margin-bottom: 1rem;
 		padding-left: 4rem;
-		flex-grow: 0.1;
 		align-items: center;
 		font-size: 3rem;
-		// font-weight: bold;
 		letter-spacing: 0.5rem;
 	`;
 	const Body = styled.div`
-		// border: 3px solid blue;
+		/* border: 3px solid blue; */
 		display: flex;
+		flex-grow: 0.1;
+		@media only screen and (max-width: 480px) {
+			display: none;
+		}
 	`;
 	const Content = styled.div`
-		// border: 3px solid black;
-		padding-left: 3rem;
+		/* border: 3px solid green; */
+		/* padding-top: 2rem; */
 		line-height: 2.5rem;
-		flex-grow: 1;
+		width: 90%;
 		display: flex;
 		flex-direction: column;
 	`;
-
 	const Text = styled.div`
-		// border: 3px solid red;
-		padding-left: 1rem;
-		width: 25rem;
+		/* border: 3px solid red; */
+		padding-left: 3rem;
 		font-size: 1.3rem;
+		@media only screen and (max-width: 1400px) {
+			font-size: 1rem;
+		}
 	`;
-
 	const Todaydate = styled.div`
-		// border: 5px solid red;
-		width: 25rem;
-		margin-bottom: 0.8rem;
+		/* border: 5px solid red; */
+		margin-top: 1.5rem;
+		padding-right: 2rem;
 		font-size: 1.5rem;
 		font-weight: bold;
 		text-align: right;
 		letter-spacing: 0.3rem;
+		@media only screen and (max-width: 1400px) {
+			font-size: 1.3rem;
+		}
+		@media only screen and (max-width: 770px) {
+			font-size: 1.1rem;
+		}
 	`;
 	const Principal = styled.div`
-		// border: 5px solid red;
-		width: 25rem;
+		/* border: 5px solid red; */
+		margin-top: 1rem;
+		padding-right: 2rem;
 		font-size: 1.8rem;
 		font-weight: bold;
 		text-align: right;
+		@media only screen and (max-width: 1400px) {
+			font-size: 1.5rem;
+		}
+		@media only screen and (max-width: 770px) {
+			font-size: 1.3rem;
+		}
 	`;
-
 	const Image = styled.div`
-		// border: 3px solid black;
-		flex-grow: 1;
-		margin-right: 1.5rem;
+		/* border: 3px solid blue; */
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 10em;
-		// text-align: center;
 	`;
-
 	const Footer = styled.div`
-		// border: 3px solid black;
+		/* border: 3px solid black; */
 		text-align: center;
+		flex-grow: 1;
 		display: flex;
-		height: 2rem;
 		margin-right: -0.2rem;
-		margin-top: 3rem;
+		/* margin-top: 3rem; */
 	`;
-
 	const Logo = styled.div`
-		// border: 5px solid red;
-		flex-grow: 3;
-		padding-left: 14rem;
+		/* border: 5px solid red; */
+		flex-grow: 4;
+		padding-left: 10rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: -10px;
+		@media only screen and (max-width: 480px) {
+			padding-left: 0rem;
+		}
 	`;
-
 	const Button = styled.div`
-		// border-left: 5px solid black;
+		/* border-left: 5px solid black; */
 		flex-grow: 1;
 		display: flex;
 		margin-right: 3.5rem;
@@ -102,10 +119,17 @@ export default function Application(): ReactElement {
 		align-items: center;
 		justify-content: center;
 	`;
+	const LogoImg = styled.img`
+		width: 35%;
+		alt: "";
+		@media only screen and (max-width: 480px) {
+			width: 50%;
+		}
+	`;
 
 	const pstyle1 = { letterSpacing: "0.5rem" };
 	const pstyle2 = { padding: "0rem 0rem 0rem 5rem", fontSize: "1rem" };
-	const imgstyle = { width: "90%", height: "80%" };
+	const imgstyle = { width: "80%" };
 	const btnstyle = {
 		width: "6rem",
 		height: "2.5rem",
@@ -127,9 +151,7 @@ export default function Application(): ReactElement {
 			<Body>
 				<Content>
 					<Text>
-						&nbsp;&nbsp;&nbsp;다음의 어린이가 귀교의 정규교육과정을 <br /> 이수하기 위해 아래와 같이 귀교의 입학을{" "}
-						<br />
-						지원합니다.
+						&nbsp;&nbsp;&nbsp;다음의 어린이가 귀교의 정규교육과정을 이수하기 위해 아래와 같이 귀교의 입학을 지원합니다.
 					</Text>
 					<Todaydate>{Today()}</Todaydate>
 					<Principal>
@@ -144,7 +166,7 @@ export default function Application(): ReactElement {
 			<Agreement />
 			<Footer>
 				<Logo>
-					<img src={logoImg} width="130rem" height="110rem" alt="" />
+					<LogoImg src={logoImg} />
 				</Logo>
 				<Button>
 					<button type="submit" style={btnstyle}>
