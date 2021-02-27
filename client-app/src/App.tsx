@@ -2,7 +2,6 @@ import React, { useState, useEffect, ReactElement } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
-import Mainnav from "./components/mainNav";
 
 import {
 	Manual,
@@ -23,7 +22,6 @@ function App(): ReactElement {
 	return (
 		<Router>
 			<Main>
-				<Mainnav color="" />
 				<Switch>
 					<Route exact path="/">
 						<Manual />
@@ -66,9 +64,9 @@ const Main = styled.div`
 	flex-direction: row;
 	flex-wrap: wrap;
 	//box-sizing: border-box;
-	//border: 10px solid blue;
+	/* border: 10px solid blue; */
 	margin: 2.5rem auto;
-	height: 80vh;
+	height: 88vh;
 	width: 80.4vw;
 
 	@media only screen and (max-width: 1200px) {

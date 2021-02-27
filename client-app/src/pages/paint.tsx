@@ -7,11 +7,22 @@ export default function Paint(): ReactElement {
 	const Main = styled.div`
 		background: #f6f6ee;
 		border-right: 5px solid black;
-		margin-left: 6rem;
-		flex-grow: 0.68;
+		box-sizing: border-box;
+		width: 50%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
-		height: 89vh;
+		flex-grow: 1;
+		@media only screen and (max-width: 1200px) {
+			width: 80%;
+			height: 100%;
+			border-right: none;
+			border-bottom: 5px solid black;
+		}
+		@media only screen and (max-width: 480px) {
+			/* margin-left: 1rem; */
+			height: 70%;
+		}
 	`;
 	const Paintbox = styled.div`
 		border: 5px solid black;
@@ -20,9 +31,14 @@ export default function Paint(): ReactElement {
 		height: 90%;
 		display: flex;
 		flex-direction: column;
+		@media only screen and (max-width: 480px) {
+			/* margin-left: 1rem; */
+			margin: 2rem 1rem 2rem 1rem;
+		}
 	`;
 	const Title = styled.div`
 		// border: 3px solid black;
+		margin-top: 0.5rem;
 		padding-left: 1rem;
 		font-size: 1.2rem;
 		font-weight: bold;

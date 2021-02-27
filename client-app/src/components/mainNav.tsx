@@ -4,34 +4,43 @@ import PropTypes from "prop-types";
 
 export default function Mainnav(): ReactElement {
 	const Main = styled.div`
-		// border: 3px solid red;
-		position: absolute;
-		width: 10vw;
-		top: 20rem;
-		right: -2rem;
+		/* border: 3px solid red; */
+		width: 4rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	`;
 
 	const Navsole = styled.div`
-		// border: 1px solid red;
+		/* border: 1px solid red; */
+		position: relative;
+		top: 1rem;
+		right: -2rem;
+		width: 7rem;
 		margin: 0.2rem 0rem;
 		display: flex;
 		font-weight: bold;
+		@media only screen and (max-width: 480px) {
+			top: 1rem;
+			right: 0rem;
+		}
 	`;
 	const Navin = styled.div`
 		// border: 1px solid black;
-		width: 20%;
+		width: 2rem;
 		background: ${(props) => props.color};
-		// flex-grow: 1.3;
+		@media only screen and (max-width: 480px) {
+			display: none;
+		}
 	`;
 
 	const Navout = styled.div`
 		// border: 1px solid blue;
-		width: 45%;
+		width: 5rem;
 		background: ${(props) => props.color};
-		// flex-grow: 2;
+		@media only screen and (max-width: 480px) {
+			width: 4rem;
+		}
 	`;
 
 	const colorType = {
