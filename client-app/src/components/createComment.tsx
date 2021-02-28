@@ -1,10 +1,23 @@
-import React from "react";
-import styled from "styled-components";
+import React, { ReactElement } from "react";
+import styled, { keyframes } from "styled-components";
+import Modal from "react-modal";
 
-function CreateComment() {
+Modal.setAppElement("#root");
+interface Props {
+	modalIsOpen: boolean;
+	setIsOpen: any;
+}
+
+export default function CommentlModal(props: Props): ReactElement {
+	const { modalIsOpen, setIsOpen } = props;
+
+	function closeModal() {
+		setIsOpen(false);
+	}
+
 	const CommentBox = styled.div`
 		width: 71%;
-		height: 55%;
+		height: 100%;
 		border: 0.1rem solid black;
 		margin: 1%;
 		background: #ededed;
@@ -13,14 +26,18 @@ function CreateComment() {
 		margin: 1% 4%;
 	`;
 
-	const CommentInput = styled.textarea`
+	const CommentInput = styled.input.attrs({
+		type: "text",
+		placeholder: "20자 이내로 입력하세요",
+		maxLength: 20,
+	})`
 		width: 90%;
 		height: 30%;
 		background: white;
-		margin-top: 2%;
-		margin-left: 4.5%;
+		margin-top: 1%;
+		margin-left: 4%;
 		resize: none;
-		font-size: 1.5em;
+		font-size: 1em;
 	`;
 
 	const CommentStampSend = styled.div`
@@ -30,43 +47,101 @@ function CreateComment() {
 	`;
 
 	const CommentSendButton = styled.button`
-		width: 15%;
+		width: 21%;
 		align-items: center;
 		justify-content: center;
 		display: flex;
-		margin-left: 57.2%;
+		margin-left: 36%;
+	`;
+	// 댓글창
+
+	const ModalStyles = {
+		content: {
+			margin: "auto",
+			width: "30rem",
+			height: "15rem",
+			background: "#f3f3e9",
+			display: "flex",
+			alignItems: "center",
+		},
+	};
+	const ModalBox = styled.div`
+		margin: 1px;
+		width: 45rem;
+		height: 20rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	`;
+	const Title = styled.div`
+		/* border: 1px solid red; */
+		font-size: 2rem;
+		font-weight: bold;
+		text-align: center;
+	`;
+	const Buttons = styled.div`
+		/* border: 1px solid red; */
+		display: flex;
+		justify-content: center;
+	`;
+	const BackBtn = styled.div`
+		/* border: 1px solid red; */
+		display: flex;
+		justify-content: flex-end;
 	`;
 
+	const logoStyle = {
+		margin: "1rem",
+		width: "5rem",
+	};
+
+	const btnStyle = {
+		border: "1px solid black",
+		width: "1.5rem",
+		height: "1.3rem",
+		fontSize: "1rem",
+	};
+
 	return (
-		<CommentBox>
-			<CommentBoxTitle>한마디쓰기</CommentBoxTitle>
-			<CommentInput />
-			<CommentStampSend>
-				<img
-					className="date_weather"
-					src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
-					alt=""
-					width="40px"
-					height="40px"
-				/>
-				<img
-					className="date_weather"
-					src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
-					alt=""
-					width="40px"
-					height="40px"
-				/>
-				<img
-					className="date_weather"
-					src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
-					alt=""
-					width="40px"
-					height="40px"
-				/>
-				<CommentSendButton>등록하기</CommentSendButton>
-			</CommentStampSend>
-		</CommentBox>
+		<Modal isOpen={modalIsOpen} style={ModalStyles}>
+			<ModalBox>
+				<BackBtn>
+					<button onClick={closeModal} type="button" style={btnStyle}>
+						X
+					</button>
+				</BackBtn>
+				<Title>댓글로 응원해주세요!</Title>
+				<Buttons>
+					<CommentBox>
+						<CommentBoxTitle>한마디쓰기</CommentBoxTitle>
+						<CommentInput />
+						<CommentStampSend>
+							<img
+								className="date_weather"
+								src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
+								alt=""
+								width="40px"
+								height="40px"
+							/>
+							<img
+								className="date_weather"
+								src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
+								alt=""
+								width="40px"
+								height="40px"
+							/>
+							<img
+								className="date_weather"
+								src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
+								alt=""
+								width="40px"
+								height="40px"
+							/>
+							<CommentSendButton>등록하기</CommentSendButton>
+						</CommentStampSend>
+					</CommentBox>
+				</Buttons>
+			</ModalBox>
+		</Modal>
 	);
 }
-
-export default CreateComment;

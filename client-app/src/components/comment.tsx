@@ -7,11 +7,9 @@ function Comment() {
 	`;
 	const CommentStyle = styled.div`
 		background: #edede9;
-		display: inline-block;
-		width: 71%;
-		height: 80px;
+		width: 90%;
+		height: 100%;
 		margin: 0.5%;
-
 		border: 1px solid black;
 	`;
 

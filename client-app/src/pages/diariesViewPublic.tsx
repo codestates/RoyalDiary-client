@@ -8,8 +8,8 @@ export default function DiariesViewPublic(): ReactElement {
 		display: flex;
 		flex-direction: column;
 		flex-grow: 0.68;
-		margin-left: 6rem;
-		max-width: 40rem;
+		//margin-left: 6rem;
+		width: 50%;
 		height: 89vh;
 		box-sizing: border-box;
 		border-right: 5px solid black;

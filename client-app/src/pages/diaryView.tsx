@@ -6,12 +6,11 @@ import Comment from "../components/comment";
 export default function DiaryView(): ReactElement {
 	const Main = styled.div`
 		background: #f3f3e9;
-		display: flex;
-		margin-right: 8rem;
-		max-width: 50rem;
+		//display: flex;
+		width: 50%;
+		height: 101%;
 		box-sizing: border-box;
 		flex-direction: column;
-		flex-grow: 1;
 	`;
 
 	const Button = styled.button`
@@ -24,12 +23,20 @@ export default function DiaryView(): ReactElement {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		overflow: scroll;
+		height: 10%;
+		border: 0.15rem solid black;
+		margin-left: 10%;
+		margin-top: 5.8%;
+		width: 82%;
 	`;
 
 	return (
 		<Main>
 			<DiaryContent />
 			<Comments>
+				<Comment />
+				<Comment />
 				<Comment />
 			</Comments>
 		</Main>
