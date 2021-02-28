@@ -11,9 +11,12 @@ export default function CalendarRows(): ReactElement {
 		display: flex;
 		flex-direction: row;
 		flex-grow: 1;
-		max-width: 50rem;
-		@media only screen and (max-width: 768px) {
-			margin: 0px;
+		width: 50%;
+		box-sizing: border-box;
+
+		@media only screen and (max-width: 1200px) {
+			width: 80%;
+			height: 100%;
 		}
 	`;
 

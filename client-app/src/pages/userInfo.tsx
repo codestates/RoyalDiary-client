@@ -7,11 +7,12 @@ export default function UserInfo(): ReactElement {
 		background: #f3f3e9;
 		display: flex;
 		flex-direction: row;
-		flex-grow: 1;
-		max-width: 50rem;
-		max-height: 53.5rem;
-		@media only screen and (max-width: 1348px) {
-			max-width: 100%;
+		width: 50%;
+		height: 100%;
+		box-sizing: border-box;
+		@media only screen and (max-width: 1200px) {
+			width: 80%;
+			height: 100%;
 		}
 	`;
 

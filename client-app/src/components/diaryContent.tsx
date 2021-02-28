@@ -1,67 +1,129 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import styled from "styled-components";
+import picture from "../assets/images/drawing.png";
+import section from "../assets/images/paper.png";
+import cloudy from "../assets/images/weather/1.png";
+import sunny from "../assets/images/weather/2.png";
+import rainy from "../assets/images/weather/3.png";
+import snowy from "../assets/images/weather/4.png";
+import windy from "../assets/images/weather/5.png";
 
-const Diary = styled.div`
-	background: white;
-	width: 70%;
-	height: 60%;
-	margin: 10% 15% 0.5% 15%;
-	border: 0.2rem solid black;
-`;
+export default function DiaryContent(): ReactElement {
+	const Main = styled.div`
+		width: 100%;
+	`;
+	const Title = styled.div`
+		border: 3px solid black;
+		border-radius: 1rem;
+		flex-grow: 0.4;
+		margin: 3rem 5rem 1rem 3rem;
+		width: 78%;
+		padding-left: 1rem;
+		display: flex;
+		align-items: center;
+		font-size: 1.2rem;
+	`;
 
-const Info = styled.div`
-	border: 0.01rem solid black;
-	width: 100%;
-	height: 5%;
-	display: flex;
-	//justify-content: flex-end;
-	border: 0.01 rem solid black;
-`;
+	const Date = styled.div`
+		border: 2px solid black;
+		border-radius: 0.5rem;
+		flex-grow: 0.3;
+		box-sizing: border-box;
+		display: flex;
+		width: 97%;
+	`;
 
-const Date = styled.span`
-	border: 0.01rem solid black;
-	width: 10%;
-	font-size: 1.3rem;
-	display: flex;
-	justify-content: center;
-`;
+	const Option = styled.span`
+		border-right: 2px solid black;
+		font-size: 1.3rem;
+		width: 10%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	`;
+	const OptionContent = styled.span`
+		font-size: 1.3rem;
+		border-right: 2px solid black;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 30%;
+		height: 100%;
+	`;
 
-const Data = styled.span`
-	border: 0.01rem solid black;
-	width: 50%;
-	font-size: 1.3rem;
-	justify-content: center;
-	align-items: center;
-	display: flex;
-`;
+	const Type = styled.div`
+		border: 3px solid black;
+		border-radius: 1rem;
+		flex-grow: 10;
+		margin: 0rem 5rem 1rem 3rem;
+		padding-top: 1rem;
+		padding-left: 1rem;
+		display: flex;
+		flex-direction: column;
+	`;
 
-const Text = styled.div`
-	border: 1px solid black;
-	height: 43.5%;
-	width: 100%;
-`;
+	const Img = styled.img.attrs({
+		src: picture,
+	})`
+		width: 96%;
+		height: 250px;
+		margin: 0.2rem 0.2rem;
+		border: 0.15rem solid black;
+		box-sizing: border-box;
+	`;
+	const Back = styled.div`
+		background-size: cover;
+		background: url(${section});
+		width: 100.5%;
+		height: 18rem;
+		margin: 0.2rem -0.5rem;
+		border: 0.15rem solid black;
+		box-sizing: border-box;
+	`;
 
-function DiaryContent() {
+	const Content = styled.div`
+		font-size: 1.3rem;
+		letter-spacing: 0.7rem;
+		word-spacing: 0.7rem;
+		line-height: 1.8rem;
+		margin-left: 0.4rem;
+		margin-top: 0.2rem;
+		word-break: normal;
+		box-sizing: border-box;
+		//border: 1px solid red;
+		width: 32.8rem;
+	`;
+
+	const Weather1 = styled.img.attrs({
+		src: cloudy,
+		sunny,
+		rainy,
+		snowy,
+		windy,
+	})`
+		width: 2rem;
+		height: 1rem;
+	`;
+
 	return (
-		<Diary>
-			<Info>
-				<Date>날짜</Date>
-				<Data> 2021 년 2 월 21 일</Data>
-				<Date>날씨</Date>
-				<img src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg" alt="" />
-				<img src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg" alt="" />
-				<img src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg" alt="" />
-				<img src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg" alt="" />
-			</Info>
-			<img
-				src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2021-02-21+%EC%98%A4%ED%9B%84+2.21.11.png"
-				alt=""
-				width="100%"
-				height="50%"
-			/>
-			<Text>d</Text>
-		</Diary>
+		<Main>
+			<Title>제목: 오늘은 맛있는 햄버거를 먹었다.</Title>
+			<Type>
+				<Date>
+					<Option>날짜</Option>
+					<OptionContent>2021년 2월 21일</OptionContent>
+					<Option>날씨</Option>
+				</Date>
+				<Img />
+				<Back>
+					<Content>
+						오늘은 엄마랑 치과를 갔다. 배가 많이 고팠는데 엄마가 돈까스를 사주셨다. ㅎㅎ 치즈 돈까스를 먹었는데 아저씨가
+						양을 많이줘서 기분이 좋았다 다음에 또. 오고싶다 다음에 오면 피자돈까스를 먹어야겠다 옆사람이 먹는데 디게
+						맛있어 보였다. 오늘은 밥먹고 일찍 자야겠다 코딩을 너무 많이했다 뽀삐랑 산책도 해야지 031,$
+					</Content>
+				</Back>
+			</Type>
+		</Main>
 	);
 }
-
-export default DiaryContent;

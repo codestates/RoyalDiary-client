@@ -19,7 +19,7 @@ function Comment() {
 		justify-content: space-between;
 		display: flex;
 		text-align: center;
-		width: 400px;
+		width: 95%;
 	`;
 	const CommentContents = styled.span`
 		font-size: 1.2em;

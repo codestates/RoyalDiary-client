@@ -2,15 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 function DiaryCard() {
-	const Card = styled.span`
-		height: 28%;
+	const Card = styled.div`
 		width: 30%;
+		margin: 0% 1%;
 	`;
 	const DiaryCreatedAt = styled.span`
-		margin: 0px;
+		@media only screen and (max-width: 768px) {
+			font-size: 0.8rem;
+		}
 	`;
 
-	const DiaryCardContent = styled.span``;
+	const DiaryCardContent = styled.span`
+		@media only screen and (max-width: 768px) {
+			font-size: 0.8rem;
+		}
+	`;
 	const Diaryimage = styled.div`
 		border: 1px solid black;
 		width: 100%;
