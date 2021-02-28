@@ -1,11 +1,13 @@
 import { findByLabelText } from "@testing-library/react";
 import React, { ReactElement } from "react";
+import { useHistory, Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import SocialModal from "../components/socialSignin";
 
 export default function Signin(): ReactElement {
 	// let subtitle: any;
 	const [modalIsOpen, setIsOpen] = React.useState(false);
+	const history = useHistory();
 	function openModal() {
 		setIsOpen(true);
 	}
@@ -98,6 +100,10 @@ export default function Signin(): ReactElement {
 		lineHeight: "1.3rem",
 	};
 
+	// const moveRoute = () => {
+	// 	Router.push("/");
+	// };
+
 	return (
 		<Main>
 			<form method="" style={formStyle}>
@@ -117,8 +123,12 @@ export default function Signin(): ReactElement {
 				</Input>
 				<Button>
 					<ClickButton>
-						<ButtonSole type="submit">입장 하기</ButtonSole>
-						<ButtonSole type="button">입학 하기</ButtonSole>
+						<ButtonSole type="submit" onClick={() => history.push("/diaryview")}>
+							입장 하기
+						</ButtonSole>
+						<ButtonSole type="button" onClick={() => history.push("/signup")}>
+							입학 하기
+						</ButtonSole>
 					</ClickButton>
 					<ClickButton>
 						<ButtonSole type="submit">로그 아웃</ButtonSole>

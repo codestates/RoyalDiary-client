@@ -1,8 +1,10 @@
 import React, { ReactElement } from "react";
+import { useHistory, Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import PropTypes from "prop-types";
 
 export default function Mainnav(): ReactElement {
+	const history = useHistory();
 	const Main = styled.div`
 		/* border: 3px solid red; */
 		width: 4rem;
@@ -60,19 +62,27 @@ export default function Mainnav(): ReactElement {
 		<Main>
 			<Navsole>
 				<Navin color={colorType.color1} />
-				<Navout color={colorType.color6}>일기쓰기</Navout>
+				<Navout color={colorType.color6} onClick={() => history.push("/creatediary")}>
+					일기쓰기
+				</Navout>
 			</Navsole>
 			<Navsole>
 				<Navin color={colorType.color2} />
-				<Navout color={colorType.color7}>일기보기</Navout>
+				<Navout color={colorType.color7} onClick={() => history.push("/diaryview")}>
+					일기보기
+				</Navout>
 			</Navsole>
 			<Navsole>
 				<Navin color={colorType.color3} />
-				<Navout color={colorType.color8}>훔쳐보기</Navout>
+				<Navout color={colorType.color8} onClick={() => history.push("/diarypublic")}>
+					훔쳐보기
+				</Navout>
 			</Navsole>
 			<Navsole>
 				<Navin color={colorType.color4} />
-				<Navout color={colorType.color9}>나의정보</Navout>
+				<Navout color={colorType.color9} onClick={() => history.push("/userinfo/calendar")}>
+					나의정보
+				</Navout>
 			</Navsole>
 			<Navsole>
 				<Navin color={colorType.color5} />

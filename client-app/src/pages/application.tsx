@@ -1,10 +1,13 @@
 import React, { ReactElement } from "react";
+import { useHistory, Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Agreement from "../components/agreement";
 import principalImg from "../assets/images/principal.png";
 import logoImg from "../assets/images/royalschool.png";
+import SubNav from "../components/subNav";
 
 export default function Application(): ReactElement {
+	const history = useHistory();
 	const Main = styled.div`
 		background: #f3f3e9;
 		/* border: 10px solid black; */
@@ -147,6 +150,7 @@ export default function Application(): ReactElement {
 
 	return (
 		<Main>
+			<SubNav />
 			<Header>입학지원서 </Header>
 			<Body>
 				<Content>
@@ -172,7 +176,7 @@ export default function Application(): ReactElement {
 					<button type="submit" style={btnstyle}>
 						입학하기
 					</button>
-					<button type="button" style={btnstyle}>
+					<button type="button" style={btnstyle} onClick={() => history.push("/")}>
 						뒤로가기
 					</button>
 				</Button>
