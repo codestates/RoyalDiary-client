@@ -11,31 +11,32 @@ import windy from "../assets/images/weather/5.png";
 export default function DiaryContent(): ReactElement {
 	const Main = styled.div`
 		width: 100%;
+		height: 80%;
+		margin-bottom: 0px;
+		flex-direction: column;
 	`;
 	const Title = styled.div`
-		border: 3px solid black;
-		border-radius: 1rem;
+		border: 0.2em solid black;
+		border-radius: 0.5rem;
 		flex-grow: 0.4;
-		margin: 3rem 5rem 1rem 3rem;
-		width: 78%;
-		padding-left: 1rem;
+		margin-top: 4%;
+		margin-left: 7.5%;
+		width: 85%;
 		display: flex;
 		align-items: center;
 		font-size: 1.2rem;
 	`;
 
 	const Date = styled.div`
-		border: 2px solid black;
-		border-radius: 0.5rem;
-		flex-grow: 0.3;
-		box-sizing: border-box;
+		border: 0.15em solid black;
 		display: flex;
-		width: 97%;
+		margin-top: -2%;
+		margin-left: -1%;
 	`;
 
 	const Option = styled.span`
 		border-right: 2px solid black;
-		font-size: 1.3rem;
+		font-size: 1rem;
 		width: 10%;
 		height: 100%;
 		display: flex;
@@ -43,7 +44,7 @@ export default function DiaryContent(): ReactElement {
 		align-items: center;
 	`;
 	const OptionContent = styled.span`
-		font-size: 1.3rem;
+		font-size: 1rem;
 		border-right: 2px solid black;
 		display: flex;
 		justify-content: center;
@@ -54,45 +55,51 @@ export default function DiaryContent(): ReactElement {
 
 	const Type = styled.div`
 		border: 3px solid black;
+		margin-top: 2%;
+		margin-left: 8%;
 		border-radius: 1rem;
 		flex-grow: 10;
-		margin: 0rem 5rem 1rem 3rem;
 		padding-top: 1rem;
 		padding-left: 1rem;
 		display: flex;
 		flex-direction: column;
+		width: 82%;
+		height: 92%;
+
+		//	height: 80%;
 	`;
 
 	const Img = styled.img.attrs({
 		src: picture,
 	})`
-		width: 96%;
-		height: 250px;
-		margin: 0.2rem 0.2rem;
-		border: 0.15rem solid black;
-		box-sizing: border-box;
-	`;
-	const Back = styled.div`
-		background-size: cover;
-		background: url(${section});
-		width: 100.5%;
-		height: 18rem;
+		width: 100%;
+		height: 50%;
 		margin: 0.2rem -0.5rem;
 		border: 0.15rem solid black;
 		box-sizing: border-box;
 	`;
+	const ContentBacground = styled.div`
+		background-size: cover;
+		background: url(${section});
+		overflow: scroll;
+		width: 100.5%;
+		box-sizing: border-box;
+		border: 0.2rem solid black;
+
+		//border: 0.15rem solid black;
+	`;
 
 	const Content = styled.div`
-		font-size: 1.3rem;
-		letter-spacing: 0.7rem;
-		word-spacing: 0.7rem;
-		line-height: 1.8rem;
-		margin-left: 0.4rem;
-		margin-top: 0.2rem;
-		word-break: normal;
-		box-sizing: border-box;
-		//border: 1px solid red;
-		width: 32.8rem;
+		@import url("https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap");
+		font-family: "Nanum Brush Script", cursive;
+		text-transform: uppercase;
+		overflow: scroll;
+		font-size: 2rem;
+		margin-left: 0.8rem;
+		letter-spacing: 1.3rem;
+		word-spacing: 1.2rem;
+		line-height: 2.5rem;
+		width: 105%;
 	`;
 
 	const Weather1 = styled.img.attrs({
@@ -116,13 +123,15 @@ export default function DiaryContent(): ReactElement {
 					<Option>날씨</Option>
 				</Date>
 				<Img />
-				<Back>
+				<ContentBacground>
 					<Content>
-						오늘은 엄마랑 치과를 갔다. 배가 많이 고팠는데 엄마가 돈까스를 사주셨다. ㅎㅎ 치즈 돈까스를 먹었는데 아저씨가
-						양을 많이줘서 기분이 좋았다 다음에 또. 오고싶다 다음에 오면 피자돈까스를 먹어야겠다 옆사람이 먹는데 디게
-						맛있어 보였다. 오늘은 밥먹고 일찍 자야겠다 코딩을 너무 많이했다 뽀삐랑 산책도 해야지 031,$
+						오늘은 일요일이다 아침엔 짜파게티를 먹었고 점심은 제육볶음을 먹었다 이제 저녁시간인데 밥을 뭐해먹을지
+						고민이다 다음주는 로직을 짜야한다 열심히해야지 오늘은 일요일이다 아침엔 짜파게티를 먹었고 점심은 제육볶음을
+						먹었다 이제 저녁시간인데 밥을 뭐해먹을지 고민이다 다음주는 로직을 짜야한 로직을 짜야한다 열심히해야지 오늘은
+						일요일이다 아침엔 짜파게티를 먹었고 점심은 제육볶음을 먹었다 이제 저녁시간인데 밥을 뭐해먹을지 고민이다
+						다음주는 로직을 짜야한
 					</Content>
-				</Back>
+				</ContentBacground>
 			</Type>
 		</Main>
 	);

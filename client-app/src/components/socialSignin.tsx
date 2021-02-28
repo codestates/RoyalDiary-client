@@ -29,7 +29,7 @@ export default function SocialModal(props: Props): ReactElement {
 		},
 	};
 	const ModalBox = styled.div`
-		/* border: 10px solid yellow; */
+		//border: 10px solid yellow; */
 		margin: auto;
 		/* padding-left: 4rem; */
 		width: 45rem;
