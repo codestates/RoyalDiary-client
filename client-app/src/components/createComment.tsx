@@ -3,22 +3,22 @@ import styled from "styled-components";
 
 function CreateComment() {
 	const CommentBox = styled.div`
-		width: 31.2rem;
-		height: 8rem;
+		width: 71%;
+		height: 55%;
 		border: 0.1rem solid black;
-		margin-top: 1%;
+		margin: 1%;
 		background: #ededed;
 	`;
 	const CommentBoxTitle = styled.h3`
-		margin: 0px;
+		margin: 1% 4%;
 	`;
 
 	const CommentInput = styled.textarea`
 		width: 90%;
 		height: 30%;
 		background: white;
-		margin-top: 10px;
-		margin-left: 20px;
+		margin-top: 2%;
+		margin-left: 4.5%;
 		resize: none;
 		font-size: 1.5em;
 	`;
@@ -30,12 +30,11 @@ function CreateComment() {
 	`;
 
 	const CommentSendButton = styled.button`
-		width: 5em;
-		height: 2em;
+		width: 15%;
 		align-items: center;
 		justify-content: center;
 		display: flex;
-		margin-left: 20em;
+		margin-left: 57.2%;
 	`;
 
 	return (

@@ -7,24 +7,18 @@ export default function DiaryView(): ReactElement {
 	const Main = styled.div`
 		background: #f3f3e9;
 		display: flex;
-		width: 50%;
-		max-height: 54rem;
+		margin-right: 8rem;
+		max-width: 50rem;
 		box-sizing: border-box;
-		//margin-right: 4rem;
-		border: 0.15rem solid black;
 		flex-direction: column;
 		flex-grow: 1;
-		@media only screen and (max-width: 1200px) {
-			width: 80%;
-		}
 	`;
 
 	const Button = styled.button`
-		width: 4.8em;
-		height: 1.8em;
+		width: 5em;
+		height: 2em;
 		border: 1px solid black;
-		margin-left: 46.7em;
-		border-radius: 8%;
+		margin-left: 76%;
 	`;
 	const Comments = styled.div`
 		display: flex;
@@ -35,9 +29,7 @@ export default function DiaryView(): ReactElement {
 	return (
 		<Main>
 			<DiaryContent />
-			<Button>수정하기</Button>
 			<Comments>
-				<Comment />
 				<Comment />
 			</Comments>
 		</Main>

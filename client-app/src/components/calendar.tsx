@@ -12,6 +12,9 @@ export default function Calendar(): ReactElement {
 		width: 80%;
 		display: flex;
 		justify-content: center;
+		@media only screen and (max-width: 1200px) {
+			margin: 3 px auto;
+		}
 	`;
 
 	const style1 = {

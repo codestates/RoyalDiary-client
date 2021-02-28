@@ -7,18 +7,17 @@ export default function DiariesView(): ReactElement {
 		background: #f3f3e9;
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
-		width: 50%;
+		flex-grow: 0.68;
+		margin-left: 6rem;
+		max-width: 40rem;
+		height: 89vh;
 		box-sizing: border-box;
-		border: 0.15rem solid black;
-		@media only screen and (max-width: 1200px) {
-			width: 80%;
-		}
+		border-right: 5px solid black;
 	`;
 
 	const Content = styled.div`
 		margin-top: 5%;
-		margin-left: 3.5%;
+		margin-left: 5%;
 		display: flex;
 		width: 100%;
 		height: 2.5rem;
@@ -26,13 +25,14 @@ export default function DiariesView(): ReactElement {
 	`;
 	const Cards = styled.div`
 		width: 88%;
-		height: 85%;
+		height: 75%;
 		border: 1px solid black;
-		margin-left: 3.5%;
-		flex-direction: row;
+		margin: 2% auto;
+		//flex-direction: row;
 		display: flex;
+		justify-content: center;
+		align-items: center;
 		flex-wrap: wrap;
-		justify-content: space-around;
 		background: white;
 	`;
 
@@ -41,7 +41,8 @@ export default function DiariesView(): ReactElement {
 	`;
 
 	const Buttons = styled.div`
-		margin-right: 4.9rem;
+		flex-direction: row;
+		margin-right: 11%;
 	`;
 
 	const SortButton = styled.button`

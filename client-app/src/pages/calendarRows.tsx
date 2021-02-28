@@ -6,11 +6,12 @@ export default function CalendarRows(): ReactElement {
 	const Main = styled.div`
 		background: #f3f3e9;
 		border: 0.15rem solid black;
-		margin-left: 4rem;
 		display: flex;
 		flex-direction: row;
-		flex-grow: 1;
-		max-width: 50rem;
+		//flex-grow: 1;
+		width: 50%;
+		height: 100%;
+		box-sizing: border-box;
 	`;
 	const Box = styled.div`
 		//background: whitesmoke;
