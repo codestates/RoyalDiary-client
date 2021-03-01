@@ -1,9 +1,11 @@
 import React, { ReactElement } from "react";
+import { useHistory } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import CDiary from "../components/diary";
 import Emotion from "../components/emotion";
 
 export default function Diary(): ReactElement {
+	const history = useHistory();
 	const Main = styled.div`
 		background: #f6f6ee;
 		/* border: 5px solid black; */
@@ -47,7 +49,7 @@ export default function Diary(): ReactElement {
 			<CDiary />
 			<Emotion />
 			<Buttons>
-				<Button>뒤로가기버튼</Button>
+				<Button onClick={() => history.push("/")}>뒤로가기버튼</Button>
 				<Button>장소등록버튼</Button>
 				<Button>공개버튼</Button>
 				<Button>완료버튼</Button>
