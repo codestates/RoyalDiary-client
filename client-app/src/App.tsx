@@ -68,18 +68,6 @@ const Main = styled.div`
 	margin: 2.5rem auto;
 	height: 88vh;
 	width: 80.4vw;
-	/* 
-	@media only screen and (max-width: 1200px) {
-		justify-content: center;
-	}
-
-	@media only screen and (max-width: 768px) {
-		border: 0px;
-	}
-	@media only screen and (max-width: 480px) {
-		margin: 0px;
-		width: 118%;
-	} */
 `;
 
 export default App;
