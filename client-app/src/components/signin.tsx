@@ -11,95 +11,19 @@ export default function Signin(): ReactElement {
 	function openModal() {
 		setIsOpen(true);
 	}
-	const Main = styled.div`
-		/* border: 10px solid yellow; */
-		flex-grow: 1;
-		display: flex;
-		/* justify-content: space-around; */
-		margin-bottom: 2rem;
-	`;
-	const Input = styled.div`
-		/* border: 3px solid black; */
-		margin-left: 3rem;
-		width: 70%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	`;
-	const InputBox = styled.label`
-		/* border: 1px solid blue; */
-		width: 100%;
-		font-size: 1rem;
-		display: flex;
-		/* flex-direction: row; */
-		flex-wrap: wrap;
-		align-items: center;
-		margin-top: 0.5rem;
-		@media only screen and (max-width: 770px) {
-			width: 90%;
-			margin-left: -1rem;
-		}
-		@media only screen and (max-width: 480px) {
-			width: 90%;
-			margin-left: -2rem;
-		}
-	`;
-	const InputInfo = styled.input`
-		// color: palevioletred;
-		font-size: 1.2rem;
-		border: 2px solid palevioletred;
-		width: 80%;
-		/* margin-top: 5rem; */
-		background-color: #dcdcdc;
-	`;
-	const Button = styled.div`
-		/* border: 4px solid green; */
-		width: 20%;
-		margin-right: 2.5rem;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		@media only screen and (max-width: 770px) {
-			margin-right: 4rem;
-		}
-		@media only screen and (max-width: 480px) {
-			width: 30%;
-			margin-right: 1rem;
-		}
-	`;
-	const ClickButton = styled.div`
-		/* border: 1px solid black; */
-		width: 110%;
-		height: 3.4rem;
-		display: flex;
-		align-items: center;
-	`;
-	const ButtonSole = styled.button`
-		border: 1px solid black;
-		width: 5rem;
-		height: 2.8rem;
-		margin: 0.3rem;
-		overflow: hidden;
-		box-sizing: border-box;
-		display: flex;
-	`;
 	const fontstyle = {
 		fontSize: "1rem",
 		marginRight: "0.2rem",
 	};
-
 	const formStyle = {
 		display: "flex",
 		width: "35rem",
 	};
-
 	const btnStyle = {
 		border: "1px solid black",
 		fontSize: "0.8rem",
 		lineHeight: "1.3rem",
 	};
-
 	// const moveRoute = () => {
 	// 	Router.push("/");
 	// };
@@ -143,3 +67,77 @@ export default function Signin(): ReactElement {
 		</Main>
 	);
 }
+
+const Main = styled.div`
+	/* border: 10px solid yellow; */
+	flex-grow: 1;
+	display: flex;
+	/* justify-content: space-around; */
+	margin-bottom: 2rem;
+`;
+const Input = styled.div`
+	/* border: 3px solid black; */
+	margin-left: 3rem;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+`;
+const InputBox = styled.label`
+	/* border: 1px solid blue; */
+	width: 100%;
+	font-size: 1rem;
+	display: flex;
+	/* flex-direction: row; */
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 0.5rem;
+	@media only screen and (max-width: 770px) {
+		width: 90%;
+		margin-left: -1rem;
+	}
+	@media only screen and (max-width: 480px) {
+		width: 90%;
+		margin-left: -2rem;
+	}
+`;
+const InputInfo = styled.input`
+	// color: palevioletred;
+	font-size: 1.2rem;
+	border: 2px solid palevioletred;
+	width: 80%;
+	/* margin-top: 5rem; */
+	background-color: #dcdcdc;
+`;
+const Button = styled.div`
+	/* border: 4px solid green; */
+	width: 20%;
+	margin-right: 2.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	@media only screen and (max-width: 770px) {
+		margin-right: 4rem;
+	}
+	@media only screen and (max-width: 480px) {
+		width: 30%;
+		margin-right: 1rem;
+	}
+`;
+const ClickButton = styled.div`
+	/* border: 1px solid black; */
+	width: 110%;
+	height: 3.4rem;
+	display: flex;
+	align-items: center;
+`;
+const ButtonSole = styled.button`
+	border: 1px solid black;
+	width: 5rem;
+	height: 2.8rem;
+	margin: 0.3rem;
+	overflow: hidden;
+	box-sizing: border-box;
+	display: flex;
+`;
