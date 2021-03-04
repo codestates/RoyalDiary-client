@@ -8,12 +8,16 @@ export default function DiaryRows(): ReactElement {
 		flex-direction: row;
 		background: #f3f3e9;
 		width: 90%;
-		height: 13%;
+		height: 30%;
 		max-width: 100%;
 		max-height: 100%;
 		border: 0.15em solid black;
 		box-sizing: border-box;
 		margin: 5% 5%;
+		@media only screen and (max-width: 1200px) {
+			margin: auto;
+			margin-top: 3%;
+		}
 	`;
 
 	const DateBox = styled.div`

@@ -11,7 +11,7 @@ export default function UserInfo(): ReactElement {
 		height: 100%;
 		box-sizing: border-box;
 		@media only screen and (max-width: 1200px) {
-			width: 80%;
+			width: 70%;
 			height: 100%;
 		}
 	`;
