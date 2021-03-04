@@ -25,6 +25,7 @@ export default function DiaryViewPublic(): ReactElement {
 			width: 100%;
 			height: 100%;
 		}
+
 	`;
 
 	const CommentButton = styled.button`
@@ -34,7 +35,6 @@ export default function DiaryViewPublic(): ReactElement {
 		margin-top: 2.2%;
 		margin-left: 84%;
 		margin-bottom: 0.3%;
-
 		//border-radius: 0.5rem;
 		@media only screen and (max-width: 480px) {
 			/* margin-left: 1rem; */
@@ -55,7 +55,6 @@ export default function DiaryViewPublic(): ReactElement {
 		margin-top: 0;
 		width: 82%;
 	`;
-
 	const btnStyle = {
 		border: "1px solid black",
 		fontSize: "0.8rem",
