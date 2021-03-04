@@ -81,6 +81,7 @@ export default function DiaryContent(): ReactElement {
 	const ContentBacground = styled.div`
 		background-size: cover;
 		background: url(${section});
+		margin-left: -0.7%;
 		overflow: scroll;
 		width: 100.5%;
 		box-sizing: border-box;

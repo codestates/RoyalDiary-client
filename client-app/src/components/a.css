@@ -1,7 +1,7 @@
 .react-calendar {
    background-color: white;
-   font-size: 300%;
-   width:100%;
+   font-size: 200%;
+   width:30%;
    height: 210%;
 }
 
@@ -14,14 +14,21 @@
 }
 
 .react-calendar__navigation__label {
-    font-size: 50%;
+    font-size: 80%;
 }
 
 .react-calendar__navigation__arrow {
     width: 10%;
-    font-size: 50%;
+    font-size:100%;
 }
 
 .react-calendar__tile{
-    font-size: 30px;
+    font-size: 80%;
+}
+
+.main{
+    width: 75%;
+    margin:auto;
+    margin-top:10%;
+   height: 90%;
 }

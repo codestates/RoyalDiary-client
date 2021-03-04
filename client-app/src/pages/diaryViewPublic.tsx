@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
 import DiaryContent from "../components/diaryContent";
 import Comment from "../components/comment";
-import SocialModal from "../components/socialSignin";
 import CommentModal from "../components/createComment";
 
 export default function DiaryViewPublic(): ReactElement {
@@ -17,6 +16,16 @@ export default function DiaryViewPublic(): ReactElement {
 		height: 101%;
 		box-sizing: border-box;
 		flex-direction: column;
+		@media only screen and (max-width: 1200px) {
+			width: 90.4%;
+			border-right: 5px solid black;
+		}
+		@media only screen and (max-width: 480px) {
+			/* margin-left: 1rem; */
+			width: 100%;
+			height: 100%;
+		}
+
 	`;
 
 	const CommentButton = styled.button`
@@ -27,6 +36,13 @@ export default function DiaryViewPublic(): ReactElement {
 		margin-left: 84%;
 		margin-bottom: 0.3%;
 		//border-radius: 0.5rem;
+		@media only screen and (max-width: 480px) {
+			/* margin-left: 1rem; */
+
+			margin-top: 5%;
+			margin-left: 75%;
+			margin-bottom: 3%;
+		}
 	`;
 	const Comments = styled.div`
 		display: flex;
@@ -38,15 +54,6 @@ export default function DiaryViewPublic(): ReactElement {
 		margin-left: 10%;
 		margin-top: 0;
 		width: 82%;
-	`;
-	const ButtonSole = styled.button`
-		border: 1px solid black;
-		width: 5rem;
-		height: 2.8rem;
-		margin: 0.3rem;
-		overflow: hidden;
-		box-sizing: border-box;
-		display: flex;
 	`;
 	const btnStyle = {
 		border: "1px solid black",

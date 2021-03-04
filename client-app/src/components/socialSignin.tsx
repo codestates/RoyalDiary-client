@@ -27,6 +27,34 @@ export default function SocialModal(props: Props): ReactElement {
 			alignItems: "center",
 		},
 	};
+
+	const ModalBox = styled.div`
+		//border: 10px solid yellow; */
+		margin: auto;
+		/* padding-left: 4rem; */
+		width: 45rem;
+		height: 20rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	`;
+	const Title = styled.div`
+		/* border: 1px solid red; */
+		font-size: 2rem;
+		font-weight: bold;
+		text-align: center;
+	`;
+	const Buttons = styled.div`
+		/* border: 1px solid red; */
+		display: flex;
+		justify-content: center;
+	`;
+	const BackBtn = styled.div`
+		/* border: 1px solid red; */
+		display: flex;
+		justify-content: flex-end;
+		padding-right: 3rem;
+	`;
 	const logoStyle = {
 		margin: "1rem",
 		width: "5rem",

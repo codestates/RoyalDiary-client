@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Good from "../assets/images/stamp/good.png";
 
 function Comment() {
 	const CommentBox = styled.div`
@@ -8,7 +9,7 @@ function Comment() {
 	const CommentStyle = styled.div`
 		background: #edede9;
 		width: 90%;
-		height: 100%;
+		height: 140%;
 		margin: 0.5%;
 		border: 1px solid black;
 	`;
@@ -20,25 +21,48 @@ function Comment() {
 		width: 95%;
 	`;
 	const CommentContents = styled.span`
-		font-size: 1.2em;
+		font-size: 1.2rem;
+		@media only screen and (max-width: 480px) {
+			font-size: 1rem;
+			background: grey;
+		}
+	`;
+	const CommentCreated = styled.span`
+		font-size: 1rem;
+		@media only screen and (max-width: 480px) {
+			display: none;
+		}
 	`;
 
+	const Commentbox = styled.div`
+		display: flex;
+	`;
+	const CommentText = styled.span`
+		align-items: center;
+		display: flex;
+		font-size: 1.4em;
+		@media only screen and (max-width: 480px) {
+			font-size: 1rem;
+		}
+	`;
+	const Stamp = styled.img.attrs({
+		src: Good,
+	})`
+		width: 12%;
+		@media only screen and (max-width: 480px) {
+			display: none;
+		}
+	`;
 	return (
 		<CommentStyle>
 			<CommentUser>
 				<CommentContents>뚱이님의 한마디 </CommentContents>
-				<CommentContents>2020-02-21</CommentContents>
+				<CommentCreated>2020-02-21</CommentCreated>
 			</CommentUser>
-			<div className="comment_text">
-				<span> 선생님은 뚱이를 응원해요!</span>
-				<img
-					className="date_weather"
-					src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
-					alt=""
-					width="40px"
-					height="40px"
-				/>
-			</div>
+			<Commentbox>
+				<CommentText> 선생님은 뚱이를 응원해요!</CommentText>
+				<Stamp />
+			</Commentbox>
 		</CommentStyle>
 	);
 }
