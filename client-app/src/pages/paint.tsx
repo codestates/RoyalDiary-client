@@ -31,6 +31,7 @@ const Main = styled.div`
 	}
 	@media only screen and (max-width: 480px) {
 		/* margin-left: 1rem; */
+		min-width: 400px;
 		height: 70%;
 	}
 `;

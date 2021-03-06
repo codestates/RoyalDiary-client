@@ -5,8 +5,6 @@ import Cmanual from "../components/manual";
 import logoImg from "../assets/images/royalschool.png";
 
 export default function Manual(): ReactElement {
-	const imgstyle = { width: "80%", height: "80%" };
-
 	const Today = () => {
 		const year = new Date().getFullYear();
 		const month = new Date().getMonth() + 1;
@@ -47,7 +45,6 @@ export default function Manual(): ReactElement {
 		</Main>
 	);
 }
-
 const Main = styled.div`
 	background: white;
 	border: 5px solid black;
@@ -62,8 +59,8 @@ const Main = styled.div`
 	}
 	@media only screen and (max-width: 480px) {
 		letter-spacing: 0.7rem;
+		min-width: 400px;
 		height: 70%;
-		background: blue;
 	}
 `;
 const Header = styled.div`
@@ -164,3 +161,4 @@ const Fprincipal = styled.div`
 	font-weight: bold;
 	letter-spacing: 1rem;
 `;
+const imgstyle = { width: "80%", height: "80%" };
