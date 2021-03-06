@@ -24,7 +24,6 @@ export default function DiariesViewPublic(): ReactElement {
 			margin: 0px;
 		}
 	`;
-
 	const Content = styled.div`
 		margin-top: 5%;
 		margin-left: 5%;
