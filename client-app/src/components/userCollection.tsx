@@ -1,21 +1,44 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import axios from "axios";
+
+const token =
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi7Iah7KCV7ZiEIiwibmlja25hbWUiOiLqt4DsmpTrr7giLCJlbWFpbCI6Ink2cnN5QG5hdmVyLmNvbSIsIm1vYmlsZSI6IjAxMC01NjQ4LTg1OTUiLCJpYXQiOjE2MTQ4NTY4MzMsImV4cCI6MTYxNDk0MzIzM30.eO5r550Gj7YLCPE8vp9zVWoWfm6opyK52sXVQRzt0JA";
+axios.defaults.baseURL = "https://royal-diary.ml";
+
+localStorage.setItem("token", token);
+const tokenValue = localStorage.getItem("token");
 
 export default function User(): ReactElement {
+	const [user, setUser]: any = useState("");
+
+	useEffect(() => {
+		async function getUserInfo() {
+			await axios
+				.get("users/mypage", {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+				.then((res) => setUser(res.data));
+		}
+		getUserInfo();
+	}, []);
+
 	return (
 		<Main>
 			<Info>
 				<InfoBox>
 					<Option>성명</Option>
-					<Content1>홍길동</Content1>
+					<Content1>{user.name}</Content1>
 					<Option>전자우편</Option>
-					<Content2>sdfsf@naver.com</Content2>
+					<Content2>{user.email}</Content2>
 				</InfoBox>
 				<InfoBox>
 					<Option>별명</Option>
-					<Content1>면목동 꿀주먹</Content1>
+					<Content1>{user.nickname}</Content1>
 					<Option>휴대전화</Option>
-					<Content2>010-5555-6666</Content2>
+					<Content2>{user.mobile}</Content2>
 				</InfoBox>
 				<Collection>
 					<CollectionTitle>콜렉숀</CollectionTitle>
