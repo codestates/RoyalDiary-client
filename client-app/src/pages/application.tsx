@@ -1,23 +1,13 @@
 import React, { ReactElement } from "react";
-import { useHistory, Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import Agreement from "../components/agreement";
+import Agreement from "../components/signup";
 import principalImg from "../assets/images/principal.png";
-import logoImg from "../assets/images/royalschool.png";
 import SubNav from "../components/subNav";
 
 export default function Application(): ReactElement {
-	const history = useHistory();
 	const pstyle1 = { letterSpacing: "0.5rem" };
 	const pstyle2 = { padding: "0rem 0rem 0rem 3rem", fontSize: "1rem" };
 	const imgstyle = { width: "80%" };
-	const btnstyle = {
-		width: "6rem",
-		height: "2.5rem",
-		margin: "0.3rem",
-		background: "#c4c4c4",
-		borderRadius: "1rem",
-	};
 
 	const Today = (): string => {
 		const year: number = new Date().getFullYear();
@@ -46,19 +36,6 @@ export default function Application(): ReactElement {
 				</Image>
 			</Body>
 			<Agreement />
-			<Footer>
-				<Logo>
-					<LogoImg src={logoImg} />
-				</Logo>
-				<Button>
-					<button type="submit" style={btnstyle}>
-						입학하기
-					</button>
-					<button type="button" style={btnstyle} onClick={() => history.push("/")}>
-						뒤로가기
-					</button>
-				</Button>
-			</Footer>
 		</Main>
 	);
 }
@@ -75,15 +52,16 @@ const Main = styled.div`
 		height: 100%;
 	}
 	@media only screen and (max-width: 480px) {
-		width: 100%;
+		/* width: 100%; */
+		min-width: 400px;
 		height: 70%;
 	}
 `;
 const Header = styled.div`
 	/* border: 5px solid red; */
-	flex-grow: 0.5;
+	flex-grow: 0.3;
+	margin-top: 1rem;
 	display: flex;
-	margin-bottom: 1rem;
 	padding-left: 4rem;
 	align-items: center;
 	font-size: 3rem;
@@ -150,39 +128,4 @@ const Image = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-`;
-const Footer = styled.div`
-	/* border: 3px solid black; */
-	text-align: center;
-	flex-grow: 10;
-	display: flex;
-	margin-right: -0.2rem;
-	/* margin-top: 3rem; */
-`;
-const Logo = styled.div`
-	/* border: 5px solid red; */
-	flex-grow: 4;
-	padding-left: 10rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	@media only screen and (max-width: 480px) {
-		padding-left: 0rem;
-	}
-`;
-const Button = styled.div`
-	/* border-left: 5px solid black; */
-	flex-grow: 1;
-	display: flex;
-	margin-right: 3.5rem;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-`;
-const LogoImg = styled.img`
-	width: 35%;
-	alt: "";
-	@media only screen and (max-width: 480px) {
-		width: 50%;
-	}
 `;
