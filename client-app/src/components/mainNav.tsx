@@ -1,10 +1,11 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import PropTypes from "prop-types";
 
 export default function Mainnav(): ReactElement {
+	// const { hiddenNav } = props;
 	const history = useHistory();
+	const [userNav, displayNav] = useState(false);
 	const colorType = {
 		color1: "#c2aeae",
 		color2: "#c0ca82",
@@ -17,6 +18,16 @@ export default function Mainnav(): ReactElement {
 		color9: "#df86e1",
 		color10: "#e88383",
 	};
+	useEffect(() => {
+		// sessionStorage.setItem("isLogin", JSON.stringify(true));
+		const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
+		// console.log(isLogin);
+		if (isLogin === true) {
+			displayNav(true);
+		} else {
+			displayNav(false);
+		}
+	}, []);
 
 	return (
 		<Main>
@@ -26,24 +37,24 @@ export default function Mainnav(): ReactElement {
 					일기쓰기
 				</Navout>
 			</Navsole>
-			<Navsole>
+			<UserNavsole className="userMenu" theme={userNav}>
 				<Navin color={colorType.color2} />
 				<Navout color={colorType.color7} onClick={() => history.push("/diaryview")}>
 					일기보기
 				</Navout>
-			</Navsole>
+			</UserNavsole>
 			<Navsole>
 				<Navin color={colorType.color3} />
 				<Navout color={colorType.color8} onClick={() => history.push("/diarypublic")}>
 					훔쳐보기
 				</Navout>
 			</Navsole>
-			<Navsole>
+			<UserNavsole className="userMenu" theme={userNav}>
 				<Navin color={colorType.color4} />
 				<Navout color={colorType.color9} onClick={() => history.push("/userinfo/calendar")}>
 					나의정보
 				</Navout>
-			</Navsole>
+			</UserNavsole>
 			<Navsole>
 				<Navin color={colorType.color5} />
 				<Navout color={colorType.color10}>제작자</Navout>
@@ -59,13 +70,27 @@ const Main = styled.div`
 	justify-content: center;
 `;
 const Navsole = styled.div`
-	/* border: 1px solid red; */
 	position: relative;
 	top: 1rem;
 	right: -2rem;
 	width: 7rem;
 	margin: 0.2rem 0rem;
 	display: flex;
+	font-weight: bold;
+
+	@media only screen and (max-width: 480px) {
+		top: 1rem;
+		right: 0rem;
+	}
+`;
+const UserNavsole = styled.div`
+	/* border: 1px solid red; */
+	position: relative;
+	top: 1rem;
+	right: -2rem;
+	width: 7rem;
+	margin: 0.2rem 0rem;
+	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	font-weight: bold;
 	@media only screen and (max-width: 480px) {
 		top: 1rem;
@@ -88,7 +113,3 @@ const Navout = styled.div`
 		width: 4rem;
 	}
 `;
-Mainnav.propTypes = {
-	// eslint-disable-next-line react/no-unused-prop-types
-	color: PropTypes.string.isRequired,
-};

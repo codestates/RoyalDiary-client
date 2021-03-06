@@ -107,7 +107,7 @@ export default function CPaint(): ReactElement {
 				<Range type="range" onChange={handleRange} min="0.1" max="20" step="0.1" />
 				{/* <Eraser className="fas fa-eraser" /> */}
 				<Paint className="fas fa-brush" onMouseEnter={handleMouseHover} /* onMouseLeave={handleMouseHover} */ />
-				<Colors color={showColor}>
+				<Colors theme={showColor}>
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "white" }} />
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#2c2c2c" }} />
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#FF3B30" }} />
@@ -170,10 +170,19 @@ const Paint = styled.i`
 const Colors = styled.div`
 	/* border: 3px solid blue; */
 	width: 100%;
-	display: ${(props) => props.color};
+	display: ${(props) => props.theme};
 	/* justify-content: center; */
 	align-items: center;
 	flex-wrap: wrap;
+	animation: a 2s;
+	@keyframes a {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
 `;
 const Color = styled.div`
 	width: 40px;
@@ -182,6 +191,7 @@ const Color = styled.div`
 	border-radius: 25px;
 	cursor: pointer;
 	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+
 	@media only screen and (max-width: 480px) {
 		width: 30px;
 		height: 30px;

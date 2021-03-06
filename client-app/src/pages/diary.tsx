@@ -20,7 +20,6 @@ export default function Diary(): ReactElement {
 		</Main>
 	);
 }
-
 const Main = styled.div`
 	background: #f6f6ee;
 	/* border: 5px solid black; */
@@ -32,6 +31,7 @@ const Main = styled.div`
 	flex-grow: 1;
 	@media only screen and (max-width: 480px) {
 		/* margin-left: 1rem; */
+		min-width: 400px;
 		height: 70%;
 	}
 `;
@@ -43,6 +43,9 @@ const Buttons = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-end;
+	@media only screen and (max-width: 480px) {
+		padding-right: 2rem;
+	}
 `;
 const Button = styled.button`
 	/* border: 1px solid black; */
@@ -54,7 +57,9 @@ const Button = styled.button`
 	display: flex;
 	@media only screen and (max-width: 480px) {
 		/* margin-left: 1rem; */
-		width: 4rem;
-		height: 3.5rem;
+		font-size: 0.7rem;
+		/* width: 5rem; */
+		height: 1.5rem;
+		margin-right: 0.5rem;
 	}
 `;

@@ -19,7 +19,7 @@ export default function SignIn(): ReactElement {
 					<Image>
 						<MainImg className="children_image" src={childrenImg} alt="" />
 					</Image>
-					<MainNav color="" />
+					<MainNav />
 				</ImageNav>
 				<Signin />
 			</RedWhite>
@@ -41,7 +41,7 @@ const Main = styled.div`
 		height: 100%;
 	}
 	@media only screen and (max-width: 480px) {
-		width: 80%;
+		min-width: 400px;
 		height: 70%;
 	}
 `;
