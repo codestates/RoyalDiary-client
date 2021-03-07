@@ -4,7 +4,12 @@ import Agreement from "../components/signup";
 import principalImg from "../assets/images/principal.png";
 import SubNav from "../components/subNav";
 
-export default function Application(): ReactElement {
+interface signinProps {
+	changeSignin: any;
+}
+
+export default function Application(props: signinProps): ReactElement {
+	const { changeSignin } = props;
 	const pstyle1 = { letterSpacing: "0.5rem" };
 	const pstyle2 = { padding: "0rem 0rem 0rem 3rem", fontSize: "1rem" };
 	const imgstyle = { width: "80%" };
@@ -35,7 +40,7 @@ export default function Application(): ReactElement {
 					<img src={principalImg} style={imgstyle} alt="" />
 				</Image>
 			</Body>
-			<Agreement />
+			<Agreement changeSignin={changeSignin} />
 		</Main>
 	);
 }

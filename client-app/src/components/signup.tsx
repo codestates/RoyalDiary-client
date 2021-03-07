@@ -6,7 +6,12 @@ import logoImg from "../assets/images/royalschool.png";
 import { isPhoneNumber, isEmailForm, IsPasswordForm } from "../common/validation";
 import NotificationModal from "./NotificationModal";
 
-export default function Agreement(): ReactElement {
+interface signinProps {
+	changeSignin: any;
+}
+
+export default function Agreement(props: signinProps): ReactElement {
+	const { changeSignin } = props;
 	const history = useHistory();
 	// input 값 상태 관리
 	const [name, setName] = useState("");
@@ -212,6 +217,10 @@ export default function Agreement(): ReactElement {
 		}
 	};
 
+	const handleSignin = () => {
+		changeSignin(true);
+	};
+
 	const handleRequestSignUp = async () => {
 		const nameLength = name.length;
 		const pwdLength = lastPassword.length;
@@ -294,6 +303,8 @@ export default function Agreement(): ReactElement {
 					sessionStorage.setItem("accessToken", res.data.data.accessToken);
 					sessionStorage.setItem("isLogin", JSON.stringify(true));
 					sessionStorage.setItem("nickName", nickName);
+					sessionStorage.setItem("signUpIn", JSON.stringify(true)); // 회원가입 하자마자 로그인
+					handleSignin();
 					setSignUpModal(true);
 					setModalMessage("회원가입 되었습니다");
 					setModalVisible(true);

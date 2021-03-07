@@ -2,8 +2,12 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
-export default function Mainnav(): ReactElement {
-	// const { hiddenNav } = props;
+interface isLoginProps {
+	isSignin: boolean;
+}
+
+export default function Mainnav(props: isLoginProps): ReactElement {
+	const { isSignin } = props;
 	const history = useHistory();
 	const [userNav, displayNav] = useState(false);
 	const colorType = {
@@ -19,15 +23,13 @@ export default function Mainnav(): ReactElement {
 		color10: "#e88383",
 	};
 	useEffect(() => {
-		// sessionStorage.setItem("isLogin", JSON.stringify(true));
 		const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
-		// console.log(isLogin);
 		if (isLogin === true) {
 			displayNav(true);
-		} else {
-			displayNav(false);
+		} else if (isLogin === false) {
+			displayNav(isSignin);
 		}
-	}, []);
+	}, [isSignin]);
 
 	return (
 		<Main>
@@ -63,7 +65,7 @@ export default function Mainnav(): ReactElement {
 	);
 }
 const Main = styled.div`
-	/* border: 3px solid red; */
+	border: 3px solid red;
 	width: 4rem;
 	display: flex;
 	flex-direction: column;
