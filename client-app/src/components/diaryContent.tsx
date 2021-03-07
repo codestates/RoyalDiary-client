@@ -20,6 +20,7 @@ axios.defaults.baseURL = "https://royal-diary.ml";
 export default function DiaryContent(props: any): ReactElement {
 	const { diary } = props;
 
+
 	return (
 		<Main>
 			<Title>제목: {diary.title}</Title>
