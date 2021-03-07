@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import cloudy from "../assets/images/weather/1.png";
 import sunny from "../assets/images/weather/2.png";
@@ -6,7 +6,14 @@ import rainy from "../assets/images/weather/3.png";
 import snowy from "../assets/images/weather/4.png";
 import windy from "../assets/images/weather/5.png";
 
-export default function Diaryinfo(): ReactElement {
+interface setWeatherProps {
+	conveyWeather: any;
+}
+
+export default function Diaryinfo(props: setWeatherProps): ReactElement {
+	const { conveyWeather } = props;
+	const [userNick, setUserNick] = useState("손님");
+	const [weather, setWeatherToday] = useState("");
 	const Today = () => {
 		const year = new Date().getFullYear();
 		const month = new Date().getMonth() + 1;
@@ -16,6 +23,21 @@ export default function Diaryinfo(): ReactElement {
 		return `${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`;
 	};
 
+	const setWeather = (e: any) => {
+		// sessionStorage.setItem("weather", e.target.id); // 다이어리 페이지 완료 버튼 눌렀을때 사용
+		// console.log(sessionStorage.getItem("weather"));
+		// setWeatherToday(e.target.id);
+		// console.log(e.target.id);
+		const weathernow = e.target.id;
+		conveyWeather(weathernow);
+	};
+	useEffect(() => {
+		const getNick = sessionStorage.getItem("nickName") as string;
+		if (getNick !== null) {
+			setUserNick(getNick);
+		}
+	}, []);
+
 	return (
 		<Main>
 			<DateWeather>
@@ -24,25 +46,25 @@ export default function Diaryinfo(): ReactElement {
 				</Todaydate>
 				<Weather>
 					<Image>
-						<WeatherImg src={cloudy} />
+						<WeatherImg id="cloudy" src={cloudy} onClick={setWeather} />
 					</Image>
 					<Image>
-						<WeatherImg src={sunny} />
+						<WeatherImg id="sunny" src={sunny} onClick={setWeather} />
 					</Image>
 					<Image>
-						<WeatherImg src={rainy} />
+						<WeatherImg id="rainy" src={rainy} onClick={setWeather} />
 					</Image>
 					<Image>
-						<WeatherImg src={snowy} />
+						<WeatherImg id="snowy" src={snowy} onClick={setWeather} />
 					</Image>
 					<Image>
-						<WeatherImg src={windy} />
+						<WeatherImg id="windy" src={windy} onClick={setWeather} />
 					</Image>
 				</Weather>
 			</DateWeather>
 			<Userinfo>
 				1학년 12반 <br />
-				이름: (유저이름)
+				이름: {userNick}
 			</Userinfo>
 		</Main>
 	);
