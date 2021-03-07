@@ -1,16 +1,22 @@
-import React, { ReactElement, useRef, useState } from "react";
+import React, { ReactElement, useRef, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import CanvasDraw from "react-canvas-draw";
 import axios from "axios";
 
-export default function CPaint(): ReactElement {
+interface setImgProps {
+	conveyImgUrl: any;
+	conveyImgData: any;
+}
+
+export default function CPaint(props: setImgProps): ReactElement {
+	const { conveyImgUrl, conveyImgData } = props;
 	const [color, changeColor] = useState("black");
 	const [showColor, displayColor] = useState("none");
 	const [brushSize, changeSize] = useState(2.5);
 	const firstCanvas = useRef<any>(null);
 	// const secondCanvas = useRef<any>(null);
 
-	const handleRange = (event: any) => {
+	const handleRange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const size = Number(event.target.value);
 		changeSize(size);
 	};
@@ -31,22 +37,14 @@ export default function CPaint(): ReactElement {
 	const undo1 = () => {
 		firstCanvas.current.undo();
 	};
-	const saveAsPNG = () => {
-		const canvas = document.querySelector(".CanvasDraw canvas:nth-child(2)") as HTMLCanvasElement;
-		const imgUrl = canvas.toDataURL("image/png");
-		console.log("PNG image data");
-		console.log(imgUrl);
-		dataURLtoFile(imgUrl);
 
-		/* 이미지 데이터로 원하는 이미지 엘리먼트에 이미지를 만들 수 있다.
-		const newImage = document.createElement("img");
-		newImage.src = image;
-		document.querySelector(Main)?.append(newImage);
-		*/
-		/* 이미지 파일을 다운받을수 있다. 
-		 downloadImage(image, "my-canvas.png");
-		*/
+	const setImgUrl = (event: string) => {
+		conveyImgUrl(event);
 	};
+	const setImgData = (event: string) => {
+		conveyImgData(event);
+	};
+
 	function dataURLtoFile(dataurl: string) {
 		const blobBin = atob(dataurl.split(",")[1]); // base64 데이터 디코딩
 		const array = [];
@@ -62,7 +60,25 @@ export default function CPaint(): ReactElement {
 		// const imgUrl = axios.post("https://royaldiary.ml", formdata, {
 		// 	headers: { "content-Type": "multipart/form-data" },
 		// });
+		// 유알엘을 리턴하여 saveAsPNG 에서 사용할 수 있도록!!
 	}
+	const saveAsPNG = () => {
+		const canvas = document.querySelector(".CanvasDraw canvas:nth-child(2)") as HTMLCanvasElement;
+		const imgUrl = canvas.toDataURL("image/png");
+		console.log("PNG image data");
+		console.log(imgUrl);
+		dataURLtoFile(imgUrl); // 리턴받은 url 을 handleSaveClick 에 전달
+
+		/* 이미지 데이터로 원하는 이미지 엘리먼트에 이미지를 만들 수 있다.
+		const newImage = document.createElement("img");
+		newImage.src = image;
+		document.querySelector(Main)?.append(newImage);
+		*/
+		/* 이미지 파일을 다운받을수 있다. 
+		 downloadImage(image, "my-canvas.png");
+		*/
+	};
+
 	/* 이미지 파일 다운받는 함수 
 	function downloadImage(data: string, filename: string) {
 		const a = document.createElement("a");
@@ -73,10 +89,11 @@ export default function CPaint(): ReactElement {
 	}
 	*/
 	const handleSaveClick = () => {
-		saveAsPNG();
 		const data = firstCanvas.current.getSaveData();
-		console.log("모든좌표 데이터", data);
-		// secondCanvas.current.loadSaveData(data);
+		// console.log(sessionStorage.getItem("saveDraw"));
+		setImgData(data);
+		saveAsPNG(); // multer 에 전송후 받은 url 과 좌표 데이터를 sessionStorage 에 저장해서 글쓰기 완료 버튼을 눌렀을때 사용한다..!
+		setImgUrl("imageurl");
 	};
 	// Three methods used to revise pre-drawing
 	// const clear2 = () => {
@@ -90,8 +107,15 @@ export default function CPaint(): ReactElement {
 	// 	console.log("SecondData", secondData); // 두번째 캔버스의 모든 데이터.
 	// };
 
+	useEffect(() => {
+		// 새로고침 할때 그림이 유지된다. 다만 색상변경 등의 상태변화가 있으면 마찬가지로 그림이 리로드됨....
+		// const drawData = sessionStorage.getItem("saveDraw") as string;
+		// if (drawData !== null) firstCanvas.current.loadSaveData(drawData); // 새로고침할 경우 저장된 좌표데이터를 로드
+	});
+
 	return (
 		<Main>
+			{/* {console.log(firstData)} */}
 			<CanvasDraw
 				className="CanvasDraw"
 				brushRadius={brushSize}

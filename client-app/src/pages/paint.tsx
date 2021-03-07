@@ -1,15 +1,40 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Diaryinfo from "../components/diaryInfo";
 import CPaint from "../components/paint";
 
-export default function Paint(): ReactElement {
+interface setDataProps {
+	changeWeather: any;
+	changeImgUrl: any;
+	changeImgData: any;
+}
+
+export default function Paint(props: setDataProps): ReactElement {
+	const { changeWeather, changeImgUrl, changeImgData } = props;
+	const [userNick, setUserNick] = useState("손님");
+	const conveyWeather = (e: string) => {
+		changeWeather(e);
+	};
+	const conveyImgUrl = (e: string) => {
+		changeImgUrl(e);
+	};
+	const conveyImgData = (e: string) => {
+		changeImgData(e);
+	};
+
+	useEffect(() => {
+		const getNick = sessionStorage.getItem("nickName") as string;
+		console.log(getNick);
+		if (getNick !== null) {
+			setUserNick(getNick);
+		}
+	}, []);
 	return (
 		<Main>
 			<Paintbox>
-				<Diaryinfo />
-				<Title>😍(유저)의 행복한 하루😍</Title>
-				<CPaint />
+				<Diaryinfo conveyWeather={conveyWeather} />
+				<Title>😍{userNick}의 행복한 하루😍</Title>
+				<CPaint conveyImgUrl={conveyImgUrl} conveyImgData={conveyImgData} />
 			</Paintbox>
 		</Main>
 	);

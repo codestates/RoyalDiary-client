@@ -19,21 +19,43 @@ import {
 } from "./pages/index";
 
 function App(): ReactElement {
+	const [isSignin, setSignin] = useState(false);
+	const [weatherData, setWeatherData] = useState("");
+	const [imgUrl, setImgUrl] = useState("");
+	const [imgData, setImgData] = useState("");
+
+	const changeSignin = (e: boolean) => {
+		console.log(e);
+		setSignin(e);
+	};
+	const changeWeather = (e: string) => {
+		// console.log(e);
+		setWeatherData(e);
+	};
+	const changeImgUrl = (e: string) => {
+		// console.log(e);
+		setImgUrl(e);
+	};
+	const changeImgData = (e: string) => {
+		// console.log(e);
+		setImgData(e);
+	};
+
 	return (
 		<Router>
 			<Main>
 				<Switch>
 					<Route exact path="/">
 						<Manual />
-						<SignIn />
+						<SignIn changeSignin={changeSignin} isSignin={isSignin} />
 					</Route>
 					<Route exact path="/signup">
 						<Manual />
-						<Application />
+						<Application changeSignin={changeSignin} />
 					</Route>
 					<Route exact path="/creatediary">
-						<Paint />
-						<Diary />
+						<Paint changeWeather={changeWeather} changeImgUrl={changeImgUrl} changeImgData={changeImgData} />
+						<Diary weatherData={weatherData} imgUrl={imgUrl} imgData={imgData} />
 					</Route>
 					<Route exact path="/diaryview">
 						<DiariesView />
