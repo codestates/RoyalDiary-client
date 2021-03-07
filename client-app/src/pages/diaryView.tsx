@@ -1,6 +1,8 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from "axios";
+import queryString from "query-string";
+import { useLocation } from "react-router-dom";
 import DiaryContent from "../components/diaryContent";
 import Comment from "../components/comment";
 import CommentModal from "../components/createComment";
@@ -11,37 +13,38 @@ axios.defaults.baseURL = "https://royal-diary.ml";
 
 export default function DiaryView(): ReactElement {
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	const [diary, setDiary] = useState("");
-	function openModal() {
-		setIsOpen(true);
-	}
+	const location = useLocation();
+	const params = queryString.parse(location.search);
+	const [diary, setDiary]: any = useState([]);
+	const [content, setContent]: any = useState(6);
 
 	useEffect(() => {
-		async function getDiary() {
-			await axios
-				.get("contents/contents", {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				})
-				.then((res) => console.log(res));
-		}
+		const getDiaryInfo: any = async () => {
+			const diaryList = await axios.get(`contents/content?contentId=${6}`, {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			setDiary(diaryList.data.data);
+		};
+		getDiaryInfo();
 	}, []);
 
-	async function deleteDiary() {
-		// await axios.delete();
+	let comment: any[] = [];
+	if (diary.length !== 0) {
+		comment = diary.comments;
 	}
 
 	return (
 		<Main>
-			<DiaryContent />
+			<DiaryContent diary={diary} />
 			<DeleteButton onClick={() => console.log("a")}>일기삭제</DeleteButton>
-			<Comments>
-				<Comment />
-				<Comment />
-				<Comment />
-			</Comments>
 			<CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+			<Comments>
+				{comment
+					? comment.map((ele) => {
+							return <Comment comment={ele} key={ele.commentId} />;
+					  })
+					: console.log(`there's no comment`)}
+			</Comments>
 		</Main>
 	);
 }
@@ -58,7 +61,6 @@ const Main = styled.div`
 		border-right: 5px solid black;
 	}
 	@media only screen and (max-width: 480px) {
-		/* margin-left: 1rem; */
 		width: 100%;
 		height: 100%;
 	}
@@ -72,14 +74,13 @@ const CommentButton = styled.button`
 	margin-left: 84%;
 	margin-bottom: 0.3%;
 
-	//border-radius: 0.5rem;
 	@media only screen and (max-width: 480px) {
 		margin-top: 5%;
 		margin-left: 75%;
 		margin-bottom: 3%;
 	}
 `;
-const Comments = styled.div`
+const Comments: any = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
