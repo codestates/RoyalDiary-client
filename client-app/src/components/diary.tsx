@@ -1,22 +1,45 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
-export default function CDiary(): ReactElement {
-	const [count, countLetter] = React.useState(0);
+interface diaryProps {
+	saveDiary: any;
+}
 
-	const LetterCount = () => {
-		const typeValue = (document.getElementById("typeBox") as HTMLInputElement).value;
-		countLetter(typeValue.length);
+export default function CDiary(props: diaryProps): ReactElement {
+	const { saveDiary } = props;
+	const [count, countLetter] = useState(0);
+	// const [title, setTitle] = useState("");
+	// const [content, setContent] = useState("");
+
+	const saveTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+		// setTitle(event.target.value);
+		saveDiary(event);
 	};
-
+	const handleContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const contentValue = event.target.value as string;
+		LetterCount(contentValue);
+		saveContent(event);
+	};
+	const LetterCount = (v: string) => {
+		countLetter(v.length);
+	};
+	const saveContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		// setContent(e);
+		saveDiary(e);
+	};
 	return (
 		<Main>
 			<Title>
 				제목:
-				<TypeTitle maxLength={15} placeholder="15자 이내로 작성해주세요" />
+				<TypeTitle maxLength={15} placeholder="15자 이내로 작성해주세요" onChange={saveTitle} id="typeTitle" />
 			</Title>
 			<Content>
-				<TypeContent maxLength={149} placeholder="오늘은 퇴근후 친구들을 만나..." onChange={LetterCount} id="typeBox" />
+				<TypeContent
+					maxLength={149}
+					placeholder="오늘은 퇴근후 친구들을 만나..."
+					onChange={handleContent}
+					id="typeContent"
+				/>
 			</Content>
 			<Counter id="counter">({count} / 최대 150자)</Counter>
 		</Main>

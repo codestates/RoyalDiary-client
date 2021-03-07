@@ -33,7 +33,7 @@ export default function DiaryContent(): ReactElement {
 				.then((res) => setDiary(res));
 		}
 		getDiary();
-	}, []);
+	}, [params.page]);
 
 	return (
 		<Main>

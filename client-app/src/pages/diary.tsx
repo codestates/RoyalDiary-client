@@ -1,21 +1,81 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import CDiary from "../components/diary";
 import Emotion from "../components/emotion";
 
-export default function Diary(): ReactElement {
+interface paintDataProps {
+	weatherData: string;
+	imgUrl: string;
+	imgData: string;
+}
+
+export default function Diary(props: paintDataProps): ReactElement {
+	const { weatherData, imgUrl, imgData } = props;
 	const history = useHistory();
+	const [isPublic, setIsPublic] = useState(false);
+	const [title, setTitle] = useState("");
+	const [content, setContent] = useState("");
+	const [emotion, setEmotion] = useState("");
+
+	const saveDiary = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const Id = e.target.id as string;
+		const value = e.target.value as string;
+
+		if (Id === "typeTitle") {
+			setTitle(value);
+		} else if (Id === "typeContent") {
+			setContent(value);
+		} else {
+			setEmotion(Id);
+		}
+	};
+
+	const setPublic = () => {
+		if (isPublic === false) {
+			setIsPublic(true);
+		} else {
+			setIsPublic(false);
+		}
+		console.log(isPublic);
+	};
+
+	const handleSubmit = () => {
+		console.log(weatherData);
+		console.log(imgUrl);
+		console.log(imgData);
+		console.log(title);
+		console.log(content);
+		console.log(emotion);
+		sessionStorage.removeItem("weather");
+		// sessionStorage.removeItem("completeDraw");
+
+		if (weatherData === "") {
+			console.log("날씨를 선택해주세요");
+		} else if (imgUrl === "" || imgData === "") {
+			console.log("그림 완료 버튼을 누르세요");
+		} else if (title === "") {
+			console.log("제목을 써주세요");
+		} else if (content === "") {
+			console.log("내용을 써주세요");
+		} else if (emotion === "") {
+			console.log("기분을 선택해주세요");
+		}
+	};
+
+	useEffect(() => {
+		// console.log("refresh");
+	});
 
 	return (
 		<Main>
-			<CDiary />
-			<Emotion />
+			<CDiary saveDiary={saveDiary} />
+			<Emotion saveDiary={saveDiary} />
 			<Buttons>
 				<Button onClick={() => history.push("/")}>뒤로가기버튼</Button>
 				<Button>장소등록버튼</Button>
-				<Button>공개버튼</Button>
-				<Button>완료버튼</Button>
+				<Button onClick={setPublic}>공개버튼</Button>
+				<Button onClick={handleSubmit}>완료버튼</Button>
 			</Buttons>
 		</Main>
 	);
