@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
+import Comment from "../components/comment";
 import picture from "../assets/images/drawing.png";
 import section from "../assets/images/paper.png";
 import cloudy from "../assets/images/weather/1.png";
@@ -12,47 +13,26 @@ import snowy from "../assets/images/weather/4.png";
 import windy from "../assets/images/weather/5.png";
 
 const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi7Iah7KCV7ZiEIiwibmlja25hbWUiOiLqt4DsmpTrr7giLCJlbWFpbCI6Ink2cnN5QG5hdmVyLmNvbSIsIm1vYmlsZSI6IjAxMC01NjQ4LTg1OTUiLCJpYXQiOjE2MTQ4NTY4MzMsImV4cCI6MTYxNDk0MzIzM30.eO5r550Gj7YLCPE8vp9zVWoWfm6opyK52sXVQRzt0JA";
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi6rmA6rmA6rmAIiwibmlja25hbWUiOiLsnqDrp4zrs7QiLCJlbWFpbCI6Inp6ekBnbWFpbC5jb20iLCJtb2JpbGUiOiIwMTAxMDEwMTAxIiwiaWF0IjoxNjE1MDMwNDg1LCJleHAiOjE2MTUxMTY4ODV9.0MnDWfoOk4YeimMsXnotKJtSExgWy0IdIhlFNBBPyHA";
 
 axios.defaults.baseURL = "https://royal-diary.ml";
 
-export default function DiaryContent(): ReactElement {
-	const location = useLocation();
-	const params = queryString.parse(location.search);
-	const [diary, setDiary]: any = useState("");
-	const [query, setQuery]: any = useState(1);
-	console.log(params.page);
+export default function DiaryContent(props: any): ReactElement {
+	const { diary } = props;
 
-	useEffect(() => {
-		async function getDiary() {
-			const queryParams = params.page;
-			await axios
-				.get(`contents/publiccontents?page=${queryParams}`, {
-					headers: { Authorization: `Bearer ${token}` },
-				})
-				.then((res) => setDiary(res));
-		}
-		getDiary();
-	}, [params.page]);
 
 	return (
 		<Main>
-			<Title>제목: 오늘은 맛있는 햄버거를 먹었다.</Title>
+			<Title>제목: {diary.title}</Title>
 			<Type>
 				<Date>
 					<Option>날짜</Option>
-					<OptionContent>2021년 2월 21일</OptionContent>
+					<OptionContent>{diary.createdAt}</OptionContent>
 					<Option>날씨</Option>
 				</Date>
 				<Img />
 				<ContentBacground>
-					<Content>
-						오늘은 일요일이다 아침엔 짜파게티를 먹었고 점심은 제육볶음을 먹었다 이제 저녁시간인데 밥을 뭐해먹을지
-						고민이다 다음주는 로직을 짜야한다 열심히해야지 오늘은 일요일이다 아침엔 짜파게티를 먹었고 점심은 제육볶음을
-						먹었다 이제 저녁시간인데 밥을 뭐해먹을지 고민이다 다음주는 로직을 짜야한 로직을 짜야한다 열심히해야지 오늘은
-						일요일이다 아침엔 짜파게티를 먹었고 점심은 제육볶음을 먹었다 이제 저녁시간인데 밥을 뭐해먹을지 고민이다
-						다음주는 로직을 짜야한
-					</Content>
+					<Content>{diary.content}</Content>
 				</ContentBacground>
 			</Type>
 		</Main>

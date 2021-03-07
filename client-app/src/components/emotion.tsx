@@ -6,16 +6,26 @@ import soso from "../assets/images/emotions/3.png";
 import annoyed from "../assets/images/emotions/4.png";
 import sad from "../assets/images/emotions/5.png";
 
-export default function Emotion(): ReactElement {
+interface diaryProps {
+	saveDiary: any;
+}
+
+export default function Emotion(props: diaryProps): ReactElement {
+	const { saveDiary } = props;
+
+	const handleEmotion = (event: any) => {
+		saveDiary(event);
+	};
+
 	return (
 		<Main>
 			<Title>오늘의 기분</Title>
 			<Emotions>
-				<EmotionImg src={happy} />
-				<EmotionImg src={smile} />
-				<EmotionImg src={soso} />
-				<EmotionImg src={annoyed} />
-				<EmotionImg src={sad} />
+				<EmotionImg id="happy" src={happy} onClick={handleEmotion} />
+				<EmotionImg id="smile" src={smile} onClick={handleEmotion} />
+				<EmotionImg id="soso" src={soso} onClick={handleEmotion} />
+				<EmotionImg id="annoyed" src={annoyed} onClick={handleEmotion} />
+				<EmotionImg id="sad" src={sad} onClick={handleEmotion} />
 			</Emotions>
 		</Main>
 	);

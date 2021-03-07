@@ -1,13 +1,28 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { relative } from "path";
 import MainNav from "../components/mainNav";
 import Signin from "../components/signin";
 import childrenImg from "../assets/images/children.png";
 import titleImg from "../assets/images/title.png";
 // import SSignin from "../components/socialSignin";
 
-export default function SignIn(): ReactElement {
+interface signinProps {
+	changeSignin: any;
+	isSignin: boolean;
+}
+
+export default function SignIn(props: signinProps): ReactElement {
+	const { changeSignin, isSignin } = props;
+	// const [signInStatus, setSignIn] = useState(false);
+
+	const conveySignin = (Login: boolean) => {
+		changeSignin(Login);
+		// setSignIn(Login); // loginStatus 를 props 로 signin, mainNav 컴포넌트에 뿌려줌.
+	};
+	// useEffect(() => {
+	// 	// 필요없는 부분인가?
+	// 	console.log(signInStatus);
+	// });
 	return (
 		<Main>
 			<Purple />
@@ -19,9 +34,9 @@ export default function SignIn(): ReactElement {
 					<Image>
 						<MainImg className="children_image" src={childrenImg} alt="" />
 					</Image>
-					<MainNav />
+					<MainNav isSignin={isSignin} />
 				</ImageNav>
-				<Signin />
+				<Signin isSignin={isSignin} conveySignin={conveySignin} />
 			</RedWhite>
 		</Main>
 	);
