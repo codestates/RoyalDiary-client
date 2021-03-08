@@ -1,29 +1,8 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
-import axios from "axios";
 
-const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi6rmA6rmA6rmAIiwibmlja25hbWUiOiLsnqDrp4zrs7QiLCJlbWFpbCI6Inp6ekBnbWFpbC5jb20iLCJtb2JpbGUiOiIwMTAxMDEwMTAxIiwiaWF0IjoxNjE1MDMwNDg1LCJleHAiOjE2MTUxMTY4ODV9.0MnDWfoOk4YeimMsXnotKJtSExgWy0IdIhlFNBBPyHA";
-axios.defaults.baseURL = "https://royal-diary.ml";
-
-localStorage.setItem("token", token);
-const tokenValue = localStorage.getItem("token");
-
-export default function User(): ReactElement {
-	const [user, setUser]: any = useState("");
-
-	useEffect(() => {
-		async function getUserInfo() {
-			await axios
-				.get("users/mypage", {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				})
-				.then((res) => setUser(res.data));
-		}
-		getUserInfo();
-	}, []);
+export default function User(props: any): ReactElement {
+	const { user } = props;
 
 	return (
 		<Main>

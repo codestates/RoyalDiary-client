@@ -1,27 +1,50 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import axios from "axios";
+import queryString from "query-string";
+import { useLocation } from "react-router-dom";
 import DiaryContent from "../components/diaryContent";
 import Comment from "../components/comment";
 import CommentModal from "../components/createComment";
 
+const token =
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi7Iah7KCV7ZiEIiwibmlja25hbWUiOiLqt4DsmpTrr7giLCJlbWFpbCI6Ink2cnN5QG5hdmVyLmNvbSIsIm1vYmlsZSI6IjAxMC01NjQ4LTg1OTUiLCJpYXQiOjE2MTQ4NTY4MzMsImV4cCI6MTYxNDk0MzIzM30.eO5r550Gj7YLCPE8vp9zVWoWfm6opyK52sXVQRzt0JA";
+axios.defaults.baseURL = "https://royal-diary.ml";
+
 export default function DiaryViewPublic(): ReactElement {
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	function openModal() {
-		setIsOpen(true);
+	const location = useLocation();
+	const params = queryString.parse(location.search);
+	const [diary, setDiary]: any = useState([]);
+	const [content, setContent]: any = useState(6);
+
+	useEffect(() => {
+		const getDiaryInfo: any = async () => {
+			const diaryList = await axios.get(`contents/content?contentId=${6}`, {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			setDiary(diaryList.data.data);
+		};
+		getDiaryInfo();
+	}, []);
+
+	let comment: any[] = [];
+	if (diary.length !== 0) {
+		comment = diary.comments;
 	}
 
 	return (
 		<Main>
-			<DiaryContent />
-			<CommentButton type="button" style={btnStyle} onClick={openModal}>
-				댓글쓰기
-			</CommentButton>
-			<Comments>
-				<Comment />
-				<Comment />
-				<Comment />
-			</Comments>
+			<DiaryContent diary={diary} />
+			<DeleteButton onClick={() => console.log("a")}>일기삭제</DeleteButton>
 			<CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+			<Comments>
+				{comment
+					? comment.map((ele) => {
+							return <Comment comment={ele} key={ele.commentId} />;
+					  })
+					: console.log(`there's no comment`)}
+			</Comments>
 		</Main>
 	);
 }
@@ -38,7 +61,6 @@ const Main = styled.div`
 		border-right: 5px solid black;
 	}
 	@media only screen and (max-width: 480px) {
-		/* margin-left: 1rem; */
 		width: 100%;
 		height: 100%;
 	}
@@ -51,16 +73,14 @@ const CommentButton = styled.button`
 	margin-top: 2.2%;
 	margin-left: 84%;
 	margin-bottom: 0.3%;
-	//border-radius: 0.5rem;
-	@media only screen and (max-width: 480px) {
-		/* margin-left: 1rem; */
 
+	@media only screen and (max-width: 480px) {
 		margin-top: 5%;
 		margin-left: 75%;
 		margin-bottom: 3%;
 	}
 `;
-const Comments = styled.div`
+const Comments: any = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -71,8 +91,9 @@ const Comments = styled.div`
 	margin-top: 0;
 	width: 82%;
 `;
-const btnStyle = {
-	border: "1px solid black",
-	fontSize: "0.8rem",
-	lineHeight: "1.3rem",
-};
+
+const DeleteButton = styled.button`
+	margin-top: 2.5%;
+	margin-bottom: 0.5%;
+	margin-left: 85%;
+`;
