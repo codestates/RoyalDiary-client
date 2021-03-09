@@ -1,28 +1,77 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import axios from "axios";
+import queryString from "query-string";
+import { useLocation } from "react-router-dom";
 import DiaryCard from "../components/diaryCard";
 
-export default function DiariesViewPublic(): ReactElement {
+const token = sessionStorage.getItem("accessToken");
+axios.defaults.baseURL = "https://royal-diary.ml";
+
+export default function DiariesViewPublic(props: any): ReactElement {
+	const { diaryCollect } = props;
+	const [list, setList]: any = useState([]);
+	const [sortByDate, setDate]: any = useState(true);
+	const location = useLocation();
+	const query = queryString.parse(location.search);
+	useEffect(() => {
+		async function getData() {
+			axios.get(`contents/publiccontents`).then((res: any) => {
+				setList(res.data.data);
+			});
+		}
+		getData();
+	}, []);
+
+	if (list) {
+		diaryCollect(list);
+	}
+
+	function checker() {
+		if (!sortByDate) {
+			setDate(true);
+		} else {
+			setDate(false);
+		}
+	}
+
+	const allPage = Math.ceil(list.count / 9);
+	const pageList = [];
+	for (let i = 1; i <= allPage; i += 1) {
+		pageList.push(i);
+	}
+
+	async function getContentList(pageNum: number) {
+		await axios
+			.get(`contents/publiccontents?page=${pageNum}`, { headers: { Authorization: `Bearer ${token}` } })
+			.then((res) => setList(res.data.data));
+	}
+
 	return (
 		<Main>
 			<Content>
 				<Title>일기보기</Title>
 				<Buttons>
-					<SortButton>좋아요 순</SortButton>
-					<SortButton>최근 순</SortButton>
+					<SortViews onClick={() => checker()}>조회수 순</SortViews>
+					<SortDate>최근 순</SortDate>
 				</Buttons>
 			</Content>
 			<Cards>
-				<DiaryCard />
-				<DiaryCard />
-				<DiaryCard />
-				<DiaryCard />
-				<DiaryCard />
-				<DiaryCard />
-				<DiaryCard />
-				<DiaryCard />
-				<DiaryCard />
+				{list.length !== 0
+					? list.orderByRecent.map((ele: any) => {
+							return <DiaryCard diary={ele} key={ele.id} pickerFnc={props.contentPicker} />;
+					  })
+					: console.log("trying to get data, please wait")}
 			</Cards>
+			<Pages>
+				{pageList.map((el) => {
+					return (
+						<Page onClick={() => getContentList(el)} key={el}>
+							{el}
+						</Page>
+					);
+				})}
+			</Pages>
 		</Main>
 	);
 }
@@ -84,7 +133,7 @@ const Buttons = styled.div`
 	margin-right: 11%;
 `;
 
-const SortButton = styled.button`
+const SortViews: any = styled.button`
 	width: 5rem;
 	height: 2rem;
 	border: 0.1rem solid black;
@@ -94,4 +143,25 @@ const SortButton = styled.button`
 		width: 4rem;
 		height: 1.6rem;
 	}
+`;
+const SortDate = styled.button`
+	width: 5rem;
+	height: 2rem;
+	border: 0.1rem solid black;
+	background: white;
+	@media only screen and (max-width: 480px) {
+		font-size: 0.8rem;
+		width: 4rem;
+		height: 1.6rem;
+	}
+`;
+const Page = styled.button`
+	background-color: wheat;
+	font-size: 1.5rem;
+	margin-left: 8px;
+	margin-top: 0.3rem;
+`;
+const Pages = styled.div`
+	margin-top: 1.5rem;
+	margin-left: 20%;
 `;

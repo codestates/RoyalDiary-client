@@ -23,7 +23,16 @@ function App(): ReactElement {
 	const [weatherData, setWeatherData] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
 	const [imgData, setImgData] = useState("");
+	const [pContent, setPcontent] = useState(0);
+	console.log(pContent);
+	const [diaryInfo, setDiaryInfo] = useState([]);
 
+	const diaryCollect = (e: any) => {
+		setDiaryInfo(e);
+	};
+	const contentPicker = (e: number) => {
+		setPcontent(e);
+	};
 	const changeSignin = (e: boolean) => {
 		console.log(e);
 		setSignin(e);
@@ -62,8 +71,8 @@ function App(): ReactElement {
 						<DiaryView />
 					</Route>
 					<Route exact path="/diarypublic">
-						<DiariesViewPublic />
-						<DiaryViewPublic />
+						<DiariesViewPublic contentPicker={contentPicker} diaryCollect={diaryCollect} />
+						<DiaryViewPublic contentId={pContent} data={diaryInfo} />
 					</Route>
 					<Route exact path="/userinfo/calendar">
 						<Calendar />
