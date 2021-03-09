@@ -20,6 +20,9 @@ export default function NotificationModal(props: Props): ReactElement {
 		} else if (message === "회원가입 되었습니다") {
 			setIsOpen(false);
 			history.push("/");
+		} else if (message === "그림일기가 등록되었습니다") {
+			setIsOpen(false);
+			history.push("/diaryview");
 		}
 	}
 
@@ -36,20 +39,20 @@ export default function NotificationModal(props: Props): ReactElement {
 		</Modal>
 	);
 }
-
 const ModalBox = styled.div`
-	//border: 10px solid yellow; */
+	border: 10px solid yellow;
 	margin: auto;
 	/* padding-left: 4rem; */
 	width: 30rem;
-	height: 20rem;
+	height: 15rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	z-index: 1;
 `;
 const Title = styled.div`
 	/* border: 1px solid red; */
-	font-size: 2rem;
+	font-size: 1.5rem;
 	font-weight: bold;
 	text-align: center;
 `;
@@ -62,8 +65,10 @@ const BackBtn = styled.div`
 const ModalStyles = {
 	content: {
 		margin: "auto",
-		width: "30rem",
-		height: "20rem",
+		// marginTop: "10rem",
+		// marginLeft: "10rem",
+		width: "22rem",
+		height: "18rem",
 		background: "#f3f3e9",
 		display: "flex",
 		alignItems: "center",

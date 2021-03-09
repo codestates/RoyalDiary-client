@@ -7,7 +7,7 @@ import titleImg from "../assets/images/title.png";
 // import SSignin from "../components/socialSignin";
 
 interface signinProps {
-	changeSignin: any;
+	changeSignin: (e: boolean) => void;
 	isSignin: boolean;
 }
 
@@ -19,10 +19,6 @@ export default function SignIn(props: signinProps): ReactElement {
 		changeSignin(Login);
 		// setSignIn(Login); // loginStatus 를 props 로 signin, mainNav 컴포넌트에 뿌려줌.
 	};
-	// useEffect(() => {
-	// 	// 필요없는 부분인가?
-	// 	console.log(signInStatus);
-	// });
 	return (
 		<Main>
 			<Purple />

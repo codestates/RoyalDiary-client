@@ -12,7 +12,6 @@ interface diaryProps {
 
 export default function Emotion(props: diaryProps): ReactElement {
 	const { saveDiary } = props;
-
 	const handleEmotion = (event: any) => {
 		saveDiary(event);
 	};
@@ -32,7 +31,6 @@ export default function Emotion(props: diaryProps): ReactElement {
 }
 const Main = styled.div`
 	/* border: 5px solid black; */
-	flex-grow: 0.3;
 	padding-left: 3rem;
 	display: flex;
 	flex-direction: column;
@@ -51,7 +49,7 @@ const Title = styled.div`
 `;
 const Emotions = styled.div`
 	/* border: 5px solid black; */
-	margin-top: 1rem;
+	margin-top: 0.5rem;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
@@ -62,6 +60,9 @@ const Emotions = styled.div`
 const EmotionImg = styled.img`
 	width: 3.5rem;
 	alt: "";
+	:hover {
+		cursor: pointer;
+	}
 	@media only screen and (max-width: 480px) {
 		margin-left: 0.5rem;
 	}
