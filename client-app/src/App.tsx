@@ -22,11 +22,10 @@ function App(): ReactElement {
 	const [isSignin, setSignin] = useState(false);
 	const [weatherData, setWeatherData] = useState("");
 	const [contentId, setContentId] = useState(0);
-	const [imgUrl, setImgUrl] = useState("");
-	const [imgData, setImgData] = useState("");
+	const [imageUrl, setImgUrl] = useState("");
+	const [imageData, setImgData] = useState("");
 	const [pContent, setPcontent] = useState(0);
 	const [diaryInfo, setDiaryInfo] = useState([]);
-
 
 	const diaryCollect = (e: any) => {
 		setDiaryInfo(e);
