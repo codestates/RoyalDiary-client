@@ -2,17 +2,25 @@ import React, { ReactElement, useRef, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import CanvasDraw from "react-canvas-draw";
 import axios from "axios";
+import { url } from "inspector";
+import pointer from "../assets/images/pencil.png";
 
 interface setImgProps {
-	conveyImgUrl: any;
-	conveyImgData: any;
+	conveyImgUrl: (e: string) => void;
+	conveyImgData: (e: string) => void;
+	weatherNow: string;
+	contentId: number;
 }
 
 export default function CPaint(props: setImgProps): ReactElement {
-	const { conveyImgUrl, conveyImgData } = props;
+	const { conveyImgUrl, conveyImgData, weatherNow, contentId } = props;
 	const [color, changeColor] = useState("black");
 	const [showColor, displayColor] = useState("none");
 	const [brushSize, changeSize] = useState(2.5);
+	// 메세지
+	const [message, setMessage] = useState("");
+	const [msgVisible, setMsgVisible] = useState(false);
+
 	const firstCanvas = useRef<any>(null);
 	// const secondCanvas = useRef<any>(null);
 
@@ -45,7 +53,7 @@ export default function CPaint(props: setImgProps): ReactElement {
 		conveyImgData(event);
 	};
 
-	function dataURLtoFile(dataurl: string) {
+	async function dataURLtoFile(dataurl: string) {
 		const blobBin = atob(dataurl.split(",")[1]); // base64 데이터 디코딩
 		const array = [];
 		for (let i = 0; i < blobBin.length; i += 1) {
@@ -54,20 +62,28 @@ export default function CPaint(props: setImgProps): ReactElement {
 		const u8arr = new Uint8Array(array);
 		const file = new Blob([u8arr], { type: "image/png" }); // Blob 생성
 		const formdata = new FormData(); // formData 생성
-		formdata.append("drawImg", file); // file data 추가
-		console.log(file);
+		formdata.append("img", file); // file data 추가
+		const imgUrl = await axios
+			.post("https://royal-diary.ml/image", formdata, {
+				headers: { "content-Type": "multipart/form-data" },
+			})
+			.then((res) => {
+				const returnedUrl = res.data.imgUrl;
+				return returnedUrl;
+			})
+			.catch((err) => {
+				console.log("server error occured");
+			});
+		return imgUrl;
 		// axios 로 서버에 img 파일 보내기
-		// const imgUrl = axios.post("https://royaldiary.ml", formdata, {
-		// 	headers: { "content-Type": "multipart/form-data" },
-		// });
 		// 유알엘을 리턴하여 saveAsPNG 에서 사용할 수 있도록!!
 	}
-	const saveAsPNG = () => {
+	const saveAsPNG = async () => {
 		const canvas = document.querySelector(".CanvasDraw canvas:nth-child(2)") as HTMLCanvasElement;
 		const imgUrl = canvas.toDataURL("image/png");
-		console.log("PNG image data");
-		console.log(imgUrl);
-		dataURLtoFile(imgUrl); // 리턴받은 url 을 handleSaveClick 에 전달
+		// 리턴받은 url 을 handleSaveClick 에 전달
+		const returnedUrl = await dataURLtoFile(imgUrl);
+		return returnedUrl;
 
 		/* 이미지 데이터로 원하는 이미지 엘리먼트에 이미지를 만들 수 있다.
 		const newImage = document.createElement("img");
@@ -88,12 +104,27 @@ export default function CPaint(props: setImgProps): ReactElement {
 		a.click();
 	}
 	*/
-	const handleSaveClick = () => {
+	const handleSaveClick = async () => {
+		const isLoginSession = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
+		if (isLoginSession !== true) {
+			setMessage("로그인을 해주세요 :)");
+			setMsgVisible(true);
+			setTimeout(() => {
+				setMsgVisible(false);
+			}, 3000);
+			return;
+		}
 		const data = firstCanvas.current.getSaveData();
 		// console.log(sessionStorage.getItem("saveDraw"));
 		setImgData(data);
-		saveAsPNG(); // multer 에 전송후 받은 url 과 좌표 데이터를 sessionStorage 에 저장해서 글쓰기 완료 버튼을 눌렀을때 사용한다..!
-		setImgUrl("imageurl");
+		const imgUrl = await saveAsPNG();
+		setImgUrl(imgUrl);
+		setMessage("그림이 등록되었습니다.");
+		setMsgVisible(true);
+		setTimeout(() => {
+			setMsgVisible(false);
+		}, 3000);
+		// multer 에 전송후 받은 url 과 좌표 데이터를 sessionStorage 에 저장해서 글쓰기 완료 버튼을 눌렀을때 사용한다..!
 	};
 	// Three methods used to revise pre-drawing
 	// const clear2 = () => {
@@ -107,11 +138,66 @@ export default function CPaint(props: setImgProps): ReactElement {
 	// 	console.log("SecondData", secondData); // 두번째 캔버스의 모든 데이터.
 	// };
 
+	const showWeather = (e: string) => {
+		setMessage(e);
+		setMsgVisible(true);
+		setTimeout(() => {
+			setMsgVisible(false);
+		}, 1500);
+	};
+
+	const reloadPaint = async (e: number) => {
+		const accessToken = sessionStorage.getItem("accessToken");
+		const contentid = e;
+
+		await axios
+			.get("https://royal-diary.ml/contents/content", {
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+					"Content-Type": "application/json",
+					withCredentials: true,
+				},
+				params: {
+					contentId: `${contentid}`,
+				},
+			})
+			.then((res) => {
+				// console.log(res.data.data.imgMain);
+				const imgData = res.data.data.imgMain;
+				firstCanvas.current.loadSaveData(imgData);
+			})
+			.catch((err) => {
+				console.log("error ocurred!!");
+			});
+
+		// const imgData = await getImgData(contentid);
+		// console.log(imgData);
+
+		// const secondData = secondCanvas.current.loadSaveData();
+	};
+
 	useEffect(() => {
+		if (weatherNow !== "") {
+			if (weatherNow === "cloudy") {
+				showWeather("날씨가 흐려요");
+			} else if (weatherNow === "sunny") {
+				showWeather("날씨가 화창해요");
+			} else if (weatherNow === "rainy") {
+				showWeather("오늘은 비가 와요");
+			} else if (weatherNow === "snowy") {
+				showWeather("오늘은 눈이 내려요");
+			} else {
+				showWeather("오늘은 바람이 불어요");
+			}
+		}
+		if (contentId !== 0) {
+			// console.log("clicked contentId!!");
+			reloadPaint(contentId);
+		}
 		// 새로고침 할때 그림이 유지된다. 다만 색상변경 등의 상태변화가 있으면 마찬가지로 그림이 리로드됨....
 		// const drawData = sessionStorage.getItem("saveDraw") as string;
 		// if (drawData !== null) firstCanvas.current.loadSaveData(drawData); // 새로고침할 경우 저장된 좌표데이터를 로드
-	});
+	}, [weatherNow, contentId]);
 
 	return (
 		<Main>
@@ -143,10 +229,14 @@ export default function CPaint(props: setImgProps): ReactElement {
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#5856D6" }} />
 				</Colors>
 			</Control>
+			<DivValid>
+				<ValidityBox theme={msgVisible}>{message}</ValidityBox>
+			</DivValid>
 			<Buttons>
 				<Button onClick={clear1}>새종이</Button>
 				<Button onClick={undo1}>마지막지우기</Button>
 				<Button onClick={handleSaveClick}>다그렸다버튼</Button>
+				{/* <NotificationModal modalIsOpen={modalVisible} setIsOpen={setModalVisible} message={modalMessage} /> */}
 				{/* <Button onClick={clear2}>newPaper</Button>
 				<Button onClick={undo2}>undo</Button>
 				<Button onClick={revise}>Save Revision</Button> */}
@@ -154,15 +244,16 @@ export default function CPaint(props: setImgProps): ReactElement {
 		</Main>
 	);
 }
+
 const Main = styled.div`
 	/* border: 3px solid black; */
 	/* background: white; */
-	height: 70%;
-	margin: 1rem 1rem 3rem 1rem;
+	height: 100%;
+	margin: 1rem 1rem 1rem 1rem;
 	display: flex;
 	flex-direction: column;
 	@media only screen and (max-width: 480px) {
-		height: 50%;
+		height: 80%;
 	}
 `;
 const canvasStyle = {
@@ -173,8 +264,9 @@ const canvasStyle = {
 };
 const Control = styled.div`
 	/* border: 3px solid red; */
-	position: relative;
-	top: 2rem;
+	height: 5.5em;
+	margin-top: 0.5rem;
+	padding-left: 1rem;
 	display: flex;
 	justify-content: flex-start;
 `;
@@ -215,7 +307,6 @@ const Color = styled.div`
 	border-radius: 25px;
 	cursor: pointer;
 	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-
 	@media only screen and (max-width: 480px) {
 		width: 30px;
 		height: 30px;
@@ -223,8 +314,8 @@ const Color = styled.div`
 `;
 const Buttons = styled.div`
 	/* border: 3px solid red; */
-	position: relative;
-	bottom: -3rem;
+	/* position: relative; */
+	margin-bottom: 1rem;
 	flex-grow: 1;
 	display: flex;
 	justify-content: flex-end;
@@ -237,7 +328,52 @@ const Button = styled.button`
 	margin-right: 1rem;
 	font-size: 1rem;
 	font-weight: bold;
+	:hover {
+		cursor: pointer;
+	}
 	@media only screen and (max-width: 480px) {
 		font-size: 0.8rem;
+	}
+`;
+const DivValid = styled.div`
+	/* border: 3px solid green; */
+	width: 100%;
+	height: 3rem;
+	margin-bottom: 0.3rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+`;
+const ValidityBox = styled.div`
+	/* border: 3px solid red; */
+	/* width: 9rem; */
+	height: 1.9rem;
+	padding: 0rem 1rem 0rem 1rem;
+	margin-right: 1.1rem;
+	background: #f08080;
+	display: ${(props) => (props.theme === true ? "flex" : "none")};
+	border-radius: 10px;
+	justify-content: center;
+	align-items: center;
+	animation: a 2s;
+	@keyframes a {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+	@media only screen and (max-width: 480px) {
+		::after {
+			border-top: 0px solid transparent;
+			border-left: none;
+			border-right: none;
+			border-bottom: 10px solid #f08080;
+			content: "";
+			position: absolute;
+			top: -10px;
+			left: 120px;
+		}
 	}
 `;
