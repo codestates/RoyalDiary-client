@@ -9,7 +9,7 @@ interface setImgProps {
 	conveyImgUrl: (e: string) => void;
 	conveyImgData: (e: string) => void;
 	weatherNow: string;
-	contentId: any;
+	contentId: number;
 }
 
 export default function CPaint(props: setImgProps): ReactElement {

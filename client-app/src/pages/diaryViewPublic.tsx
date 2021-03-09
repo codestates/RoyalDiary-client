@@ -1,7 +1,6 @@
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import DiaryContent from "../components/diaryContent";
 import Comment from "../components/comment";
 import CommentModal from "../components/createComment";
@@ -10,8 +9,7 @@ const token = sessionStorage.getItem("accessToken");
 axios.defaults.baseURL = "https://royal-diary.ml";
 
 export default function DiaryViewPublic(props: any): any {
-	const history = useHistory();
-	const { data, contentId, conveyContent } = props;
+	const { data, contentId } = props;
 	const [modalIsOpen, setIsOpen] = React.useState(false);
 	const [diary, setDiary]: any = useState([]);
 	const [content, setContent]: any = useState(6);
@@ -64,19 +62,11 @@ export default function DiaryViewPublic(props: any): any {
 	return (
 		<Main>
 			<DiaryContent diary={diary} />
-			<FixDiary
-				onClick={() => {
-					conveyContent(diary);
-					history.push("/creatediary");
-				}}
-			>
-				일기수정
-			</FixDiary>
 			<CommentButton type="button" onClick={openModal}>
 				댓글작성
 			</CommentButton>
 			<DeleteButton onClick={() => deleteDiary()}>일기삭제</DeleteButton>
-			<CommentModal content={diary.id} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+			<CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 			<Comments>
 				{comment.length > 0 ? (
 					comment.map((ele) => {
@@ -144,4 +134,3 @@ const InValidComment = styled.div`
 	align-items: center;
 	display: flex;
 `;
-const FixDiary = styled.button``;
