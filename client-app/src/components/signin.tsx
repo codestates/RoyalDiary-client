@@ -6,7 +6,7 @@ import SocialModal from "../components/socialSigninModal";
 
 interface isLoginProps {
 	// signInStatus: boolean;
-	conveySignin: any;
+	conveySignin: (e: boolean) => void;
 	isSignin: boolean;
 }
 
@@ -67,6 +67,9 @@ export default function Signin(props: isLoginProps): ReactElement {
 					} else {
 						console.log("server error occured");
 					}
+					setTimeout(() => {
+						setMsgVisible(false);
+					}, 3000);
 				});
 		} else {
 			setMessage("이메일과 비밀번호를 입력해주세요.");
@@ -75,7 +78,6 @@ export default function Signin(props: isLoginProps): ReactElement {
 	};
 	const handleSignout = async () => {
 		const getAccessToken = sessionStorage.getItem("accessToken");
-		// console.log(getAccessToken);
 		await axios
 			.post(
 				"https://royal-diary.ml/users/logout",
@@ -88,10 +90,9 @@ export default function Signin(props: isLoginProps): ReactElement {
 			.then((res) => {
 				const resMessage = res.data.message;
 				if (resMessage === "successfully signed out!") {
-					sessionStorage.setItem("accessToken", "");
+					sessionStorage.removeItem("accessToken");
+					sessionStorage.removeItem("nickName");
 					sessionStorage.setItem("isLogin", JSON.stringify(false));
-					sessionStorage.setItem("signUpIn", JSON.stringify(false));
-					sessionStorage.setItem("nickName", "");
 					handleSigninProp(false);
 					setMainVisible(false);
 				}
@@ -102,13 +103,12 @@ export default function Signin(props: isLoginProps): ReactElement {
 	};
 	useEffect(() => {
 		const isLoginSession = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
-		// const isSignUpIn = JSON.parse(sessionStorage.getItem("signUpIn") || "{}");
 		const nickname = sessionStorage.getItem("nickName") as string;
 		if (isLoginSession === true) {
-			setMainVisible(isLoginSession); // session 에 저장되어 있으므로, 새로고침 해도 상태유지.
+			setMainVisible(true); // session 에 저장되어 있으므로, 새로고침 해도 상태유지.
 			setNickName(nickname);
 		} else {
-			setMainVisible(isSignin);
+			setMainVisible(false);
 			setNickName("");
 		}
 		if (uemail.length > 0 && upassword.length > 0) {
@@ -186,13 +186,13 @@ const Main = styled.div`
 	margin-bottom: 2rem;
 `;
 const Input = styled.div`
-	border: 3px solid black;
+	/* border: 3px solid black; */
 	display: ${(props) => (props.theme === true ? "none" : "flex")};
 	flex-direction: column;
 	justify-content: flex-end;
 	align-items: center;
 	div#wrap {
-		border: 3px solid red;
+		/* border: 3px solid red; */
 		width: 100%;
 		height: 2rem;
 		margin-top: 0.5rem;
@@ -208,7 +208,7 @@ const Input = styled.div`
 	}
 `;
 const ValidityBox = styled.div`
-	border: 3px solid red;
+	/* border: 3px solid red; */
 	position: relative;
 	width: 70%;
 	height: 30px;
@@ -252,7 +252,7 @@ const ValidityBox = styled.div`
 	}
 `;
 const InputBox = styled.label`
-	border: 1px solid blue;
+	/* border: 1px solid blue; */
 	width: 100%;
 	font-size: 1rem;
 	display: flex;
@@ -308,7 +308,7 @@ const InputInfo = styled.input`
 	}
 `;
 const Button = styled.div`
-	border: 4px solid green;
+	/* border: 4px solid green; */
 	width: 7rem;
 	display: ${(props) => (props.theme === true ? "none" : "flex")};
 	flex-direction: column;

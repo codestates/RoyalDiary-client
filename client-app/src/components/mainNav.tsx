@@ -23,10 +23,10 @@ export default function Mainnav(props: isLoginProps): ReactElement {
 		color10: "#e88383",
 	};
 	useEffect(() => {
-		const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
-		if (isLogin === true) {
-			displayNav(true);
-		} else if (isLogin === false) {
+		const isLoginSession = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
+		if (isLoginSession === true) {
+			displayNav(isSignin);
+		} else if (isLoginSession === false) {
 			displayNav(isSignin);
 		}
 	}, [isSignin]);
@@ -42,7 +42,7 @@ export default function Mainnav(props: isLoginProps): ReactElement {
 			<UserNavsole className="userMenu" theme={userNav}>
 				<Navin color={colorType.color2} />
 				<Navout color={colorType.color7} onClick={() => history.push("/diaryview")}>
-					일기보기
+					나의일기
 				</Navout>
 			</UserNavsole>
 			<Navsole>
@@ -65,7 +65,7 @@ export default function Mainnav(props: isLoginProps): ReactElement {
 	);
 }
 const Main = styled.div`
-	border: 3px solid red;
+	/* border: 3px solid red; */
 	width: 4rem;
 	display: flex;
 	flex-direction: column;
