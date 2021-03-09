@@ -48,8 +48,8 @@ function App(): ReactElement {
 		setImgData(e);
 	};
 	const conveyContent = (e: any) => {
-		setDiaryInfo(e);
-		console.log(diaryInfo);
+		setContentInfo(e);
+		console.log(contentInfo);
 	};
 	const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
 	useEffect(() => {
