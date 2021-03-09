@@ -1,22 +1,42 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Modal from "react-modal";
+import axios from "axios";
 import Comment from "../components/comment";
 
 Modal.setAppElement("#root");
 interface Props {
 	modalIsOpen: boolean;
 	setIsOpen: any;
+	content: number;
 }
 
+axios.defaults.baseURL = "https://royal-diary.ml";
+const token = sessionStorage.getItem("accessToken");
+
 export default function CommentlModal(props: Props): ReactElement {
-	const { modalIsOpen, setIsOpen } = props;
+	const { modalIsOpen, setIsOpen, content } = props;
+	const [text, setText] = useState("");
 	function closeModal() {
 		setIsOpen(false);
 	}
+
 	let comments: any = sessionStorage.getItem("comments");
 	comments = JSON.parse(comments);
-	console.log(comments);
+
+	const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const textValue = event.target.value;
+		setText(textValue);
+	};
+
+	async function createComment(comment: string, id: number, stamp: number) {
+		await axios.post(
+			"contents/comment",
+			{ text: comment, contentId: id, stampId: stamp },
+			{ headers: { Authorization: `Bearer ${token}` } }
+		);
+	}
+
 	return (
 		<Modal isOpen={modalIsOpen} style={ModalStyles}>
 			<ModalBox>
@@ -36,7 +56,7 @@ export default function CommentlModal(props: Props): ReactElement {
 				<Buttons>
 					<CommentBox>
 						<CommentBoxTitle>한마디쓰기</CommentBoxTitle>
-						<CommentInput />
+						<CommentInput onChange={handleText} />
 						<CommentStampSend>
 							<img
 								className="date_weather"
@@ -59,7 +79,7 @@ export default function CommentlModal(props: Props): ReactElement {
 								width="40px"
 								height="40px"
 							/>
-							<CommentSendButton>등록하기</CommentSendButton>
+							<CommentSendButton onClick={() => createComment(text, content, 1)}>등록하기</CommentSendButton>
 						</CommentStampSend>
 					</CommentBox>
 				</Buttons>
@@ -98,7 +118,7 @@ const CommentStampSend = styled.div`
 	margin-left: 1.3rem;
 `;
 
-const CommentSendButton = styled.button`
+const CommentSendButton: any = styled.button`
 	width: 21%;
 	align-items: center;
 	justify-content: center;
@@ -141,12 +161,6 @@ const BackBtn = styled.div`
 	display: flex;
 	justify-content: flex-end;
 `;
-
-const logoStyle = {
-	margin: "1rem",
-	width: "5rem",
-};
-
 const btnStyle = {
 	border: "1px solid black",
 	width: "1.5rem",
