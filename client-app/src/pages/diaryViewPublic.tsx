@@ -1,49 +1,80 @@
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from "axios";
-import queryString from "query-string";
-import { useLocation } from "react-router-dom";
 import DiaryContent from "../components/diaryContent";
 import Comment from "../components/comment";
 import CommentModal from "../components/createComment";
 
-const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi7Iah7KCV7ZiEIiwibmlja25hbWUiOiLqt4DsmpTrr7giLCJlbWFpbCI6Ink2cnN5QG5hdmVyLmNvbSIsIm1vYmlsZSI6IjAxMC01NjQ4LTg1OTUiLCJpYXQiOjE2MTQ4NTY4MzMsImV4cCI6MTYxNDk0MzIzM30.eO5r550Gj7YLCPE8vp9zVWoWfm6opyK52sXVQRzt0JA";
+const token = sessionStorage.getItem("accessToken");
 axios.defaults.baseURL = "https://royal-diary.ml";
 
-export default function DiaryViewPublic(): ReactElement {
+export default function DiaryViewPublic(props: any): any {
+	const { data, contentId } = props;
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	const location = useLocation();
-	const params = queryString.parse(location.search);
 	const [diary, setDiary]: any = useState([]);
 	const [content, setContent]: any = useState(6);
 
 	useEffect(() => {
-		const getDiaryInfo: any = async () => {
-			const diaryList = await axios.get(`contents/content?contentId=${6}`, {
-				headers: { Authorization: `Bearer ${token}` },
+		if (contentId !== 0) {
+			axios.get(`contents/content?contentId=${contentId}`).then((res) => {
+				res.data.data.createdAt = res.data.data.createdAt.slice(0, 10);
+				setDiary(res.data.data);
 			});
-			setDiary(diaryList.data.data);
-		};
-		getDiaryInfo();
-	}, []);
+		}
+
+		if (data.length !== 0 && contentId === 0) {
+			const getDiaryInfo: any = async () => {
+				setContent(data.orderByRecent[0].id);
+				await axios
+					.get(`contents/content?contentId=${content}`, {
+						headers: { Authorization: `Bearer ${token}` },
+					})
+					.then((res) => {
+						res.data.data.createdAt = res.data.data.createdAt.slice(0, 10);
+						sessionStorage.setItem("comments", JSON.stringify(res.data.data.comments));
+						setDiary(res.data.data);
+					});
+			};
+			getDiaryInfo();
+		}
+	}, [data.length, data.orderByRecent, content, contentId]);
 
 	let comment: any[] = [];
 	if (diary.length !== 0) {
 		comment = diary.comments;
 	}
 
+	async function deleteDiary() {
+		await axios
+			.delete(`/contents/dcontent`, {
+				headers: { Authorization: `Bearer ${token}` },
+				data: { contentId: diary.id },
+			})
+			.then((res) => console.log(res))
+			.catch((e) => console.log(e));
+		window.location.reload();
+	}
+
+	function openModal() {
+		setIsOpen(true);
+	}
+
 	return (
 		<Main>
 			<DiaryContent diary={diary} />
-			<DeleteButton onClick={() => console.log("a")}>일기삭제</DeleteButton>
+			<CommentButton type="button" onClick={openModal}>
+				댓글작성
+			</CommentButton>
+			<DeleteButton onClick={() => deleteDiary()}>일기삭제</DeleteButton>
 			<CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 			<Comments>
-				{comment
-					? comment.map((ele) => {
-							return <Comment comment={ele} key={ele.commentId} />;
-					  })
-					: console.log(`there's no comment`)}
+				{comment.length > 0 ? (
+					comment.map((ele) => {
+						return <Comment comment={ele} key={ele.commentId} />;
+					})
+				) : (
+					<InValidComment>댓글이 존재하지 않습니다. ㅠㅠ </InValidComment>
+				)}
 			</Comments>
 		</Main>
 	);
@@ -66,7 +97,7 @@ const Main = styled.div`
 	}
 `;
 
-const CommentButton = styled.button`
+const CommentButton: any = styled.button`
 	width: 5em;
 	height: 1.8em;
 	border: 1px solid black;
@@ -90,10 +121,16 @@ const Comments: any = styled.div`
 	margin-left: 10%;
 	margin-top: 0;
 	width: 82%;
+	background: whitesmoke;
 `;
 
 const DeleteButton = styled.button`
 	margin-top: 2.5%;
 	margin-bottom: 0.5%;
 	margin-left: 85%;
+`;
+const InValidComment = styled.div`
+	justify-content: center;
+	align-items: center;
+	display: flex;
 `;
