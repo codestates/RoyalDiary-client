@@ -1,9 +1,6 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import axios from "axios";
-import Mainnav from "./components/mainNav";
-
 import {
 	Manual,
 	SignIn,
@@ -22,7 +19,7 @@ import {
 function App(): ReactElement {
 	const [isSignin, setSignin] = useState(false);
 	const [weatherData, setWeatherData] = useState("");
-	const [contentId, setContentId] = useState(0);
+	const [contentInfo, setContentInfo] = useState(0);
 	const [imageUrl, setImgUrl] = useState("");
 	const [imageData, setImgData] = useState("");
 	const [pContent, setPcontent] = useState(0);
@@ -49,8 +46,9 @@ function App(): ReactElement {
 		// console.log(e);
 		setImgData(e);
 	};
-	const changeContentId = (e: number) => {
-		setContentId(e);
+	const conveyContent = (e: any) => {
+		setContentInfo(e);
+		console.log(contentInfo);
 	};
 	const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
 	useEffect(() => {
@@ -78,7 +76,7 @@ function App(): ReactElement {
 							changeWeather={changeWeather}
 							changeImgUrl={changeImgUrl}
 							changeImgData={changeImgData}
-							contentId={contentId}
+							contentId={contentInfo}
 						/>
 						<Diary weatherData={weatherData} imageUrl={imageUrl} imageData={imageData} />
 					</Route>
@@ -88,7 +86,7 @@ function App(): ReactElement {
 					</Route>
 					<Route exact path="/diarypublic">
 						<DiariesViewPublic contentPicker={contentPicker} diaryCollect={diaryCollect} />
-						<DiaryViewPublic contentId={pContent} data={diaryInfo} />
+						<DiaryViewPublic contentId={pContent} data={diaryInfo} conveyContent={conveyContent} />
 					</Route>
 					<Route exact path="/userinfo/calendar">
 						<Calendar />

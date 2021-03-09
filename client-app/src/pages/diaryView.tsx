@@ -37,7 +37,6 @@ export default function DiaryView(): ReactElement {
 		<Main>
 			<DiaryContent diary={diary} />
 			<CommentButton onClick={() => console.log("a")}>일기삭제</CommentButton>
-			<CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 			<Comments>
 				{comment
 					? comment.map((ele) => {
