@@ -1,9 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-import queryString from "query-string";
-import { useLocation } from "react-router-dom";
-import Comment from "../components/comment";
 import picture from "../assets/images/drawing.png";
 import section from "../assets/images/paper.png";
 import cloudy from "../assets/images/weather/1.png";
@@ -12,14 +8,8 @@ import rainy from "../assets/images/weather/3.png";
 import snowy from "../assets/images/weather/4.png";
 import windy from "../assets/images/weather/5.png";
 
-const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi6rmA6rmA6rmAIiwibmlja25hbWUiOiLsnqDrp4zrs7QiLCJlbWFpbCI6Inp6ekBnbWFpbC5jb20iLCJtb2JpbGUiOiIwMTAxMDEwMTAxIiwiaWF0IjoxNjE1MDMwNDg1LCJleHAiOjE2MTUxMTY4ODV9.0MnDWfoOk4YeimMsXnotKJtSExgWy0IdIhlFNBBPyHA";
-
-axios.defaults.baseURL = "https://royal-diary.ml";
-
 export default function DiaryContent(props: any): ReactElement {
 	const { diary } = props;
-
 
 	return (
 		<Main>

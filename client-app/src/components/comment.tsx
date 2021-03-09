@@ -26,7 +26,7 @@ function Comment(props: any) {
 const CommentStyle = styled.div`
 	background: #edede9;
 	width: 90%;
-	height: 140%;
+	height: 55%;
 	margin: 0.5%;
 	border: 1px solid black;
 `;
