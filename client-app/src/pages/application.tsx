@@ -5,7 +5,7 @@ import principalImg from "../assets/images/principal.png";
 import SubNav from "../components/subNav";
 
 interface signinProps {
-	changeSignin: any;
+	changeSignin: (e: boolean) => void;
 }
 
 export default function Application(props: signinProps): ReactElement {

@@ -36,7 +36,7 @@ export default function DiaryView(): ReactElement {
 	return (
 		<Main>
 			<DiaryContent diary={diary} />
-			<DeleteButton onClick={() => console.log("a")}>일기삭제</DeleteButton>
+			<CommentButton onClick={() => console.log("a")}>일기삭제</CommentButton>
 			<CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 			<Comments>
 				{comment
@@ -90,10 +90,4 @@ const Comments: any = styled.div`
 	margin-left: 10%;
 	margin-top: 0;
 	width: 82%;
-`;
-
-const DeleteButton = styled.button`
-	margin-top: 2.5%;
-	margin-bottom: 0.5%;
-	margin-left: 85%;
 `;

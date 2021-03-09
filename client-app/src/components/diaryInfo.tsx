@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, StyledInterface } from "styled-components";
 import cloudy from "../assets/images/weather/1.png";
 import sunny from "../assets/images/weather/2.png";
 import rainy from "../assets/images/weather/3.png";
@@ -7,13 +7,12 @@ import snowy from "../assets/images/weather/4.png";
 import windy from "../assets/images/weather/5.png";
 
 interface setWeatherProps {
-	conveyWeather: any;
+	conveyWeather: (e: string) => void;
 }
 
 export default function Diaryinfo(props: setWeatherProps): ReactElement {
 	const { conveyWeather } = props;
 	const [userNick, setUserNick] = useState("손님");
-	const [weather, setWeatherToday] = useState("");
 	const Today = () => {
 		const year = new Date().getFullYear();
 		const month = new Date().getMonth() + 1;
@@ -24,10 +23,7 @@ export default function Diaryinfo(props: setWeatherProps): ReactElement {
 	};
 
 	const setWeather = (e: any) => {
-		// sessionStorage.setItem("weather", e.target.id); // 다이어리 페이지 완료 버튼 눌렀을때 사용
-		// console.log(sessionStorage.getItem("weather"));
-		// setWeatherToday(e.target.id);
-		// console.log(e.target.id);
+		// 날씨 데이터 보내기
 		const weathernow = e.target.id;
 		conveyWeather(weathernow);
 	};
@@ -52,10 +48,10 @@ export default function Diaryinfo(props: setWeatherProps): ReactElement {
 						<WeatherImg id="sunny" src={sunny} onClick={setWeather} />
 					</Image>
 					<Image>
-						<WeatherImg id="rainy" src={rainy} onClick={setWeather} />
+						<WeatherImg id="rainy" src={rainy} style={{ width: "4.3rem" }} onClick={setWeather} />
 					</Image>
 					<Image>
-						<WeatherImg id="snowy" src={snowy} onClick={setWeather} />
+						<WeatherImg id="snowy" src={snowy} style={{ width: "3.3rem" }} onClick={setWeather} />
 					</Image>
 					<Image>
 						<WeatherImg id="windy" src={windy} onClick={setWeather} />
@@ -72,14 +68,14 @@ export default function Diaryinfo(props: setWeatherProps): ReactElement {
 
 const Main = styled.div`
 	/* border: 5px solid black; */
-	flex-grow: 0.3;
+	flex-grow: 0.5;
 	display: flex;
 	@media only screen and (max-width: 480px) {
 		height: 20%;
 	}
 `;
 const DateWeather = styled.div`
-	// border: 3px solid black;
+	/* border: 3px solid black; */
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
@@ -93,7 +89,6 @@ const Todaydate = styled.div`
 	font-size: 1.3rem;
 	font-weight: bold;
 	letter-spacing: 0.5rem;
-
 	@media (max-width: 480px) {
 		font-size: 1rem;
 		padding-left: 1rem;
@@ -101,6 +96,7 @@ const Todaydate = styled.div`
 	}
 `;
 const Weather = styled.div`
+	/* height: 4rem; */
 	border-bottom: 3px solid black;
 	display: flex;
 	justify-content: center;
@@ -122,6 +118,9 @@ const WeatherImg = styled.img`
 	/* border: 3px solid black; */
 	width: 3.5rem;
 	alt: "";
+	:hover {
+		cursor: pointer;
+	}
 	@media (max-width: 480px) {
 		width: 2rem;
 		margin: 0.1rem;

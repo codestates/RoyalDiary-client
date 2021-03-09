@@ -8,15 +8,16 @@ interface diaryProps {
 export default function CDiary(props: diaryProps): ReactElement {
 	const { saveDiary } = props;
 	const [count, countLetter] = useState(0);
-	// const [title, setTitle] = useState("");
-	// const [content, setContent] = useState("");
+	const [title, setTitle] = useState("");
+	const [content, setContent] = useState("");
 
 	const saveTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-		// setTitle(event.target.value);
+		setTitle(event.target.value);
 		saveDiary(event);
 	};
 	const handleContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const contentValue = event.target.value as string;
+		setContent(contentValue);
 		LetterCount(contentValue);
 		saveContent(event);
 	};
@@ -27,14 +28,26 @@ export default function CDiary(props: diaryProps): ReactElement {
 		// setContent(e);
 		saveDiary(e);
 	};
+	useEffect(() => {
+		// 글수정할 때 사용할 로직...
+		setTitle("테스트 타이틀");
+		setContent("테스트 컨텐츠");
+	}, [setTitle, setContent]);
 	return (
 		<Main>
 			<Title>
 				제목:
-				<TypeTitle maxLength={15} placeholder="15자 이내로 작성해주세요" onChange={saveTitle} id="typeTitle" />
+				<TypeTitle
+					value={title}
+					maxLength={15}
+					placeholder="15자 이내로 작성해주세요"
+					onChange={saveTitle}
+					id="typeTitle"
+				/>
 			</Title>
 			<Content>
 				<TypeContent
+					value={content}
 					maxLength={149}
 					placeholder="오늘은 퇴근후 친구들을 만나..."
 					onChange={handleContent}
@@ -115,7 +128,7 @@ const TypeContent = styled.textarea`
 `;
 const Counter = styled.span`
 	/* border: 3px solid red; */
-	margin: 0.5rem 3rem 2rem 3rem;
+	margin: 0.5rem 3rem 1rem 3rem;
 	padding-left: 0.3rem;
 	color: "#aaa";
 	font-size: 1.2rem;

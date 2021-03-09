@@ -3,59 +3,6 @@ import styled from "styled-components";
 import DiaryCard from "./diaryCard";
 
 export default function DiaryRows(): ReactElement {
-	const DiaryBox = styled.div`
-		display: flex;
-		flex-direction: row;
-		background: #f3f3e9;
-		width: 90%;
-		height: 30%;
-		max-width: 100%;
-		max-height: 100%;
-		border: 0.15em solid black;
-		box-sizing: border-box;
-		margin: 5% 5%;
-		@media only screen and (max-width: 1200px) {
-			margin: auto;
-			margin-top: 3%;
-		}
-	`;
-
-	const DateBox = styled.div`
-		width: 15%;
-		height: 100%;
-		flex-direction: row;
-	`;
-
-	const DayOfWeek = styled.div`
-		width: 100%;
-		justify-content: center;
-		background: #d4d0c5;
-		align-items: center;
-		display: flex;
-		border-bottom: 0.01em solid black;
-		border-right: 0.01em solid black;
-		height: 40%;
-		font-size: 130%;
-	`;
-
-	const Date = styled.div`
-		width: 100%;
-		height: 60%;
-		justify-content: center;
-		align-items: center;
-		display: flex;
-		border-right: 0.01em solid black;
-		font-size: 220%;
-	`;
-
-	const Content = styled.span`
-		width: 90%;
-		align-items: center;
-		display: flex;
-		margin-left: 1em;
-		word-break: break-all;
-	`;
-
 	return (
 		<DiaryBox>
 			<DateBox>
@@ -66,3 +13,55 @@ export default function DiaryRows(): ReactElement {
 		</DiaryBox>
 	);
 }
+const DiaryBox = styled.div`
+	display: flex;
+	flex-direction: row;
+	background: #f3f3e9;
+	width: 90%;
+	height: 30%;
+	max-width: 100%;
+	max-height: 100%;
+	border: 0.15em solid black;
+	box-sizing: border-box;
+	margin: 5% 5%;
+	@media only screen and (max-width: 1200px) {
+		margin: auto;
+		margin-top: 3%;
+	}
+`;
+
+const DateBox = styled.div`
+	width: 15%;
+	height: 100%;
+	flex-direction: row;
+`;
+
+const DayOfWeek = styled.div`
+	width: 100%;
+	justify-content: center;
+	background: #d4d0c5;
+	align-items: center;
+	display: flex;
+	border-bottom: 0.01em solid black;
+	border-right: 0.01em solid black;
+	height: 40%;
+	font-size: 130%;
+`;
+
+const Date = styled.div`
+	width: 100%;
+	height: 60%;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	border-right: 0.01em solid black;
+	font-size: 220%;
+`;
+
+const Content = styled.span`
+	width: 90%;
+	align-items: center;
+	display: flex;
+	margin-left: 1em;
+	word-break: break-all;
+`;

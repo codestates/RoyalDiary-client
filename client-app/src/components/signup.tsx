@@ -7,7 +7,7 @@ import { isPhoneNumber, isEmailForm, IsPasswordForm } from "../common/validation
 import NotificationModal from "./NotificationModal";
 
 interface signinProps {
-	changeSignin: any;
+	changeSignin: (e: boolean) => void;
 }
 
 export default function Agreement(props: signinProps): ReactElement {
@@ -220,7 +220,6 @@ export default function Agreement(props: signinProps): ReactElement {
 	const handleSignin = () => {
 		changeSignin(true);
 	};
-
 	const handleRequestSignUp = async () => {
 		const nameLength = name.length;
 		const pwdLength = lastPassword.length;
@@ -228,6 +227,7 @@ export default function Agreement(props: signinProps): ReactElement {
 		const mobileLength = mobile.length;
 		const { validEmail, validPassword, validMobile, validAgreement } = validation;
 		if (nameLength > 0 && pwdLength > 0 && nickNameLength > 0 && mobileLength > 0) {
+			/*
 			if (
 				!isUsableNick ||
 				!validEmail ||
@@ -242,7 +242,7 @@ export default function Agreement(props: signinProps): ReactElement {
 				setMsgVisible(true);
 				return;
 			}
-			/*
+			*/
 			if (!isUsableNick) {
 				setMessage("동일한 별명이 존재합니다.");
 				setMsgVisible(true);
@@ -283,7 +283,7 @@ export default function Agreement(props: signinProps): ReactElement {
 				setMsgVisible(true);
 				return;
 			}
-			*/
+
 			await axios
 				.post(
 					"https://royal-diary.ml/users/signup",
@@ -411,10 +411,10 @@ const Main = styled.div`
 const ValidityBox = styled.div`
 	/* border: 3px solid red; */
 	position: relative;
-	width: 12rem;
+	/* width: 12rem; */
 	height: 30px;
-	margin-right: 1.1rem;
-	padding-left: 0.6rem;
+	margin-right: 2rem;
+	padding: 0rem 1rem 0rem 1rem;
 	background: #f08080;
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	border-radius: 10px;
@@ -428,18 +428,15 @@ const ValidityBox = styled.div`
 		content: "";
 		position: absolute;
 		top: -10px;
-		left: 120px;
+		left: 100px;
 	}
 	animation: a 2s;
 	@keyframes a {
 		0% {
 			opacity: 0;
 		}
-		50% {
-			opacity: 1;
-		}
 		100% {
-			opacity: 0;
+			opacity: 1;
 		}
 	}
 	@media only screen and (max-width: 480px) {

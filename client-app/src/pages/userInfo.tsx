@@ -1,11 +1,29 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import axios from "axios";
 import User from "../components/userCollection";
 
+const token = sessionStorage.getItem("accessToken");
+
 export default function UserInfo(): ReactElement {
+	const [user, setUser]: any = useState("");
+
+	useEffect(() => {
+		async function getUserInfo() {
+			await axios
+				.get("users/mypage", {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+				.then((res) => setUser(res.data));
+		}
+		getUserInfo();
+	}, []);
+
 	return (
 		<Main>
-			<User />
+			<User user={user} />
 		</Main>
 	);
 }
