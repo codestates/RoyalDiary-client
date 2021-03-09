@@ -21,11 +21,11 @@ import {
 function App(): ReactElement {
 	const [isSignin, setSignin] = useState(false);
 	const [weatherData, setWeatherData] = useState("");
-	const [imgUrl, setImgUrl] = useState("");
-	const [imgData, setImgData] = useState("");
+	const [imageUrl, setImgUrl] = useState("");
+	const [imageData, setImgData] = useState("");
+	const [contentId, setContentId] = useState(0);
 
 	const changeSignin = (e: boolean) => {
-		console.log(e);
 		setSignin(e);
 	};
 	const changeWeather = (e: string) => {
@@ -40,6 +40,17 @@ function App(): ReactElement {
 		// console.log(e);
 		setImgData(e);
 	};
+	const changeContentId = (e: number) => {
+		setContentId(e);
+	};
+	const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
+	useEffect(() => {
+		if (isLogin === true) {
+			changeSignin(true);
+		} else {
+			changeSignin(false);
+		}
+	});
 
 	return (
 		<Router>
@@ -54,8 +65,13 @@ function App(): ReactElement {
 						<Application changeSignin={changeSignin} />
 					</Route>
 					<Route exact path="/creatediary">
-						<Paint changeWeather={changeWeather} changeImgUrl={changeImgUrl} changeImgData={changeImgData} />
-						<Diary weatherData={weatherData} imgUrl={imgUrl} imgData={imgData} />
+						<Paint
+							changeWeather={changeWeather}
+							changeImgUrl={changeImgUrl}
+							changeImgData={changeImgData}
+							contentId={contentId}
+						/>
+						<Diary weatherData={weatherData} imageUrl={imageUrl} imageData={imageData} />
 					</Route>
 					<Route exact path="/diaryview">
 						<DiariesView />

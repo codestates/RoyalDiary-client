@@ -4,15 +4,19 @@ import Diaryinfo from "../components/diaryInfo";
 import CPaint from "../components/paint";
 
 interface setDataProps {
-	changeWeather: any;
-	changeImgUrl: any;
-	changeImgData: any;
+	changeWeather: (e: string) => void;
+	changeImgUrl: (e: string) => void;
+	changeImgData: (e: string) => void;
+	contentId: number;
 }
 
 export default function Paint(props: setDataProps): ReactElement {
-	const { changeWeather, changeImgUrl, changeImgData } = props;
+	const { changeWeather, changeImgUrl, changeImgData, contentId } = props;
 	const [userNick, setUserNick] = useState("손님");
+	const [weatherNow, setWeatherNow] = useState("");
+
 	const conveyWeather = (e: string) => {
+		setWeatherNow(e);
 		changeWeather(e);
 	};
 	const conveyImgUrl = (e: string) => {
@@ -23,8 +27,7 @@ export default function Paint(props: setDataProps): ReactElement {
 	};
 
 	useEffect(() => {
-		const getNick = sessionStorage.getItem("nickName") as string;
-		console.log(getNick);
+		const getNick = sessionStorage.getItem("nickName");
 		if (getNick !== null) {
 			setUserNick(getNick);
 		}
@@ -34,7 +37,12 @@ export default function Paint(props: setDataProps): ReactElement {
 			<Paintbox>
 				<Diaryinfo conveyWeather={conveyWeather} />
 				<Title>😍{userNick}의 행복한 하루😍</Title>
-				<CPaint conveyImgUrl={conveyImgUrl} conveyImgData={conveyImgData} />
+				<CPaint
+					conveyImgUrl={conveyImgUrl}
+					conveyImgData={conveyImgData}
+					weatherNow={weatherNow}
+					contentId={contentId}
+				/>
 			</Paintbox>
 		</Main>
 	);
