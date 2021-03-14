@@ -1,30 +1,95 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
-import picture from "../assets/images/drawing.png";
-import section from "../assets/images/paper.png";
-import cloudy from "../assets/images/weather/1.png";
-import sunny from "../assets/images/weather/2.png";
-import rainy from "../assets/images/weather/3.png";
-import snowy from "../assets/images/weather/4.png";
-import windy from "../assets/images/weather/5.png";
+import Cloudy from "../assets/images/weather/1.png";
+import Sunny from "../assets/images/weather/2.png";
+import Rainy from "../assets/images/weather/3.png";
+import Snowy from "../assets/images/weather/4.png";
+import Windy from "../assets/images/weather/5.png";
+import Happy from "../assets/images/emotions/1.png";
+import Smile from "../assets/images/emotions/2.png";
+import Soso from "../assets/images/emotions/3.png";
+import Annoyed from "../assets/images/emotions/4.png";
+import Sad from "../assets/images/emotions/5.png";
 
 export default function DiaryContent(props: any): ReactElement {
 	const { diary } = props;
-
 	return (
 		<Main>
-			<Title>제목: {diary.title}</Title>
-			<Type>
-				<Date>
-					<Option>날짜</Option>
-					<OptionContent>{diary.createdAt}</OptionContent>
-					<Option>날씨</Option>
-				</Date>
-				<Img />
-				<ContentBacground>
-					<Content>{diary.content}</Content>
-				</ContentBacground>
-			</Type>
+			{diary ? (
+				<>
+					<Title>제목: {diary.title}</Title>
+					<Type>
+						<Date>
+							<Option>날짜</Option>
+							<OptionContent>{diary.createdAt}</OptionContent>
+							<Option>날씨</Option>
+
+							<img
+								src={
+									/* eslint-disable-next-line */
+									diary.weather === "cloudy"
+										? Cloudy
+										: /* eslint-disable-next-line */
+										diary.weather === "snowy"
+										? Snowy
+										: /* eslint-disable-next-line */
+										diary.weather === "sunny"
+										? Sunny
+										: /* eslint-disable-next-line */
+										diary.weather === "rainy"
+										? Rainy
+										: diary.weather === "windy"
+										? Windy
+										: ""
+								}
+								alt=""
+								style={{ width: "8%", marginLeft: "3%", marginRight: "3%" }}
+							/>
+
+							<Option2>기분</Option2>
+							{diary.emotion ? (
+								<img
+									src={
+										/* eslint-disable-next-line */
+										diary.emotion === "happy"
+											? Happy
+											: /* eslint-disable-next-line */
+											diary.emotion === "smile"
+											? Smile
+											: /* eslint-disable-next-line */
+											diary.emotion === "soso"
+											? Soso
+											: /* eslint-disable-next-line */
+											diary.emotion === "annoyed"
+											? Annoyed
+											: diary.emotion === "sad"
+											? Sad
+											: ""
+									}
+									alt=""
+									style={{ width: "8%", marginLeft: "3%", marginRight: "3%" }}
+								/>
+							) : (
+								""
+							)}
+						</Date>
+
+						<img
+							src={diary.imgUrl}
+							width="99%"
+							height="50%"
+							alt=""
+							style={{ background: "white", border: "0.15rem solid black" }}
+						/>
+
+						<Content>
+							<div>{diary.content}</div>
+						</Content>
+					</Type>
+				</>
+			) : (
+				""
+			)}
 		</Main>
 	);
 }
@@ -51,7 +116,6 @@ const Date = styled.div`
 	border: 0.15em solid black;
 	display: flex;
 	margin-top: -2%;
-	margin-left: -1%;
 `;
 
 const Option = styled.span`
@@ -64,13 +128,25 @@ const Option = styled.span`
 	align-items: center;
 `;
 const OptionContent = styled.span`
-	font-size: 1rem;
+	font-size: 1.5rem;
 	border-right: 2px solid black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 30%;
 	height: 100%;
+`;
+
+const Option2 = styled.span`
+	margin-left: 5%;
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	font-size: 1rem;
+	width: 10%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 const Type = styled.div`
@@ -89,23 +165,14 @@ const Type = styled.div`
 	//	height: 80%;
 `;
 
-const Img = styled.img.attrs({
-	src: picture,
-})`
-	width: 100%;
-	height: 50%;
-	margin: 0.2rem -0.5rem;
-	border: 0.15rem solid black;
-	box-sizing: border-box;
-`;
 const ContentBacground = styled.div`
-	background-size: cover;
-	background: url(${section});
+	background: white;
 	margin-left: -0.7%;
 	overflow: scroll;
 	width: 100.5%;
 	box-sizing: border-box;
 	border: 0.2rem solid black;
+	height: 100%;
 
 	//border: 0.15rem solid black;
 `;
@@ -116,20 +183,11 @@ const Content = styled.div`
 	text-transform: uppercase;
 	overflow: scroll;
 	font-size: 2rem;
-	margin-left: 0.8rem;
-	letter-spacing: 1.3rem;
-	word-spacing: 1.2rem;
+	letter-spacing: 1rem;
+	word-spacing: 1rem;
 	line-height: 2.5rem;
-	width: 105%;
-`;
-
-const Weather1 = styled.img.attrs({
-	src: cloudy,
-	sunny,
-	rainy,
-	snowy,
-	windy,
-})`
-	width: 2rem;
-	height: 1rem;
+	width: 99%;
+	height: 100%;
+	border: 0.15rem solid black;
+	background: #f1efef;
 `;

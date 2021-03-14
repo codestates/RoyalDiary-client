@@ -25,7 +25,11 @@ function App(): ReactElement {
 	const [imageData, setImgData] = useState("");
 	const [pContent, setPcontent] = useState(0);
 	const [diaryInfo, setDiaryInfo] = useState([]);
+	const [content, setContent] = useState([]);
 
+	const setContentId = (e: any) => {
+		setContent(e);
+	};
 	const diaryCollect = (e: any) => {
 		setDiaryInfo(e);
 	};
@@ -82,16 +86,16 @@ function App(): ReactElement {
 						<Diary weatherData={weatherData} imageUrl={imageUrl} imageData={imageData} />
 					</Route>
 					<Route exact path="/diaryview">
-						<DiariesView />
-						<DiaryView />
+						<DiariesView contentPicker={contentPicker} diaryCollect={diaryCollect} />
+						<DiaryView contentId={pContent} data={diaryInfo} conveyContent={conveyContent} />
 					</Route>
 					<Route exact path="/diarypublic">
 						<DiariesViewPublic contentPicker={contentPicker} diaryCollect={diaryCollect} />
 						<DiaryViewPublic contentId={pContent} data={diaryInfo} conveyContent={conveyContent} />
 					</Route>
 					<Route exact path="/userinfo/calendar">
-						<Calendar />
-						<UserInfo />
+						<Calendar content={content} />
+						<UserInfo setContentId={setContentId} content={content} />
 					</Route>
 					<Route path="/userinfo/calendarrows">
 						<CalendarRows />
