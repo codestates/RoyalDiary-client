@@ -1,15 +1,23 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
+import moment from "moment";
 import DiaryCard from "./diaryCard";
 
-export default function DiaryRows(): ReactElement {
+moment().format();
+
+export default function DiaryRows(props: any): ReactElement {
+	const { comments } = props;
+	comments.cratedAt = comments.cratedAt.slice(0, 10);
+	comments.day = String(moment(comments.cratedAt)).slice(0, 3);
+	comments.date = comments.cratedAt.slice(8, 10);
+	console.log(comments);
 	return (
 		<DiaryBox>
 			<DateBox>
-				<DayOfWeek>FRI</DayOfWeek>
-				<Date>15</Date>
+				<DayOfWeek>{comments.day}</DayOfWeek>
+				<Date>{comments.date}</Date>
 			</DateBox>
-			<Content>오늘은 엄마랑 돈까스를 먹으러갔다. 매우 맛있었다. 치과도 갔는데 의사선생님이 충치가 있다고했다.</Content>
+			<Content>{comments.text}</Content>
 		</DiaryBox>
 	);
 }
@@ -18,7 +26,7 @@ const DiaryBox = styled.div`
 	flex-direction: row;
 	background: #f3f3e9;
 	width: 90%;
-	height: 30%;
+	height: 4rem;
 	max-width: 100%;
 	max-height: 100%;
 	border: 0.15em solid black;
@@ -59,7 +67,7 @@ const Date = styled.div`
 `;
 
 const Content = styled.span`
-	width: 90%;
+	width: 80%;
 	align-items: center;
 	display: flex;
 	margin-left: 1em;
