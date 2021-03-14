@@ -7,23 +7,25 @@ function DiaryCard(props: any) {
 
 	return (
 		<Card onClick={() => pickerFnc(diary.id)}>
+			<Title>{diary.title}</Title>
 			<Diaryimage>
-				<img
-					src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2021-02-21+%EC%98%A4%ED%9B%84+2.21.11.png"
-					width="100%"
-					height="100%"
-					alt=""
-				/>
+				<img src={diary.imgUrl} width="100%" height="100%" alt="" />
 			</Diaryimage>
-			<DiaryCardContent>{diary.nickname} </DiaryCardContent>
-			<DiaryCreatedAt>{diary.createdAt}</DiaryCreatedAt>
+			<DiaryInfo>
+				<DiaryCardContent>{diary.nickname} </DiaryCardContent>
+				<DiaryCreatedAt>{diary.createdAt}</DiaryCreatedAt>
+			</DiaryInfo>
 		</Card>
 	);
 }
 
 const Card = styled.div`
 	width: 30%;
+
 	margin: 0% 1%;
+	&:hover {
+		background: #c5c3c3;
+	}
 `;
 const DiaryCreatedAt = styled.span`
 	@media only screen and (max-width: 768px) {
@@ -32,6 +34,7 @@ const DiaryCreatedAt = styled.span`
 `;
 
 const DiaryCardContent = styled.span`
+	margin-right: 1rem;
 	@media only screen and (max-width: 768px) {
 		font-size: 0.8rem;
 	}
@@ -39,6 +42,16 @@ const DiaryCardContent = styled.span`
 const Diaryimage = styled.div`
 	border: 1px solid black;
 	width: 100%;
+	height: 8rem;
+`;
+const Title = styled.div`
+	display: flex;
+	justify-content: center;
+	font-size: 1rem;
+`;
+const DiaryInfo = styled.div`
+	display: flex;
+	justify-content: center;
 `;
 
 export default DiaryCard;
