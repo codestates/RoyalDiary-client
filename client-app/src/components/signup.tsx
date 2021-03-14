@@ -30,7 +30,7 @@ export default function Agreement(props: signinProps): ReactElement {
 	// modal 상태 관리
 	const [modalMessage, setModalMessage] = useState("");
 	const [modalVisible, setModalVisible] = useState(false);
-	const [signUpModal, setSignUpModal] = useState(false);
+	// const [signUpModal, setSignUpModal] = useState(false);
 	// 유효성 검사(형식에 맞는지)
 	const [validation, setValidation] = useState({
 		validEmail: false,
@@ -65,16 +65,16 @@ export default function Agreement(props: signinProps): ReactElement {
 				.then((res) => {
 					if (res.data.message === "email is usable") {
 						setIsUsableEmail(true);
-						setMessage("사용가능한 이메일입니다.");
+						setMessage("사용가능한 이메일입니다");
 						setMsgVisible(true);
 					} else if (res.data.message === "email already exists") {
 						setIsUsableEmail(false);
-						setMessage("동일한 이메일이 존재합니다.");
+						setMessage("동일한 이메일이 존재합니다");
 						setMsgVisible(true);
 					}
 				})
 				.catch((err) => {
-					console.log(err);
+					console.log("Internal Server Error occured");
 				});
 		} else {
 			setMessage("이메일 형식을 확인해주세요");
@@ -98,16 +98,16 @@ export default function Agreement(props: signinProps): ReactElement {
 			.then((res) => {
 				if (res.data.message === "nickname is usable") {
 					setIsUsableNick(true);
-					setMessage("사용가능한 별명입니다.");
+					setMessage("사용가능한 별명입니다");
 					setMsgVisible(true);
 				} else if (res.data.message === "nickname already exists") {
 					setIsUsableNick(false);
-					setMessage("동일한 별명이 존재합니다.");
+					setMessage("동일한 별명이 존재합니다");
 					setMsgVisible(true);
 				}
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log("Internal Server Error occured");
 			});
 	};
 	// 입력한 모바일 상태 저장. 전화번호 형식에 맞으면 validMobile: true
@@ -131,16 +131,16 @@ export default function Agreement(props: signinProps): ReactElement {
 				.then((res) => {
 					if (res.data.message === "mobile is usable") {
 						setIsUsableMobile(true);
-						setMessage("사용가능한 휴대폰 번호입니다.");
+						setMessage("사용가능한 휴대폰 번호입니다");
 						setMsgVisible(true);
 					} else if (res.data.message === "mobile already exists") {
 						setIsUsableMobile(false);
-						setMessage("동일한 번호가 존재합니다.");
+						setMessage("동일한 번호가 존재합니다");
 						setMsgVisible(true);
 					}
 				})
 				.catch((err) => {
-					console.log(err);
+					console.log("Internal Server Error occured");
 				});
 		} else {
 			setMessage("전화번호 형식을 확인해주세요");
@@ -162,7 +162,7 @@ export default function Agreement(props: signinProps): ReactElement {
 			setMsgVisible(false);
 			if (lastPassword.length > 0) {
 				if (value !== lastPassword) {
-					setMessage("비밀번호가 불일치합니다.");
+					setMessage("비밀번호가 불일치합니다");
 					setMsgVisible(true);
 					setIsSamePassword(false);
 				} else if (lastPassword === "") {
@@ -183,7 +183,7 @@ export default function Agreement(props: signinProps): ReactElement {
 		setLastPassword(value);
 
 		if (value !== firstPassword) {
-			setMessage("비밀번호가 불일치합니다.");
+			setMessage("비밀번호가 불일치합니다");
 			setMsgVisible(true);
 			setIsSamePassword(false); // 비밀번호 불일치 점검
 		} else if (firstPassword === " ") {
@@ -205,7 +205,7 @@ export default function Agreement(props: signinProps): ReactElement {
 				...validation,
 				validAgreement: true,
 			});
-			setMessage("동의가 완료되었습니다.");
+			setMessage("동의가 완료되었습니다");
 			setMsgVisible(true);
 		} else {
 			setValidation({
@@ -227,24 +227,8 @@ export default function Agreement(props: signinProps): ReactElement {
 		const mobileLength = mobile.length;
 		const { validEmail, validPassword, validMobile, validAgreement } = validation;
 		if (nameLength > 0 && pwdLength > 0 && nickNameLength > 0 && mobileLength > 0) {
-			/*
-			if (
-				!isUsableNick ||
-				!validEmail ||
-				!isUsableEmail ||
-				!isUsableMobile ||
-				!validMobile ||
-				!validPassword ||
-				!isSamePassword ||
-				!validAgreement
-			) {
-				setMessage("입력한 내용을 재확인 해주세요");
-				setMsgVisible(true);
-				return;
-			}
-			*/
 			if (!isUsableNick) {
-				setMessage("동일한 별명이 존재합니다.");
+				setMessage("동일한 별명이 존재합니다");
 				setMsgVisible(true);
 				return;
 			}
@@ -254,12 +238,12 @@ export default function Agreement(props: signinProps): ReactElement {
 				return;
 			}
 			if (!isUsableEmail) {
-				setMessage("동일한 이메일이 존재합니다.");
+				setMessage("동일한 이메일이 존재합니다");
 				setMsgVisible(true);
 				return;
 			}
 			if (!isUsableMobile) {
-				setMessage("동일한 번호가 존재합니다.");
+				setMessage("동일한 번호가 존재합니다");
 				setMsgVisible(true);
 				return;
 			}
@@ -274,7 +258,7 @@ export default function Agreement(props: signinProps): ReactElement {
 				return;
 			}
 			if (!isSamePassword) {
-				setMessage("비밀번호가 불일치합니다.");
+				setMessage("비밀번호가 불일치합니다");
 				setMsgVisible(true);
 				return;
 			}
@@ -305,16 +289,14 @@ export default function Agreement(props: signinProps): ReactElement {
 					sessionStorage.setItem("nickName", nickName);
 					sessionStorage.setItem("signUpIn", JSON.stringify(true)); // 회원가입 하자마자 로그인
 					handleSignin();
-					setSignUpModal(true);
 					setModalMessage("회원가입 되었습니다");
 					setModalVisible(true);
 				})
 				.catch((error) => {
-					const errResponse = error.response.data.message;
-					console.log(errResponse);
+					console.log("Internal Server Error occured");
 				});
 		} else {
-			setModalMessage("모든 입력사항은 필수 입니다.");
+			setModalMessage("모든 입력사항은 필수 입니다");
 			setModalVisible(true);
 		}
 	};
@@ -337,7 +319,7 @@ export default function Agreement(props: signinProps): ReactElement {
 						<Item>전자우편</Item>
 						<Input name="email" type="text" placeholder="abc@gmail.com" onChange={handleEmail} />
 						<Item>전화번호</Item>
-						<Input name="mobile" type="text" placeholder="'-' 없이 작성" onChange={handleMobile} />
+						<Input name="mobile" type="text" placeholder="01012345678" onChange={handleMobile} />
 					</Linesolo>
 					<Linesolo>
 						<Item>암호</Item>
@@ -378,14 +360,14 @@ export default function Agreement(props: signinProps): ReactElement {
 				<Logo>
 					<img src={logoImg} alt="" />
 				</Logo>
-				<Button>
-					<button type="button" name="signup" onClick={handleRequestSignUp}>
+				<Buttons>
+					<Button type="button" name="signup" onClick={handleRequestSignUp}>
 						입학하기
-					</button>
-					<button type="button" name="back button" onClick={() => history.push("/")}>
+					</Button>
+					<Button type="button" name="back button" onClick={() => history.push("/")}>
 						뒤로가기
-					</button>
-				</Button>
+					</Button>
+				</Buttons>
 				<NotificationModal modalIsOpen={modalVisible} setIsOpen={setModalVisible} message={modalMessage} />
 			</Footer>
 		</Main>
@@ -409,13 +391,14 @@ const Main = styled.div`
 	}
 `;
 const ValidityBox = styled.div`
-	/* border: 3px solid red; */
+	/* border: 1px solid black; */
 	position: relative;
 	/* width: 12rem; */
 	height: 30px;
 	margin-right: 2rem;
 	padding: 0rem 1rem 0rem 1rem;
-	background: #f08080;
+	background: black;
+	color: white;
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	border-radius: 10px;
 	justify-content: flex-start;
@@ -424,7 +407,7 @@ const ValidityBox = styled.div`
 		border-top: 0px solid transparent;
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
-		border-bottom: 10px solid #f08080;
+		border-bottom: 10px solid black;
 		content: "";
 		position: absolute;
 		top: -10px;
@@ -453,7 +436,7 @@ const ValidityBox = styled.div`
 	}
 `;
 const InfoBox = styled.div`
-	border: 5px solid black;
+	border: 3px solid black;
 	margin-top: 0.5rem;
 	/* height: 10rem; */
 	width: 80%;
@@ -511,6 +494,10 @@ const Item = styled.div`
 	width: 4rem;
 	display: flex;
 	align-items: center;
+	@media only screen and (max-width: 480px) {
+		margin-top: -0.1rem;
+		height: 2.1rem;
+	}
 `;
 const Input = styled.input`
 	border: 1px solid white;
@@ -539,10 +526,10 @@ const Inputpwd = styled.input`
 	}
 `;
 const Checkagreement = styled.div`
-	border: 5px solid black;
+	border: 3px solid black;
 	width: 77%;
 	height: 7rem;
-	margin: 1rem 0rem 0rem 0rem;
+	margin: 1rem 0rem 1rem 0rem;
 	padding-left: 2rem;
 	padding-bottom: 1rem;
 	border-radius: 2rem;
@@ -567,9 +554,6 @@ const Footer = styled.div`
 	width: 77%;
 	margin-top: 1.5rem;
 	display: flex;
-	/* justify-content: flex-end; */
-	/* margin-right: -0.2rem; */
-	/* margin-top: 3rem; */
 `;
 const Logo = styled.div`
 	/* border: 5px solid red; */
@@ -587,20 +571,27 @@ const Logo = styled.div`
 		padding-left: 0rem;
 	}
 `;
-const Button = styled.div`
+const Buttons = styled.div`
 	/* height: 3rem; */
 	/* border: 5px solid black; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	button {
-		/* border: 1px solid red; */
-		width: 7rem;
-		height: 2.3rem;
-		margin: 0.3rem;
-		font-size: 0.9rem;
-		background: #c4c4c4;
-		border-radius: 1rem;
+`;
+const Button = styled.button`
+	border: 2px solid black;
+	width: 7rem;
+	height: 2.3rem;
+	margin: 0.3rem;
+	font-size: 0.9rem;
+	color: white;
+	background: black;
+	border-radius: 1rem;
+	outline: none;
+	:hover {
+		cursor: pointer;
+		background: white;
+		color: black;
 	}
 `;

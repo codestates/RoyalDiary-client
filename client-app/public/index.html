@@ -31,13 +31,30 @@
     @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
       body {font-family: 'Poor Story', cursive; }
-      
-      </style>
+    </style>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="701055359005-1ssquh4o9qbj1m8p4r55op6lc2knb9cs.apps.googleusercontent.com"> -->
+    <script>
+      // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+      window.Kakao.init('80bf209d1c87b43369a88d2e526b71ea');//배포시에는 .env 에 저장.
+      // SDK 초기화 여부를 판단합니다.
+      console.log(Kakao.isInitialized());
+      console.log(Kakao);
+    </script>
+    <script>
+      function test() {
+         console.log("heelo")
+		}
+    </script>
     <title>추억의 그림일기(로얄 다이어리)</title>
   </head>
-  <body background="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2021-02-26+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+6.05.44.png" width=100%>
+  <body onload="test()">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="loading">
+      <img SRC="https://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile1.uf.tistory.com%2Fimage%2F9950163C5AFE32810A7310">    
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -49,5 +66,8 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+  
+       
+
   </body>
 </html>

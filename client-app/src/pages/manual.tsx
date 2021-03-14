@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import styled, { keyframes } from "styled-components";
-import { relative } from "path";
 import Cmanual from "../components/manual";
 import logoImg from "../assets/images/royalschool.png";
 

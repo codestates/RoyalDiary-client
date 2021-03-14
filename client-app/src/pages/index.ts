@@ -10,6 +10,7 @@ import Manual from "./manual";
 import Paint from "./paint";
 import SignIn from "./signIn";
 import UserInfo from "./userInfo";
+import Developer from "./developer";
 
 export {
 	Application,
@@ -24,4 +25,5 @@ export {
 	Paint,
 	SignIn,
 	UserInfo,
+	Developer,
 };

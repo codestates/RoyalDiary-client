@@ -1,1 +1,5 @@
-body {cursor: url(./pencil.png), auto}
+body {
+  background: url(./desktop.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

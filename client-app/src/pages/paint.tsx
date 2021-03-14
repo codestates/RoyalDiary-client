@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Diaryinfo from "../components/diaryInfo";
 import CPaint from "../components/paint";
 
@@ -7,11 +7,11 @@ interface setDataProps {
 	changeWeather: (e: string) => void;
 	changeImgUrl: (e: string) => void;
 	changeImgData: (e: string) => void;
-	contentId: number;
+	contentInfo: any;
 }
 
 export default function Paint(props: setDataProps): ReactElement {
-	const { changeWeather, changeImgUrl, changeImgData, contentId } = props;
+	const { changeWeather, changeImgUrl, changeImgData, contentInfo } = props;
 	const [userNick, setUserNick] = useState("손님");
 	const [weatherNow, setWeatherNow] = useState("");
 
@@ -35,13 +35,13 @@ export default function Paint(props: setDataProps): ReactElement {
 	return (
 		<Main>
 			<Paintbox>
-				<Diaryinfo conveyWeather={conveyWeather} />
+				<Diaryinfo conveyWeather={conveyWeather} contentInfo={contentInfo} />
 				<Title>😍{userNick}의 행복한 하루😍</Title>
 				<CPaint
 					conveyImgUrl={conveyImgUrl}
 					conveyImgData={conveyImgData}
 					weatherNow={weatherNow}
-					contentId={contentId}
+					contentInfo={contentInfo}
 				/>
 			</Paintbox>
 		</Main>

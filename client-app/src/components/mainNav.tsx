@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 interface isLoginProps {
 	isSignin: boolean;
@@ -31,35 +31,51 @@ export default function Mainnav(props: isLoginProps): ReactElement {
 		}
 	}, [isSignin]);
 
+	const intoDiary = () => {
+		history.push("creatediary");
+		window.location.reload(); // 일기 수정으로 남아있던 데이터 삭제
+	};
 	return (
 		<Main>
 			<Navsole>
 				<Navin color={colorType.color1} />
-				<Navout color={colorType.color6} onClick={() => history.push("/creatediary")}>
+				<Navout color={colorType.color6} onClick={intoDiary}>
 					일기쓰기
 				</Navout>
 			</Navsole>
-			<UserNavsole className="userMenu" theme={userNav}>
-				<Navin color={colorType.color2} />
-				<Navout color={colorType.color7} onClick={() => history.push("/diaryview")}>
-					나의일기
-				</Navout>
-			</UserNavsole>
+			{userNav ? (
+				<Navsole className="userMenu">
+					<Navin color={colorType.color2} />
+					<Navout color={colorType.color7} onClick={() => history.push("/diaryview")}>
+						나의일기
+					</Navout>
+				</Navsole>
+			) : null}
 			<Navsole>
 				<Navin color={colorType.color3} />
 				<Navout color={colorType.color8} onClick={() => history.push("/diarypublic")}>
 					훔쳐보기
 				</Navout>
 			</Navsole>
-			<UserNavsole className="userMenu" theme={userNav}>
-				<Navin color={colorType.color4} />
-				<Navout color={colorType.color9} onClick={() => history.push("/userinfo/calendar")}>
-					나의정보
-				</Navout>
-			</UserNavsole>
+			{userNav ? (
+				<Navsole className="userMenu" theme={userNav}>
+					<Navin color={colorType.color4} />
+					<Navout color={colorType.color9} onClick={() => history.push("/userinfo/calendar")}>
+						나의정보
+					</Navout>
+				</Navsole>
+			) : null}
+
 			<Navsole>
 				<Navin color={colorType.color5} />
-				<Navout color={colorType.color10}>제작자</Navout>
+				<Navout
+					color={colorType.color10}
+					onClick={() => {
+						history.push("/developer");
+					}}
+				>
+					제작자
+				</Navout>
 			</Navsole>
 		</Main>
 	);
@@ -70,6 +86,7 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding-bottom: 5rem;
 `;
 const Navsole = styled.div`
 	position: relative;
@@ -79,21 +96,9 @@ const Navsole = styled.div`
 	margin: 0.2rem 0rem;
 	display: flex;
 	font-weight: bold;
-
-	@media only screen and (max-width: 480px) {
-		top: 1rem;
-		right: 0rem;
+	:hover {
+		cursor: pointer;
 	}
-`;
-const UserNavsole = styled.div`
-	/* border: 1px solid red; */
-	position: relative;
-	top: 1rem;
-	right: -2rem;
-	width: 7rem;
-	margin: 0.2rem 0rem;
-	display: ${(props) => (props.theme === true ? "flex" : "none")};
-	font-weight: bold;
 	@media only screen and (max-width: 480px) {
 		top: 1rem;
 		right: 0rem;

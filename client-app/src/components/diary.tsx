@@ -1,12 +1,13 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 interface diaryProps {
 	saveDiary: any;
+	contentInfo: any;
 }
 
 export default function CDiary(props: diaryProps): ReactElement {
-	const { saveDiary } = props;
+	const { saveDiary, contentInfo } = props;
 	const [count, countLetter] = useState(0);
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
@@ -29,10 +30,13 @@ export default function CDiary(props: diaryProps): ReactElement {
 		saveDiary(e);
 	};
 	useEffect(() => {
-		// 글수정할 때 사용할 로직...
-		setTitle("테스트 타이틀");
-		setContent("테스트 컨텐츠");
-	}, [setTitle, setContent]);
+		if (contentInfo !== 0) {
+			const titleIn = contentInfo.title;
+			const contentIn = contentInfo.content;
+			setTitle(titleIn);
+			setContent(contentIn);
+		}
+	}, [setTitle, setContent, contentInfo]);
 	return (
 		<Main>
 			<Title>
@@ -72,7 +76,7 @@ const Title = styled.div`
 	padding-left: 1rem;
 	display: flex;
 	align-items: center;
-	font-size: 1.5rem;
+	font-size: 1.7rem;
 	@media only screen and (max-width: 480px) {
 		font-size: 1.2rem;
 		margin: 2rem 1rem 1rem 1rem;
@@ -87,10 +91,13 @@ const TypeTitle = styled.input`
 	height: 40%;
 	width: 70%;
 	font-family: "Nanum Brush Script", cursive;
-	font-size: 1.5rem;
+	font-size: 1.8rem;
 	background-color: rgb(246, 246, 238);
 	:focus {
 		outline: none;
+	}
+	@media only screen and (max-width: 480px) {
+		font-size: 1.5rem;
 	}
 `;
 const Content = styled.div`
@@ -111,7 +118,7 @@ const TypeContent = styled.textarea`
 	width: 92%;
 	height: 90%;
 	font-family: "Nanum Brush Script", cursive;
-	font-size: 2rem;
+	font-size: 1.9rem;
 	background-color: rgb(246, 246, 238);
 	outline: none;
 	resize: none;

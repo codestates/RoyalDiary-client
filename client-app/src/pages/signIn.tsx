@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { ReactElement } from "react";
+import styled from "styled-components";
 import MainNav from "../components/mainNav";
 import Signin from "../components/signin";
 import childrenImg from "../assets/images/children.png";
@@ -21,11 +21,11 @@ export default function SignIn(props: signinProps): ReactElement {
 	};
 	return (
 		<Main>
-			<Purple />
+			<PurplePart />
 			<RedWhite>
-				<Red>
+				<RedPart>
 					<TitleImg className="title_image" src={titleImg} alt="" />
-				</Red>
+				</RedPart>
 				<ImageNav>
 					<Image>
 						<MainImg className="children_image" src={childrenImg} alt="" />
@@ -38,7 +38,7 @@ export default function SignIn(props: signinProps): ReactElement {
 	);
 }
 const Main = styled.div`
-	// border: 10px solid #8f4f4f;
+	/* border: 10px solid #8f4f4f; */
 	width: 50%;
 	display: flex;
 	flex-direction: row;
@@ -56,7 +56,7 @@ const Main = styled.div`
 		height: 70%;
 	}
 `;
-const Purple = styled.div`
+const PurplePart = styled.div`
 	// border: 10px solid purple;
 	background: rgb(73, 65, 126);
 	width: 12%;
@@ -64,35 +64,46 @@ const Purple = styled.div`
 const RedWhite = styled.div`
 	// border: 5px solid black;
 	background: white;
-	width: 80%;
+	width: 90%;
 	display: flex;
 	flex-direction: column;
 	@media only screen and (max-width: 480px) {
 		width: 90%;
 	}
 `;
-const Red = styled.div`
+const RedPart = styled.div`
 	/* border: 10px solid green; */
-	flex-grow: 0.6;
+	height: 16rem;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	overflow: hidden;
 	font-size: 1.5rem;
 	background: #eb6262;
 	@media only screen and (max-width: 480px) {
-		/* width: 110%; */
+		height: 18rem;
+	}
+`;
+const TitleImg = styled.img`
+	/* border: 1px solid blue; */
+	width: 34rem;
+	@media only screen and (max-width: 480px) {
+		/* margin-left: 4rem; */
+		width: 100%;
 	}
 `;
 const ImageNav = styled.div`
 	/* border: 3px solid red; */
-	flex-grow: 3;
+	height: 22rem;
 	display: flex;
+	padding-top: 1rem;
 	padding-left: 2rem;
+	@media only screen and (max-width: 480px) {
+		height: 17rem;
+	}
 `;
 const Image = styled.div`
 	/* border: 10px solid black; */
-	flex-grow: 4;
+	flex-grow: 2;
 	width: 50%;
 	display: flex;
 	justify-content: center;
@@ -100,18 +111,10 @@ const Image = styled.div`
 `;
 const MainImg = styled.img`
 	border: 1px solid black;
-	width: 80%;
-	height: 70%;
+	width: 75%;
+	height: 85%;
 	@media only screen and (max-width: 480px) {
 		width: 120%;
 		height: 80%;
-	}
-`;
-const TitleImg = styled.img`
-	/* border: 1px solid blue; */
-	width: 420rem;
-	@media only screen and (max-width: 480px) {
-		/* margin-left: 4rem; */
-		width: 100%;
 	}
 `;

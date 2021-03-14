@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export default function SubNav(): ReactElement {
 	const [userNav, setUserNav] = useState(false);
@@ -10,9 +10,7 @@ export default function SubNav(): ReactElement {
 		if (isLogin === true) {
 			setUserNav(true);
 		} else {
-			console.log(isLogin);
 			setUserNav(false);
-			console.log("not logined!");
 		}
 	}, []);
 	return (
@@ -22,13 +20,17 @@ export default function SubNav(): ReactElement {
 				<Contents className="dropdown-content">
 					<Content href="/">홈</Content>
 					<Content href="/creatediary">일기쓰기</Content>
-					<Content className="usernav" theme={userNav} href="/diaryview">
-						일기보기
-					</Content>
+					{userNav ? (
+						<Content className="usernav" href="/diaryview">
+							일기보기
+						</Content>
+					) : null}
 					<Content href="/diarypublic">훔쳐보기</Content>
-					<Content className="usernav" theme={userNav} href="/userinfo/calendar">
-						나의정보
-					</Content>
+					{userNav ? (
+						<Content className="usernav" href="/userinfo/calendar">
+							나의정보
+						</Content>
+					) : null}
 				</Contents>
 			</Dropbtn>
 			{/* </Dropdown> */}
@@ -71,9 +73,6 @@ const Contents = styled.div`
 	z-index: 1;
 	:hover {
 		display: block;
-	}
-	a.usernav {
-		display: ${(props) => (props.theme === true ? "block" : "none")};
 	}
 	animation: a 2s;
 	@keyframes a {

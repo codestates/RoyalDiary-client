@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Agreement from "../components/signup";
 import principalImg from "../assets/images/principal.png";
 import SubNav from "../components/subNav";
@@ -64,9 +64,9 @@ const Main = styled.div`
 `;
 const Header = styled.div`
 	/* border: 5px solid red; */
-	flex-grow: 0.3;
 	margin-top: 1rem;
 	display: flex;
+	padding-bottom: 0.5rem;
 	padding-left: 4rem;
 	align-items: center;
 	font-size: 3rem;
@@ -85,7 +85,7 @@ const Body = styled.div`
 `;
 const Content = styled.div`
 	/* border: 3px solid green; */
-	/* padding-top: 2rem; */
+	padding-left: 1.5rem;
 	line-height: 2.5rem;
 	width: 90%;
 	display: flex;
@@ -93,7 +93,7 @@ const Content = styled.div`
 `;
 const Text = styled.div`
 	/* border: 3px solid red; */
-	padding-left: 3rem;
+	/* padding-left: 3rem; */
 	font-size: 1.1rem;
 	@media only screen and (max-width: 1400px) {
 		font-size: 1rem;
@@ -101,7 +101,6 @@ const Text = styled.div`
 `;
 const Todaydate = styled.div`
 	/* border: 5px solid red; */
-	margin-top: 0.8rem;
 	padding-right: 2rem;
 	font-size: 1.3rem;
 	font-weight: bold;
