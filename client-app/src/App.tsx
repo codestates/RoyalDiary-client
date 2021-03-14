@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactElement } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import styled from "styled-components";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
 	Manual,
 	SignIn,
@@ -14,7 +14,14 @@ import {
 	Calendar,
 	CalendarRows,
 	UserInfo,
+	Developer,
 } from "./pages/index";
+
+declare global {
+	interface Window {
+		Kakao: any;
+	}
+}
 
 function App(): ReactElement {
 	const [isSignin, setSignin] = useState(false);
@@ -35,20 +42,16 @@ function App(): ReactElement {
 		setSignin(e);
 	};
 	const changeWeather = (e: string) => {
-		// console.log(e);
 		setWeatherData(e);
 	};
 	const changeImgUrl = (e: string) => {
-		// console.log(e);
 		setImgUrl(e);
 	};
 	const changeImgData = (e: string) => {
-		// console.log(e);
 		setImgData(e);
 	};
 	const conveyContent = (e: any) => {
 		setContentInfo(e);
-		console.log(contentInfo);
 	};
 	const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
 	useEffect(() => {
@@ -58,7 +61,6 @@ function App(): ReactElement {
 			changeSignin(false);
 		}
 	});
-
 	return (
 		<Router>
 			<Main>
@@ -76,9 +78,9 @@ function App(): ReactElement {
 							changeWeather={changeWeather}
 							changeImgUrl={changeImgUrl}
 							changeImgData={changeImgData}
-							contentId={contentInfo}
+							contentInfo={contentInfo}
 						/>
-						<Diary weatherData={weatherData} imageUrl={imageUrl} imageData={imageData} />
+						<Diary weatherData={weatherData} imageUrl={imageUrl} imageData={imageData} contentInfo={contentInfo} />
 					</Route>
 					<Route exact path="/diaryview">
 						<DiariesView />
@@ -96,6 +98,9 @@ function App(): ReactElement {
 						<CalendarRows />
 						<UserInfo />
 					</Route>
+					<Route path="/developer">
+						<Developer />
+					</Route>
 				</Switch>
 			</Main>
 		</Router>
@@ -107,6 +112,7 @@ const Main = styled.div`
 	display: flex;
 	position: relative;
 	flex-direction: row;
+	justify-content: center;
 	flex-wrap: wrap;
 	//box-sizing: border-box;
 	/* border: 10px solid blue; */

@@ -1,26 +1,24 @@
 import React, { ReactElement, useRef, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import CanvasDraw from "react-canvas-draw";
 import axios from "axios";
-import { url } from "inspector";
-import pointer from "../assets/images/pencil.png";
+// import pencil from "../assets/images/pencil.png";
 
 interface setImgProps {
 	conveyImgUrl: (e: string) => void;
 	conveyImgData: (e: string) => void;
 	weatherNow: string;
-	contentId: any;
+	contentInfo: any;
 }
 
 export default function CPaint(props: setImgProps): ReactElement {
-	const { conveyImgUrl, conveyImgData, weatherNow, contentId } = props;
+	const { conveyImgUrl, conveyImgData, weatherNow, contentInfo } = props;
 	const [color, changeColor] = useState("black");
 	const [showColor, displayColor] = useState("none");
 	const [brushSize, changeSize] = useState(2.5);
 	// 메세지
 	const [message, setMessage] = useState("");
 	const [msgVisible, setMsgVisible] = useState(false);
-
 	const firstCanvas = useRef<any>(null);
 	// const secondCanvas = useRef<any>(null);
 
@@ -72,7 +70,7 @@ export default function CPaint(props: setImgProps): ReactElement {
 				return returnedUrl;
 			})
 			.catch((err) => {
-				console.log("server error occured");
+				console.log("Internal Server Error occured");
 			});
 		return imgUrl;
 		// axios 로 서버에 img 파일 보내기
@@ -115,11 +113,10 @@ export default function CPaint(props: setImgProps): ReactElement {
 			return;
 		}
 		const data = firstCanvas.current.getSaveData();
-		// console.log(sessionStorage.getItem("saveDraw"));
 		setImgData(data);
 		const imgUrl = await saveAsPNG();
 		setImgUrl(imgUrl);
-		setMessage("그림이 등록되었습니다.");
+		setMessage("그림이 등록되었습니다👌");
 		setMsgVisible(true);
 		setTimeout(() => {
 			setMsgVisible(false);
@@ -146,68 +143,38 @@ export default function CPaint(props: setImgProps): ReactElement {
 		}, 1500);
 	};
 
-	const reloadPaint = async (e: number) => {
-		const accessToken = sessionStorage.getItem("accessToken");
-		const contentid = e;
-
-		await axios
-			.get("https://royal-diary.ml/contents/content", {
-				headers: {
-					Authorization: `Bearer ${accessToken}`,
-					"Content-Type": "application/json",
-					withCredentials: true,
-				},
-				params: {
-					contentId: `${contentid}`,
-				},
-			})
-			.then((res) => {
-				// console.log(res.data.data.imgMain);
-				const imgData = res.data.data.imgMain;
-				firstCanvas.current.loadSaveData(imgData);
-			})
-			.catch((err) => {
-				console.log("error ocurred!!");
-			});
-
-		// const imgData = await getImgData(contentid);
-		// console.log(imgData);
-
-		// const secondData = secondCanvas.current.loadSaveData();
+	const reloadPaint = (imgData: string) => {
+		firstCanvas.current.loadSaveData(imgData);
 	};
 
 	useEffect(() => {
 		if (weatherNow !== "") {
 			if (weatherNow === "cloudy") {
-				showWeather("날씨가 흐려요");
+				showWeather("오늘은 날씨가 흐려요🌫");
 			} else if (weatherNow === "sunny") {
-				showWeather("날씨가 화창해요");
+				showWeather("오늘은 날씨가 화창해요🏖");
 			} else if (weatherNow === "rainy") {
-				showWeather("오늘은 비가 와요");
+				showWeather("오늘은 비가 와요☔");
 			} else if (weatherNow === "snowy") {
-				showWeather("오늘은 눈이 내려요");
+				showWeather("오늘은 눈이 내려요⛄");
 			} else {
-				showWeather("오늘은 바람이 불어요");
+				showWeather("오늘은 바람이 불어요🎏");
 			}
 		}
-		if (contentId !== 0) {
-			// console.log("clicked contentId!!");
-			reloadPaint(contentId);
+		if (contentInfo !== 0) {
+			const imgData = contentInfo.imgMain;
+			reloadPaint(imgData);
 		}
-		// 새로고침 할때 그림이 유지된다. 다만 색상변경 등의 상태변화가 있으면 마찬가지로 그림이 리로드됨....
-		// const drawData = sessionStorage.getItem("saveDraw") as string;
-		// if (drawData !== null) firstCanvas.current.loadSaveData(drawData); // 새로고침할 경우 저장된 좌표데이터를 로드
-	}, [weatherNow, contentId]);
+	}, [weatherNow, contentInfo]);
 
 	return (
 		<Main>
-			{/* {console.log(firstData)} */}
 			<CanvasDraw
 				className="CanvasDraw"
 				brushRadius={brushSize}
 				brushColor={color}
 				lazyRadius={1}
-				catenaryColor="red"
+				catenaryColor={color}
 				hideGrid
 				ref={firstCanvas}
 				style={canvasStyle}
@@ -220,6 +187,7 @@ export default function CPaint(props: setImgProps): ReactElement {
 				<Colors theme={showColor}>
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "white" }} />
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#2c2c2c" }} />
+					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#994d00" }} />
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#FF3B30" }} />
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#FF9500" }} />
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#FFCC00" }} />
@@ -234,17 +202,12 @@ export default function CPaint(props: setImgProps): ReactElement {
 			</DivValid>
 			<Buttons>
 				<Button onClick={clear1}>새종이</Button>
-				<Button onClick={undo1}>마지막지우기</Button>
-				<Button onClick={handleSaveClick}>다그렸다버튼</Button>
-				{/* <NotificationModal modalIsOpen={modalVisible} setIsOpen={setModalVisible} message={modalMessage} /> */}
-				{/* <Button onClick={clear2}>newPaper</Button>
-				<Button onClick={undo2}>undo</Button>
-				<Button onClick={revise}>Save Revision</Button> */}
+				<Button onClick={undo1}>되돌리기버튼</Button>
+				<Button onClick={handleSaveClick}>그림완료버튼</Button>
 			</Buttons>
 		</Main>
 	);
 }
-
 const Main = styled.div`
 	/* border: 3px solid black; */
 	/* background: white; */
@@ -261,6 +224,8 @@ const canvasStyle = {
 	height: "100%",
 	border: "3px solid black",
 	// background: "white",
+	// cursor: `url(${pencil}), auto`,
+	// cursor: "pointer",
 };
 const Control = styled.div`
 	/* border: 3px solid red; */
@@ -315,7 +280,6 @@ const Color = styled.div`
 const Buttons = styled.div`
 	/* border: 3px solid red; */
 	/* position: relative; */
-	margin-bottom: 1rem;
 	flex-grow: 1;
 	display: flex;
 	justify-content: flex-end;
@@ -324,12 +288,15 @@ const Buttons = styled.div`
 	} */
 `;
 const Button = styled.button`
+	border: 2px solid black;
 	background: #f6f6ee;
 	margin-right: 1rem;
 	font-size: 1rem;
 	font-weight: bold;
 	:hover {
 		cursor: pointer;
+		background: black;
+		color: white;
 	}
 	@media only screen and (max-width: 480px) {
 		font-size: 0.8rem;
@@ -339,18 +306,16 @@ const DivValid = styled.div`
 	/* border: 3px solid green; */
 	width: 100%;
 	height: 3rem;
-	margin-bottom: 0.3rem;
+	margin-bottom: 0.5rem;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 `;
 const ValidityBox = styled.div`
 	/* border: 3px solid red; */
-	/* width: 9rem; */
 	height: 1.9rem;
 	padding: 0rem 1rem 0rem 1rem;
-	margin-right: 1.1rem;
-	background: #f08080;
+	margin-right: 1rem;
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	border-radius: 10px;
 	justify-content: center;
@@ -365,15 +330,6 @@ const ValidityBox = styled.div`
 		}
 	}
 	@media only screen and (max-width: 480px) {
-		::after {
-			border-top: 0px solid transparent;
-			border-left: none;
-			border-right: none;
-			border-bottom: 10px solid #f08080;
-			content: "";
-			position: absolute;
-			top: -10px;
-			left: 120px;
-		}
+		height: 1.5rem;
 	}
 `;

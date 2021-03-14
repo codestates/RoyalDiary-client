@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
 import { useHistory } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 interface Props {
 	modalIsOpen: boolean;
-	setIsOpen: any;
+	setIsOpen: (e: boolean) => void;
 	message: string;
 }
 
@@ -15,14 +15,25 @@ export default function NotificationModal(props: Props): ReactElement {
 	const { modalIsOpen, setIsOpen, message } = props;
 
 	function closeModal() {
-		if (message === "모든 입력사항은 필수 입니다.") {
+		if (message === "모든 입력사항은 필수 입니다") {
 			setIsOpen(false);
 		} else if (message === "회원가입 되었습니다") {
 			setIsOpen(false);
 			history.push("/");
+		} else if (message === "오늘은 어떤 일이 있었나요?:)") {
+			setIsOpen(false);
+			window.location.reload(); // 모달창 제거
 		} else if (message === "그림일기가 등록되었습니다") {
 			setIsOpen(false);
-			history.push("/diaryview");
+			history.push("/");
+			window.location.reload(); // 일기 수정으로 남아있던 데이터 삭제
+		} else if (message === "그림일기가 수정되었습니다") {
+			setIsOpen(false);
+			history.push("/");
+			window.location.reload(); // 일기 수정으로 남아있던 데이터 삭제
+		} else if (message === "추가 정보가 등록되었습니다") {
+			setIsOpen(false);
+			history.push("/");
 		}
 	}
 
@@ -31,7 +42,7 @@ export default function NotificationModal(props: Props): ReactElement {
 			<ModalBox>
 				<Title>{message}</Title>
 				<BackBtn>
-					<button onClick={closeModal} type="button" style={btnStyle}>
+					<button onClick={closeModal} type="button">
 						확인
 					</button>
 				</BackBtn>
@@ -40,7 +51,7 @@ export default function NotificationModal(props: Props): ReactElement {
 	);
 }
 const ModalBox = styled.div`
-	border: 10px solid yellow;
+	/* border: 10px solid yellow; */
 	margin: auto;
 	/* padding-left: 4rem; */
 	width: 30rem;
@@ -61,22 +72,26 @@ const BackBtn = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	padding-right: 3rem;
+	button {
+		border: 1px solid black;
+		background-color: white;
+		width: 5rem;
+		height: 3rem;
+		font-size: 1rem;
+		:hover {
+			cursor: pointer;
+			background-color: black;
+			color: white;
+		}
+	}
 `;
 const ModalStyles = {
 	content: {
 		margin: "auto",
-		// marginTop: "10rem",
-		// marginLeft: "10rem",
 		width: "22rem",
 		height: "18rem",
 		background: "#f3f3e9",
 		display: "flex",
 		alignItems: "center",
 	},
-};
-const btnStyle = {
-	border: "1px solid black",
-	width: "5rem",
-	height: "3rem",
-	fontSize: "1rem",
 };

@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import SocialModal from "../components/socialSigninModal";
+import SocialInfoModal from "../components/socialSignupModal";
+import NotificationModal from "./NotificationModal";
 
 interface isLoginProps {
 	// signInStatus: boolean;
@@ -14,28 +16,46 @@ export default function Signin(props: isLoginProps): ReactElement {
 	const { isSignin, conveySignin } = props;
 	const history = useHistory();
 	const [modalIsOpen, setIsOpen] = useState(false);
+	const [isOpenSocial, socialModalOpen] = useState(false);
+	const [socialData, setSocialData] = useState({ data: "", type: "" });
 	const [uemail, setEmail] = useState("");
 	const [upassword, setPassword] = useState("");
 	const [message, setMessage] = useState("");
 	const [msgVisible, setMsgVisible] = useState(false);
 	const [mainVisible, setMainVisible] = useState(false);
 	const [nickName, setNickName] = useState("");
+	// modal 상태 관리
+	const [modalMessage, setModalMessage] = useState("");
+	const [modalVisible, setModalVisible] = useState(false);
 
 	function openModal() {
 		setIsOpen(true);
 	}
+	const conveySocial = (e: any, socialType: string) => {
+		setSocialData({
+			...socialData,
+			data: e,
+			type: socialType,
+		});
+	};
+	const setSocialOpen = (e: boolean) => {
+		socialModalOpen(e);
+	};
 	const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const typedEmail = event.target.value;
 		setEmail(typedEmail);
-		// setMsgVisible(false);
 	};
 	const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const typedPwd = event.target.value;
 		setPassword(typedPwd);
-		// setMsgVisible(false);
 	};
 	const handleSigninProp = (isLogin: boolean) => {
 		conveySignin(isLogin);
+	};
+	const setTime = () => {
+		setTimeout(() => {
+			setMsgVisible(false);
+		}, 2000);
 	};
 	const handleSignin = async () => {
 		if (uemail.length > 0 && upassword.length > 0) {
@@ -54,26 +74,28 @@ export default function Signin(props: isLoginProps): ReactElement {
 					sessionStorage.setItem("accessToken", accessToken);
 					sessionStorage.setItem("isLogin", JSON.stringify(true));
 					sessionStorage.setItem("nickName", nickname);
-					handleSigninProp(true);
+					setModalMessage("오늘은 어떤 일이 있었나요?:)");
+					setModalVisible(true);
 				})
 				.catch((error) => {
 					const errResponse = error.response.data.message;
 					if (errResponse === "email not found") {
-						setMessage("이메일을 찾을 수 없습니다.");
+						setMessage("이메일을 찾을 수 없습니다");
 						setMsgVisible(true);
 					} else if (errResponse === "wrong password") {
-						setMessage("잘못된 비밀번호 입니다.");
+						setMessage("잘못된 비밀번호 입니다");
 						setMsgVisible(true);
 					} else {
-						console.log("server error occured");
+						console.log("Internal Server Error occured");
 					}
 					setTimeout(() => {
 						setMsgVisible(false);
 					}, 3000);
 				});
 		} else {
-			setMessage("이메일과 비밀번호를 입력해주세요.");
+			setMessage("이메일과 비밀번호를 입력해주세요😉");
 			setMsgVisible(true);
+			setTime();
 		}
 	};
 	const handleSignout = async () => {
@@ -90,6 +112,12 @@ export default function Signin(props: isLoginProps): ReactElement {
 			.then((res) => {
 				const resMessage = res.data.message;
 				if (resMessage === "successfully signed out!") {
+					if (window.Kakao.Auth.getAccessToken()) {
+						console.log("카카오 인증 엑세스 토큰 존재", window.Kakao.Auth.getAccessToken());
+						window.Kakao.Auth.logout(() => {
+							console.log("카카오 로그아웃 완료", window.Kakao.Auth.getAccessToken());
+						});
+					}
 					sessionStorage.removeItem("accessToken");
 					sessionStorage.removeItem("nickName");
 					sessionStorage.setItem("isLogin", JSON.stringify(false));
@@ -97,8 +125,8 @@ export default function Signin(props: isLoginProps): ReactElement {
 					setMainVisible(false);
 				}
 			})
-			.catch((error) => {
-				console.log(error);
+			.catch((err) => {
+				console.log("Internal Server Error occured");
 			});
 	};
 	useEffect(() => {
@@ -118,10 +146,9 @@ export default function Signin(props: isLoginProps): ReactElement {
 
 	return (
 		<Main>
-			{/* <form method="" style={formStyle}> */}
 			<Input theme={mainVisible}>
 				<InputBox>
-					<div style={fontstyle}>이름 쓰는곳</div>
+					<div>이름 쓰는곳</div>
 					<div>
 						<InputInfo
 							name="type name"
@@ -134,7 +161,7 @@ export default function Signin(props: isLoginProps): ReactElement {
 					</div>
 				</InputBox>
 				<InputBox>
-					<div style={fontstyle}>암호 쓰는곳</div>
+					<div>암호 쓰는곳</div>
 					<div>
 						<InputInfo
 							name="type password"
@@ -155,26 +182,36 @@ export default function Signin(props: isLoginProps): ReactElement {
 			</UserNick>
 			<Button theme={mainVisible}>
 				<ClickButton>
-					<ButtonSole name="login btn" type="submit" style={{ alignItems: "center" }} onClick={handleSignin}>
-						로그인
-					</ButtonSole>
-					<ButtonSole name="signup btn" type="button" onClick={() => history.push("/signup")}>
-						회원 가입
-					</ButtonSole>
+					<MainBtn onClick={handleSignin}>
+						<ButtonSole>로그인</ButtonSole>
+						<ButtonSole>로그인</ButtonSole>
+					</MainBtn>
+					<MainBtn style={{ marginLeft: "0.3rem", letterSpacing: "0.05rem" }} onClick={() => history.push("/signup")}>
+						<ButtonSole>&nbsp; 회원 &nbsp;&nbsp;가입</ButtonSole>
+						<ButtonSole>&nbsp; 회원 &nbsp;&nbsp;가입</ButtonSole>
+					</MainBtn>
 				</ClickButton>
 				<ClickButton>
-					<ButtonSole name="social login btn" type="button" style={btnStyle} onClick={openModal}>
-						소샬 로그인
-					</ButtonSole>
+					<MainBtn id="social" onClick={openModal}>
+						<ButtonSole>소샬 로그인</ButtonSole>
+						<ButtonSole>소샬 로그인</ButtonSole>
+					</MainBtn>
 				</ClickButton>
-				<SocialModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+				<SocialModal
+					modalIsOpen={modalIsOpen}
+					setIsOpen={setIsOpen}
+					setSocialOpen={setSocialOpen}
+					conveySocial={conveySocial}
+				/>
+				<SocialInfoModal isOpenSocial={isOpenSocial} socialData={socialData} setSocialOpen={setSocialOpen} />
 			</Button>
 			<LogoutBox theme={mainVisible}>
-				<LogoutBtn name="logout btn" type="submit" onClick={handleSignout}>
-					로그 아웃
-				</LogoutBtn>
+				<MainBtn onClick={handleSignout}>
+					<ButtonSole>&nbsp; 로그 &nbsp;&nbsp;아웃</ButtonSole>
+					<ButtonSole>&nbsp; 로그 &nbsp;&nbsp;아웃</ButtonSole>
+				</MainBtn>
 			</LogoutBox>
-			{/* </form> */}
+			<NotificationModal modalIsOpen={modalVisible} setIsOpen={setModalVisible} message={modalMessage} />
 		</Main>
 	);
 }
@@ -184,16 +221,21 @@ const Main = styled.div`
 	display: flex;
 	justify-content: center;
 	margin-bottom: 2rem;
+	@media only screen and (max-width: 480px) {
+		height: 8rem;
+		margin-bottom: 0.5rem;
+	}
 `;
 const Input = styled.div`
 	/* border: 3px solid black; */
 	display: ${(props) => (props.theme === true ? "none" : "flex")};
+	width: 60%;
 	flex-direction: column;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
+	margin-left: 2rem;
+	padding-top: 1rem;
 	div#wrap {
-		/* border: 3px solid red; */
-		width: 100%;
 		height: 2rem;
 		margin-top: 0.5rem;
 	}
@@ -207,28 +249,82 @@ const Input = styled.div`
 		width: 40%;
 	}
 `;
+const InputBox = styled.label`
+	/* border: 1px solid blue; */
+	font-size: 1rem;
+	display: flex;
+	/* flex-direction: row; */
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 0.5rem;
+	div:nth-child(1) {
+		font-size: 1.2rem;
+		margin-right: 0.2rem;
+		@media only screen and (max-width: 480px) {
+			font-size: 1rem;
+		}
+	}
+	@media only screen and (max-width: 770px) {
+		width: 90%;
+		margin-left: -1rem;
+	}
+	@media only screen and (max-width: 480px) {
+		width: 90%;
+		margin-left: -2rem;
+	}
+`;
+
+const UserNick = styled.div`
+	/* border: 10px solid red; */
+	display: ${(props) => (props.theme === true ? "flex" : "none")};
+	margin-left: 3rem;
+	width: 65%;
+	justify-content: center;
+	align-items: center;
+	@media only screen and (max-width: 480px) {
+		width: 70%;
+		margin-left: 0rem;
+	}
+`;
+const InputNick = styled.div`
+	/* border: 3px solid blue; */
+	width: 80%;
+	height: 50%;
+	font-size: 1.7rem;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@media only screen and (max-width: 480px) {
+		font-size: 1.2rem;
+	}
+`;
+const InputInfo = styled.input`
+	font-size: 1.1rem;
+	border: none;
+	border-bottom: 2px solid black;
+	outline: none;
+	width: 80%;
+	height: 1.6rem;
+	margin-top: 0.1rem;
+	margin-left: 0.3rem;
+	/* background-color: #dcdcdc; */
+	@media only screen and (max-width: 480px) {
+		width: 100%;
+		font-size: 0.9rem;
+		margin-top: 0.2rem;
+	}
+`;
 const ValidityBox = styled.div`
 	/* border: 3px solid red; */
 	position: relative;
-	width: 70%;
 	height: 30px;
-	margin-right: 1.1rem;
-	padding-left: 0.6rem;
-	background: #f08080;
+	padding: 0.2rem 1rem 0.2rem 1rem;
+	/* background: #f08080; */
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	border-radius: 10px;
 	justify-content: flex-start;
 	align-items: center;
-	::after {
-		border-top: 0px solid transparent;
-		border-left: none;
-		border-right: none;
-		border-bottom: 10px solid #f08080;
-		content: "";
-		position: absolute;
-		top: -10px;
-		left: 120px;
-	}
 	animation: a 2s;
 	@keyframes a {
 		0% {
@@ -251,69 +347,17 @@ const ValidityBox = styled.div`
 		}
 	}
 `;
-const InputBox = styled.label`
-	/* border: 1px solid blue; */
-	width: 100%;
-	font-size: 1rem;
-	display: flex;
-	/* flex-direction: row; */
-	flex-wrap: wrap;
-	align-items: center;
-	margin-top: 0.5rem;
-	@media only screen and (max-width: 770px) {
-		width: 90%;
-		margin-left: -1rem;
-	}
-	@media only screen and (max-width: 480px) {
-		width: 90%;
-		margin-left: -2rem;
-	}
-`;
-const UserNick = styled.div`
-	/* border: 10px solid red; */
-	display: ${(props) => (props.theme === true ? "flex" : "none")};
-	margin-left: 3rem;
-	width: 65%;
-	justify-content: center;
-	align-items: center;
-	@media only screen and (max-width: 480px) {
-		width: 70%;
-		margin-left: 0rem;
-	}
-`;
-const InputNick = styled.div`
-	/* border: 3px solid blue; */
-	width: 100%;
-	height: 50%;
-	font-size: 1.7rem;
-	font-weight: bold;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	@media only screen and (max-width: 480px) {
-		font-size: 1.2rem;
-	}
-`;
-const InputInfo = styled.input`
-	// color: palevioletred;
-	font-size: 1.2rem;
-	border: 2px solid palevioletred;
-	width: 80%;
-	/* margin-top: 5rem; */
-	background-color: #dcdcdc;
-	@media only screen and (max-width: 480px) {
-		width: 100%;
-		font-size: 0.9rem;
-		margin-top: 0.2rem;
-	}
-`;
 const Button = styled.div`
 	/* border: 4px solid green; */
 	width: 7rem;
 	display: ${(props) => (props.theme === true ? "none" : "flex")};
+	margin-right: 1rem;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	:hover {
+		cursor: pointer;
+	}
 	@media only screen and (max-width: 1200px) {
 		margin-left: 2rem;
 	}
@@ -331,16 +375,77 @@ const ClickButton = styled.div`
 	height: 3.4rem;
 	display: flex;
 	align-items: center;
+	div#social {
+		/* border: 3px solid red; */
+		width: 6.3rem;
+	}
 `;
-const ButtonSole = styled.button`
-	/* border: 1px solid black; */
-	width: 5rem;
-	height: 2.8rem;
-	margin: 0.3rem;
-	overflow: hidden;
-	box-sizing: border-box;
+const MainBtn = styled.div`
+	/* border: 3px solid blue; */
+	width: 3rem;
+	height: 3rem;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	perspective: 500px;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
+	perspective-origin: center top;
+	-webkit-perspective-origin: center top;
+	-moz-perspective-origin: center top;
+	:hover {
+		cursor: pointer;
+	}
+	div {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 50px;
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		/* padding: 10px; */
+		border: #000000 solid 1px;
+	}
+
+	div:nth-child(1) {
+		color: #000000;
+		background-color: #ffffff;
+		transition: all 0.2s ease;
+		-webkit-transition: all 0.2s ease;
+		-moz-transition: all 0.2s ease;
+	}
+	:hover div:nth-child(1) {
+		transition: all 0.2s ease;
+		-webkit-transition: all 0.2s ease;
+		-moz-transition: all 0.2s ease;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	div:nth-child(2) {
+		color: #ffffff;
+		background-color: #000000;
+		transform: rotateX(90deg);
+		-webkit-transform: rotateX(90deg);
+		-moz-transform: rotateX(90deg);
+		transition: all 0.2s ease;
+		-webkit-transition: all 0.2s ease;
+		-moz-transition: all 0.2s ease;
+		transform-origin: left top;
+		-webkit-transform-origin: left top;
+		-moz-transform-origin: left top;
+	}
+	:hover div:nth-child(2) {
+		transition: all 0.2s ease;
+		-webkit-transition: all 0.2s ease;
+		-moz-transition: all 0.2s ease;
+		transform: rotateX(0deg);
+		-webkit-transform: rotateX(0deg);
+		-moz-transform: rotateX(0deg);
+	}
 `;
+const ButtonSole = styled.div``;
 const LogoutBox = styled.div`
 	/* border: 4px solid green; */
 	width: 20%;
@@ -350,38 +455,7 @@ const LogoutBox = styled.div`
 	align-items: center;
 	justify-content: center;
 `;
-const LogoutBtn = styled.button`
-	border: 1px solid black;
-	width: 4.8rem;
-	height: 2.5rem;
-	font-size: 0.9rem;
-	overflow: hidden;
-	box-sizing: border-box;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	@media only screen and (max-width: 480px) {
-		width: 3rem;
-		height: 2.5rem;
-		font-size: 0.8rem;
-	}
-`;
-const fontstyle = {
-	fontSize: "1rem",
-	marginRight: "0.2rem",
-};
-// const formStyle = {
-// 	display: "flex",
-// 	width: "100%",
-// 	justifyContent: "center",
-// 	alignItems: "center",
+// const fontstyle = {
+// 	fontSize: "1.2rem",
+// 	marginRight: "0.2rem",
 // };
-const btnStyle = {
-	border: "1px solid black",
-	width: "100%",
-	fontSize: "0.8rem",
-	lineHeight: "1.3rem",
-	display: "flex",
-	justifyContent: "center",
-	alignItems: "center",
-};
