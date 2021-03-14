@@ -2,27 +2,45 @@ import React, { ReactElement, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Modal from "react-modal";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import Comment from "../components/comment";
+import Good from "../assets/images/stamp/good.png";
+import Cheer from "../assets/images/stamp/cheer.png";
+import Fail from "../assets/images/stamp/fail.png";
 
 Modal.setAppElement("#root");
 interface Props {
 	modalIsOpen: boolean;
 	setIsOpen: any;
 	content: number;
+	comments: any;
+}
+
+interface CssProps {
+	isTrue?: boolean;
+	picture?: any;
 }
 
 axios.defaults.baseURL = "https://royal-diary.ml";
 const token = sessionStorage.getItem("accessToken");
+const isLogin = sessionStorage.getItem("isLogin");
 
 export default function CommentlModal(props: Props): ReactElement {
-	const { modalIsOpen, setIsOpen, content } = props;
+	const history = useHistory();
+	const { modalIsOpen, setIsOpen, content, comments } = props;
 	const [text, setText] = useState("");
+	const [stampGood, setGoodStamp]: any = useState(false);
+	const [stampCheer, setCheerStamp]: any = useState(false);
+	const [stampFail, setFailStamp]: any = useState(false);
+	const [updateId, setUpdateId] = useState(0);
+
+	function updateHandler(id: number) {
+		setUpdateId(id);
+	}
+
 	function closeModal() {
 		setIsOpen(false);
 	}
-
-	let comments: any = sessionStorage.getItem("comments");
-	comments = JSON.parse(comments);
 
 	const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const textValue = event.target.value;
@@ -30,12 +48,64 @@ export default function CommentlModal(props: Props): ReactElement {
 	};
 
 	async function createComment(comment: string, id: number, stamp: number) {
-		await axios.post(
-			"contents/comment",
-			{ text: comment, contentId: id, stampId: stamp },
-			{ headers: { Authorization: `Bearer ${token}` } }
-		);
+		if (!isLogin) {
+			alert("로그인 후 사용 가능합니다.");
+		}
+
+		if (comment && id && stamp) {
+			await axios.post(
+				"contents/comment",
+				{ text: comment, contentId: id, stampId: stamp },
+				{ headers: { Authorization: `Bearer ${token}` } }
+			);
+			window.location.reload();
+		}
+		if (!comment) {
+			alert("댓글을 입력하세요");
+		}
 	}
+
+	function changeStamp(stampId: number) {
+		if (stampId === 1) {
+			if (stampGood === false) {
+				setGoodStamp(true);
+				setCheerStamp(false);
+				setFailStamp(false);
+			} else {
+				setGoodStamp(false);
+			}
+		} else if (stampId === 2) {
+			if (!stampCheer) {
+				setCheerStamp(true);
+				setGoodStamp(false);
+				setFailStamp(false);
+			} else {
+				setCheerStamp(false);
+			}
+		} else if (stampId === 3) {
+			if (!stampFail) {
+				setFailStamp(true);
+				setGoodStamp(false);
+				setCheerStamp(false);
+			} else {
+				setFailStamp(false);
+			}
+		}
+	}
+
+	function checkStamp() {
+		if (stampGood === true) {
+			return 1;
+		}
+		if (stampCheer === true) {
+			return 2;
+		}
+		if (stampFail === true) {
+			return 3;
+		}
+		return 0;
+	}
+	const checkedStamp = checkStamp();
 
 	return (
 		<Modal isOpen={modalIsOpen} style={ModalStyles}>
@@ -45,42 +115,34 @@ export default function CommentlModal(props: Props): ReactElement {
 						X
 					</button>
 				</BackBtn>
+				<Title>댓글로 친구를 응원해주세요:)</Title>
 				<Comments>
-					{comments !== null
+					{comments !== [] && comments !== undefined
 						? comments.map((ele: any) => {
-								return <Comment comment={ele} />;
+								return <Comment updateId={updateId} updateHandler={updateHandler} comment={ele} />;
 						  })
 						: "댓글이 없습니다."}
+					{comments === [] ? "댓글이 없습니다." : null}
 				</Comments>
 
 				<Buttons>
 					<CommentBox>
 						<CommentBoxTitle>한마디쓰기</CommentBoxTitle>
 						<CommentInput onChange={handleText} />
-						<CommentStampSend>
-							<img
-								className="date_weather"
-								src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
-								alt=""
-								width="40px"
-								height="40px"
-							/>
-							<img
-								className="date_weather"
-								src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
-								alt=""
-								width="40px"
-								height="40px"
-							/>
-							<img
-								className="date_weather"
-								src="https://image-storage-homemade.s3.ap-northeast-2.amazonaws.com/cloud-sun-rain-solid.svg"
-								alt=""
-								width="40px"
-								height="40px"
-							/>
-							<CommentSendButton onClick={() => createComment(text, content, 1)}>등록하기</CommentSendButton>
-						</CommentStampSend>
+						<CreateZone>
+							<CommentStampSend>
+								<GoodStamp theme={stampGood} onClick={() => changeStamp(1)} />
+								<CheerStamp theme={stampCheer} onClick={() => changeStamp(2)} />
+								<FailStamp theme={stampFail} onClick={() => changeStamp(3)} />
+								<CommentSendButton
+									onClick={() => {
+										createComment(text, content, checkedStamp);
+									}}
+								>
+									등록하기
+								</CommentSendButton>
+							</CommentStampSend>
+						</CreateZone>
 					</CommentBox>
 				</Buttons>
 			</ModalBox>
@@ -88,8 +150,8 @@ export default function CommentlModal(props: Props): ReactElement {
 	);
 }
 const CommentBox = styled.div`
-	width: 71%;
-	height: 100%;
+	width: 90%;
+	height: 105%;
 	border: 0.1rem solid black;
 	margin: 1%;
 	background: #ededed;
@@ -103,7 +165,7 @@ const CommentInput = styled.input.attrs({
 	placeholder: "20자 이내로 입력하세요",
 	maxLength: 20,
 })`
-	width: 90%;
+	width: 82%;
 	height: 30%;
 	background: white;
 	margin-top: 1%;
@@ -119,28 +181,34 @@ const CommentStampSend = styled.div`
 `;
 
 const CommentSendButton: any = styled.button`
-	width: 21%;
+	width: 20%;
+	margin-left: 32%;
+	height: 25px;
 	align-items: center;
 	justify-content: center;
 	display: flex;
-	margin-left: 36%;
+	font-size: 1rem;
+	&:hover {
+		color: white;
+		background: grey;
+		cursor: pointer;
+	}
 `;
 // 댓글창
 
 const ModalStyles = {
 	content: {
 		margin: "auto",
-		width: "50rem",
+		width: "35rem",
 		height: "30rem",
 		background: "#f3f3e9",
 		display: "flex",
-		alignItems: "center",
 	},
 };
 const ModalBox = styled.div`
 	margin: 1px;
-	width: 45rem;
-	height: 20rem;
+	width: 44rem;
+	height: 30rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -150,6 +218,8 @@ const Title = styled.div`
 	font-size: 2rem;
 	font-weight: bold;
 	text-align: center;
+	margin-top: 1%;
+	margin-bottom: 3%;
 `;
 const Buttons = styled.div`
 	/* border: 1px solid red; */
@@ -172,8 +242,65 @@ const Comments: any = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	overflow: scroll;
+	margin-left: 5%;
+	width: 90%;
 	height: 100%;
-	margin-left: 10%;
-	margin-top: 0;
-	width: 82%;
+	border: 2px solid black;
+`;
+const CreateZone = styled.div``;
+
+const GoodStamp: any = styled.img.attrs({
+	src: Good,
+})`
+	transform-origin: ${(props) => (props.theme === true ? "50% 50%" : "")};
+	animation: ${(props) => (props.theme === true ? "rotate_image 1.5s linear infinite" : "")};
+	width: 10%;
+	@keyframes rotate_image {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	&:hover {
+		width: 25%;
+	}
+	@media only screen and (max-width: 480px) {
+		display: none;
+	}
+`;
+const CheerStamp: any = styled.img.attrs({
+	src: Cheer,
+})`
+	transform-origin: ${(props) => (props.theme === true ? "50% 50%" : "")};
+	animation: ${(props) => (props.theme === true ? "rotate_image 1.5s linear infinite" : "")};
+	width: 10%;
+	@keyframes rotate_image {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	&:hover {
+		width: 25%;
+	}
+	@media only screen and (max-width: 480px) {
+		display: none;
+	}
+`;
+const FailStamp: any = styled.img.attrs({
+	src: Fail,
+})`
+	transform-origin: ${(props) => (props.theme === true ? "50% 50%" : "")};
+	animation: ${(props) => (props.theme === true ? "rotate_image 1.5s linear infinite" : "")};
+	width: 10%;
+	@keyframes rotate_image {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	&:hover {
+		width: 25%;
+	}
+	@media only screen and (max-width: 480px) {
+		display: none;
+	}
 `;

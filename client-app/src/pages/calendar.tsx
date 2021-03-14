@@ -1,19 +1,41 @@
-import React, { ReactElement, useState } from "react";
+import axios from "axios";
+import React, { ReactElement, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import Calendar from "../components/calendar";
 import DiaryRows from "../components/diaryRows";
 
-export default function CalendarRows(): ReactElement {
+const token = sessionStorage.getItem("accessToken");
+axios.defaults.baseURL = "https://royal-diary.ml";
+
+export default function CalendarRows(props: any): ReactElement {
+	const { content } = props;
+	const [comments, setComments] = useState([]);
+	console.log(comments);
+	useEffect(() => {
+		async function getComments() {
+			await axios
+				.post(
+					"contents/rcomment",
+					{ contentId: content },
+					{
+						headers: { Authorization: `Bearer ${token}` },
+					}
+				)
+				.then((res) => {
+					setComments(res.data.data);
+				});
+		}
+		getComments();
+	}, [content]);
+
 	return (
 		<Main>
-			<Calendar />
 			<Title>다이어리 요약</Title>
 			<Comments>
-				<DiaryRows />
-				<DiaryRows />
-				<DiaryRows />
-				<DiaryRows />
-				<DiaryRows />
+				{comments
+					? comments.map((el: any) => {
+							return <DiaryRows comments={el} />;
+					  })
+					: "최근 받은 댓글이 없네요 ㅜㅜ"}
 			</Comments>
 		</Main>
 	);
@@ -36,7 +58,7 @@ const Main = styled.div`
 
 const Comments = styled.div`
 	width: 75%;
-	height: 20%;
+	height: 40%;
 	border: 0.15rem solid black;
 	background: white;
 	margin: auto;
@@ -53,5 +75,5 @@ const Comments = styled.div`
 const Title = styled.div`
 	font-size: 2rem;
 	margin-left: 13%;
-	margin-top: 3%;
+	margin-top: 15%;
 `;

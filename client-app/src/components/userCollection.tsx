@@ -1,40 +1,103 @@
-import React, { ReactElement } from "react";
+import axios from "axios";
+import { func } from "prop-types";
+import React, { ReactElement, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+import apolo from "../assets/images/collection/apolo.png";
+import candy from "../assets/images/collection/candy.png";
+import corn from "../assets/images/collection/corn.png";
+
+const token = sessionStorage.getItem("accessToken");
 
 export default function User(props: any): ReactElement {
-	const { user } = props;
+	const { user, diary } = props;
+	const [editStatus, setEditStatus] = useState(false);
+	const history = useHistory();
+
+	function editStatusHandler() {
+		if (editStatus === false) {
+			setEditStatus(true);
+		}
+		if (editStatus === true) {
+			setEditStatus(false);
+		}
+	}
+	console.log(editStatus);
+
+	async function removeCheck() {
+		if (window.confirm("정말 탈퇴하시겠습니까?") === true) {
+			await axios.delete("users/mypage", { headers: { Authorization: `Bearer ${token}` } });
+			localStorage.clear();
+			sessionStorage.clear();
+			history.push("/");
+		}
+	}
 
 	return (
 		<Main>
 			<Info>
-				<InfoBox>
-					<Option>성명</Option>
-					<Content1>{user.name}</Content1>
-					<Option>전자우편</Option>
-					<Content2>{user.email}</Content2>
-				</InfoBox>
-				<InfoBox>
-					<Option>별명</Option>
-					<Content1>{user.nickname}</Content1>
-					<Option>휴대전화</Option>
-					<Content2>{user.mobile}</Content2>
-				</InfoBox>
-				<Collection>
-					<CollectionTitle>콜렉숀</CollectionTitle>
-				</Collection>
-				<ExchangeBox>
-					<Exchange>교환일기</Exchange>
-					<Exchange>
-						<ExchangeTitle1>별명</ExchangeTitle1>
-						<ExchangeTitle1>날짜</ExchangeTitle1>
-						<ExchangeTitle2>내용</ExchangeTitle2>
-					</Exchange>
-				</ExchangeBox>
-				<ExchangeLists>
-					<ExchangeListName>송정현</ExchangeListName>
-					<ExchangeListDate>2021년 2월 21일</ExchangeListDate>
-					<ExchangeListContent>햄버거를 먹은날.</ExchangeListContent>
-				</ExchangeLists>
+				<UserInfo className="userinfo">
+					<InfoBox>
+						<Option>성명</Option>
+						<Content1>{user.name}</Content1>
+						<Option>전자우편</Option>
+						<Content2>{user.email}</Content2>
+					</InfoBox>
+					<InfoBox>
+						<Option>별명</Option>
+						<Content1>{user.nickname}</Content1>
+						<Option>휴대전화</Option>
+						<Content2>{user.mobile}</Content2>
+					</InfoBox>
+					<Collection className="collectionBox">
+						<CollectionTitle>콜렉숀</CollectionTitle>
+						<Items className="items">
+							<Item>
+								<ItemDescription>일기 10개 이상 작성 시</ItemDescription>
+								<Apolo src={apolo} theme={diary} />
+							</Item>
+							<Item>
+								<ItemDescription>일기 3개 이상 작성 시</ItemDescription>
+								<Candy src={candy} theme={diary} />
+							</Item>
+							<Item>
+								<ItemDescription>일기 1개 이상 작성 시</ItemDescription>
+								<Corn src={corn} theme={diary} />
+							</Item>
+						</Items>
+					</Collection>
+				</UserInfo>
+				<DiaryInfo className="diaryinfo">
+					<ExchangeBox>
+						<MenuBoxLine>내 최근 일기</MenuBoxLine>
+						<MenuBoxLine>
+							<ExchangeTitle1>제목</ExchangeTitle1>
+							<ExchangeTitle2>생성일</ExchangeTitle2>
+							<ExchangeTitle2>수정일</ExchangeTitle2>
+						</MenuBoxLine>
+					</ExchangeBox>
+
+					<DiaryList>
+						{diary
+							? diary.map((ele: any) => {
+									/* eslint-disable-next-line */
+									ele.createdAt = ele.createdAt.slice(0, 10);
+									/* eslint-disable-next-line */
+									ele.updatedAt = ele.updatedAt.slice(0, 10);
+									/* eslint-disable-next-line */
+									ele.title = ele.title.slice(0, 10);
+									return (
+										<DiaryLists>
+											<DiaryListsName>{ele.title}</DiaryListsName>
+											<DiaryListsDate>{ele.createdAt}</DiaryListsDate>
+											<DiaryListsContent>{ele.updatedAt}</DiaryListsContent>
+										</DiaryLists>
+									);
+							  })
+							: ""}
+					</DiaryList>
+				</DiaryInfo>
+				<EditBtn onClick={() => removeCheck()}>회원 탈퇴</EditBtn>
 			</Info>
 		</Main>
 	);
@@ -42,12 +105,13 @@ export default function User(props: any): ReactElement {
 
 const Main = styled.div`
 	width: 100%;
+	display: flex;
 `;
 
 const Info = styled.div`
-	margin: 10% 15%;
-	width: 70%;
-	height: 40.5%;
+	width: 80%;
+	margin: auto;
+	height: 80%;
 	border-top: 0.2rem solid black;
 	border-bottom: 0.2rem solid black;
 `;
@@ -73,7 +137,7 @@ const ExchangeBox = styled.div`
 	border-bottom: 0.15rem solid black;
 `;
 
-const Exchange = styled.div`
+const MenuBoxLine = styled.div`
 	height: 3%;
 	border-top: 0.15rem solid black;
 	display: flex;
@@ -84,43 +148,46 @@ const Exchange = styled.div`
 
 const ExchangeTitle1 = styled.span`
 	font-size: 60%;
-	width: 33%;
+	width: 30%;
 	display: flex;
-	border-right: 0.15rem solid black;
+
 	justify-content: center;
 `;
 
 const ExchangeTitle2 = styled.span`
 	font-size: 60%;
-	width: 33%;
+	width: 20%;
 	display: flex;
 	justify-content: center;
 `;
 
-const ExchangeLists = styled.div`
-	height: 60%;
-	border-bottom: 0.15rem solid black;
+const DiaryLists = styled.div`
 	display: flex;
 	justify-content: space-around;
+	&:hover {
+		background: #aaa7a7;
+		cursor: pointer;
+		height: 10%;
+	}
 `;
 
-const ExchangeListName = styled.span`
+const DiaryListsName = styled.span`
 	font-size: 120%;
-	width: 33.1%;
-	border-right: 0.15rem solid black;
+	width: 40%;
+
 	display: flex;
 	justify-content: center;
 `;
-const ExchangeListDate = styled.span`
+const DiaryListsDate = styled.span`
 	font-size: 120%;
-	width: 33.1%;
-	border-right: 0.15rem solid black;
+	width: 30%;
+
 	display: flex;
 	justify-content: center;
 `;
-const ExchangeListContent = styled.span`
+const DiaryListsContent = styled.span`
 	font-size: 120%;
-	width: 33.1%;
+	width: 30%;
 	display: flex;
 	justify-content: center;
 `;
@@ -152,13 +219,14 @@ const Content2 = styled.span`
 `;
 
 const Collection = styled.div`
-	height: 76%;
+	height: 71%;
 	display: flex;
+	align-items: center;
 `;
 
-const CollectionTitle = styled.span`
-	height: 88%;
-	width: 13%;
+const CollectionTitle = styled.div`
+	height: 100%;
+	width: 15%;
 	font-size: 140%;
 	border-right: 0.15rem solid black;
 	display: flex;
@@ -167,3 +235,49 @@ const CollectionTitle = styled.span`
 	writing-mode: vertical-rl;
 	text-orientation: upright;
 `;
+
+const Apolo = styled.img`
+	width: 5rem;
+	height: 7rem;
+	opacity: ${(props) => (props.theme.length > 10 ? "1" : "0.3")};
+`;
+const Candy = styled.img`
+	width: 5rem;
+	height: 7rem;
+	opacity: ${(props) => (props.theme.length > 3 ? "1" : "0.3")};
+`;
+const Corn = styled.img`
+	width: 5em;
+	height: 7rem;
+	opacity: ${(props) => (props.theme.length > 1 ? "1" : "0.3")};
+`;
+const Items = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: center;
+`;
+const ItemDescription = styled.span`
+	display: none;
+`;
+const Item = styled.span`
+	width: 30%;
+	height: 80%;
+	display: flex;
+	margin-left: 1rem;
+	justify-content: center;
+	flex-direction: column;
+	&:hover {
+		${ItemDescription} {
+			display: flex;
+		}
+	}
+`;
+
+const UserInfo = styled.div`
+	height: 55%;
+`;
+const DiaryInfo = styled.div``;
+
+const DiaryList = styled.div``;
+
+const EditBtn: any = styled.button``;
