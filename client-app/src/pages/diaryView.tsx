@@ -1,56 +1,110 @@
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from "axios";
-import queryString from "query-string";
-import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import DiaryContent from "../components/diaryContent";
-import Comment from "../components/comment";
 import CommentModal from "../components/createComment";
+import commentViewer from "../assets/images/diary/commentview.svg";
+import deleteContent from "../assets/images/diary/delete.svg";
+import editDiary from "../assets/images/diary/edit.svg";
 
-const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi7Iah7KCV7ZiEIiwibmlja25hbWUiOiLqt4DsmpTrr7giLCJlbWFpbCI6Ink2cnN5QG5hdmVyLmNvbSIsIm1vYmlsZSI6IjAxMC01NjQ4LTg1OTUiLCJpYXQiOjE2MTQ4NTY4MzMsImV4cCI6MTYxNDk0MzIzM30.eO5r550Gj7YLCPE8vp9zVWoWfm6opyK52sXVQRzt0JA";
+const token = sessionStorage.getItem("accessToken");
 axios.defaults.baseURL = "https://royal-diary.ml";
+const nickname = sessionStorage.getItem("nickName");
 
-export default function DiaryView(): ReactElement {
+export default function DiaryView(props: any): ReactElement {
+	const history = useHistory();
+	const { data, contentId, conveyContent } = props;
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	const location = useLocation();
-	const params = queryString.parse(location.search);
 	const [diary, setDiary]: any = useState([]);
-	const [content, setContent]: any = useState(6);
+	const [content, setContent]: any = useState(1);
 
 	useEffect(() => {
-		const getDiaryInfo: any = async () => {
-			const diaryList = await axios.get(`contents/content?contentId=${6}`, {
-				headers: { Authorization: `Bearer ${token}` },
+		if (contentId !== 0) {
+			axios.get(`contents/content?contentId=${contentId}`).then((res) => {
+				if (res.data.data.createdAt) {
+					res.data.data.createdAt = res.data.data.createdAt.slice(0, 10);
+				}
+				setDiary(res.data.data);
 			});
-			setDiary(diaryList.data.data);
-		};
-		getDiaryInfo();
-	}, []);
+		}
+		setTimeout(() => {
+			if (data.length !== 0 && contentId === 0) {
+				setContent(data.orderByRecent[0].id);
+				const getDiaryInfo: any = async () => {
+					await axios
+						.get(`contents/content?contentId=${content}`, {
+							headers: { Authorization: `Bearer ${token}` },
+						})
+						.then((res) => {
+							if (res.data.data) {
+								res.data.data.createdAt = res.data.data.createdAt.slice(0, 10);
+							}
+							setDiary(res.data.data);
+						});
+				};
+				getDiaryInfo();
+			}
+		}, 1000);
+	}, [data.length, data.orderByRecent, content, contentId]);
 
 	let comment: any[] = [];
 	if (diary.length !== 0) {
 		comment = diary.comments;
 	}
 
+	async function deleteDiary() {
+		await axios
+			.delete(`/contents/dcontent`, {
+				headers: { Authorization: `Bearer ${token}` },
+				data: { contentId: diary.id },
+			})
+			.then((res) => console.log(res))
+			.catch((e) => console.log(e));
+		window.location.reload();
+	}
+
+	function openModal() {
+		setIsOpen(true);
+	}
+
 	return (
 		<Main>
 			<DiaryContent diary={diary} />
-			<CommentButton onClick={() => console.log("a")}>일기삭제</CommentButton>
-			<Comments>
-				{comment
-					? comment.map((ele) => {
-							return <Comment comment={ele} key={ele.commentId} />;
-					  })
-					: console.log(`there's no comment`)}
-			</Comments>
+			<Buttons className="buttons">
+				<ImgBox>
+					<ImgDescription>댓글 보기</ImgDescription>
+					<CommentButton onClick={openModal} />
+				</ImgBox>
+				{diary.nickname === nickname ? (
+					<ImgBox>
+						<ImgDescription>일기 수정</ImgDescription>
+						<EditButton
+							onClick={() => {
+								conveyContent(diary);
+								history.push("/creatediary");
+							}}
+						/>
+					</ImgBox>
+				) : (
+					""
+				)}
+				{diary.nickname === nickname ? (
+					<ImgBox>
+						<ImgDescription>일기 삭제</ImgDescription>
+						<DeleteButton onClick={() => deleteDiary()} />
+					</ImgBox>
+				) : (
+					""
+				)}
+			</Buttons>
+			<CommentModal comments={diary.comments} content={diary.id} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 		</Main>
 	);
 }
 
 const Main = styled.div`
 	background: #f3f3e9;
-	//display: flex;
 	width: 50%;
 	height: 101%;
 	box-sizing: border-box;
@@ -65,28 +119,53 @@ const Main = styled.div`
 	}
 `;
 
-const CommentButton = styled.button`
-	width: 5em;
-	height: 1.8em;
-	border: 1px solid black;
-	margin-top: 2.2%;
-	margin-left: 84%;
-	margin-bottom: 0.3%;
-
-	@media only screen and (max-width: 480px) {
-		margin-top: 5%;
-		margin-left: 75%;
-		margin-bottom: 3%;
+const CommentButton = styled.img.attrs({
+	src: commentViewer,
+})`
+	width: 80%;
+	margin-left: 3%;
+	&:hover {
+		cursor: pointer;
+		width: 110%;
 	}
 `;
-const Comments: any = styled.div`
+const DeleteButton = styled.img.attrs({
+	src: deleteContent,
+})`
+	width: 80%;
+	margin-left: 3%;
+	&:hover {
+		cursor: pointer;
+		width: 110%;
+	}
+`;
+const EditButton = styled.img.attrs({
+	src: editDiary,
+})`
+	width: 80%;
+	margin-left: 3%;
+	&:hover {
+		cursor: pointer;
+		width: 110%;
+	}
+`;
+
+const Buttons = styled.div`
+	margin-top: 5%;
+	margin-right: 7%;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	overflow: scroll;
-	height: 10%;
-	border: 0.15rem solid black;
-	margin-left: 10%;
-	margin-top: 0;
-	width: 82%;
+	justify-content: flex-end;
+`;
+const ImgDescription = styled.div`
+	display: none;
+`;
+
+const ImgBox = styled.div`
+	width: 4rem;
+	margin-right: 0.5rem;
+	&:hover {
+		${ImgDescription} {
+			display: flex;
+		}
+	}
 `;
