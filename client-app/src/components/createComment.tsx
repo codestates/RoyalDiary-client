@@ -122,7 +122,6 @@ export default function CommentlModal(props: Props): ReactElement {
 								return <Comment updateId={updateId} updateHandler={updateHandler} comment={ele} />;
 						  })
 						: "댓글이 없습니다."}
-					{comments === [] ? "댓글이 없습니다." : null}
 				</Comments>
 
 				<Buttons>
@@ -200,14 +199,15 @@ const ModalStyles = {
 	content: {
 		margin: "auto",
 		width: "35rem",
-		height: "30rem",
+		height: "33rem",
 		background: "#f3f3e9",
 		display: "flex",
 	},
 };
+
 const ModalBox = styled.div`
 	margin: 1px;
-	width: 44rem;
+	width: 45rem;
 	height: 30rem;
 	display: flex;
 	flex-direction: column;
@@ -218,7 +218,7 @@ const Title = styled.div`
 	font-size: 2rem;
 	font-weight: bold;
 	text-align: center;
-	margin-top: 1%;
+	margin-top: 2%;
 	margin-bottom: 3%;
 `;
 const Buttons = styled.div`
@@ -244,7 +244,7 @@ const Comments: any = styled.div`
 	overflow: scroll;
 	margin-left: 5%;
 	width: 90%;
-	height: 100%;
+	height: 1000%;
 	border: 2px solid black;
 `;
 const CreateZone = styled.div``;

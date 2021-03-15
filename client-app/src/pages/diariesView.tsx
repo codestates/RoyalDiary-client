@@ -100,14 +100,14 @@ const Main = styled.div`
 	box-sizing: border-box;
 	border-right: 5px solid black;
 	@media only screen and (max-width: 1200px) {
-		/* margin-left: 1rem; */
-		width: 70%;
+		width: 80%;
+		height: 100%;
+		border-right: none;
+		border-bottom: 5px solid black;
 	}
 	@media only screen and (max-width: 480px) {
-		/* margin-left: 1rem; */
-		width: 100%;
-		height: 90%;
-		margin: 0px;
+		min-width: 400px;
+		height: 70%;
 	}
 `;
 const Content = styled.div`
@@ -129,8 +129,8 @@ const Cards = styled.div`
 	flex-wrap: wrap;
 	background: white;
 	@media only screen and (max-width: 480px) {
-		margin-top: 15%;
-		height: 50%;
+		margin-top: 3%;
+		height: 75%;
 	}
 `;
 
@@ -147,29 +147,6 @@ const Buttons = styled.div`
 	display: flex;
 	align-items: flex-end;
 	color: blue;
-`;
-
-const SortViews: any = styled.button`
-	width: 5rem;
-	height: 2rem;
-	border: 0.1rem solid black;
-	background: white;
-	@media only screen and (max-width: 480px) {
-		font-size: 0.8rem;
-		width: 4rem;
-		height: 1.6rem;
-	}
-`;
-const SortDate = styled.button`
-	width: 5rem;
-	height: 2rem;
-	border: 0.1rem solid black;
-	background: white;
-	@media only screen and (max-width: 480px) {
-		font-size: 0.8rem;
-		width: 4rem;
-		height: 1.6rem;
-	}
 `;
 
 const LeftBtn = styled.img.attrs({
@@ -193,6 +170,10 @@ const ControllBox = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-top: 5%;
+
+	@media only screen and (max-width: 480px) {
+		margin-top: 1%;
+	}
 `;
 const PageNotice = styled.span`
 	background: white;

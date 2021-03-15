@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import User from "../components/userCollection";
+import SubNav from "../components/subNav";
 
 const token = sessionStorage.getItem("accessToken");
 
@@ -47,6 +48,7 @@ export default function UserInfo(props: any): ReactElement {
 	return (
 		<Main>
 			<User user={user} diary={diary} />
+			<SubNav />
 		</Main>
 	);
 }
@@ -59,5 +61,11 @@ const Main = styled.div`
 	@media only screen and (max-width: 1200px) {
 		width: 80%;
 		height: 100%;
+		border-right: none;
+		border-bottom: 5px solid black;
+	}
+	@media only screen and (max-width: 480px) {
+		min-width: 400px;
+		height: 70%;
 	}
 `;
