@@ -23,32 +23,31 @@ export default function DiaryContent(props: any): ReactElement {
 							<Option>날짜</Option>
 							<OptionContent>{diary.createdAt}</OptionContent>
 							<Option>날씨</Option>
-
-							<img
-								src={
-									/* eslint-disable-next-line */
-									diary.weather === "cloudy"
-										? Cloudy
-										: /* eslint-disable-next-line */
-										diary.weather === "snowy"
-										? Snowy
-										: /* eslint-disable-next-line */
-										diary.weather === "sunny"
-										? Sunny
-										: /* eslint-disable-next-line */
-										diary.weather === "rainy"
-										? Rainy
-										: diary.weather === "windy"
-										? Windy
-										: ""
-								}
-								alt=""
-								style={{ width: "8%", marginLeft: "3%", marginRight: "3%" }}
-							/>
-
-							<Option2>기분</Option2>
-							{diary.emotion ? (
-								<img
+							<OptionContent>
+								<Img
+									src={
+										/* eslint-disable-next-line */
+										diary.weather === "cloudy"
+											? Cloudy
+											: /* eslint-disable-next-line */
+											diary.weather === "snowy"
+											? Snowy
+											: /* eslint-disable-next-line */
+											diary.weather === "sunny"
+											? Sunny
+											: /* eslint-disable-next-line */
+											diary.weather === "rainy"
+											? Rainy
+											: diary.weather === "windy"
+											? Windy
+											: ""
+									}
+									alt=""
+								/>
+							</OptionContent>
+							<Option>기분</Option>
+							<OptionContent2>
+								<Img
 									src={
 										/* eslint-disable-next-line */
 										diary.emotion === "happy"
@@ -67,19 +66,16 @@ export default function DiaryContent(props: any): ReactElement {
 											: ""
 									}
 									alt=""
-									style={{ width: "8%", marginLeft: "3%", marginRight: "3%" }}
 								/>
-							) : (
-								""
-							)}
+							</OptionContent2>
 						</Date>
 
 						<img
 							src={diary.imgUrl}
-							width="99%"
+							width="100%"
 							height="50%"
 							alt=""
-							style={{ background: "white", border: "0.15rem solid black" }}
+							style={{ background: "white", borderTop: "0.15rem solid black", borderBottom: "0.15rem solid black" }}
 						/>
 
 						<Content>
@@ -97,7 +93,7 @@ export default function DiaryContent(props: any): ReactElement {
 const Main = styled.div`
 	width: 100%;
 	height: 80%;
-	margin-bottom: 0px;
+	margin-top: 6%;
 	flex-direction: column;
 `;
 const Title = styled.div`
@@ -105,17 +101,21 @@ const Title = styled.div`
 	border-radius: 0.5rem;
 	flex-grow: 0.4;
 	margin-top: 4%;
-	margin-left: 7.5%;
-	width: 85%;
+	margin-left: 5.5%;
+	width: 82%;
+	height: 5%;
 	display: flex;
 	align-items: center;
 	font-size: 1.2rem;
+
+	@media only screen and (max-width: 480px) {
+		font-size: 1rem;
+	}
 `;
 
 const Date = styled.div`
-	border: 0.15em solid black;
 	display: flex;
-	margin-top: -2%;
+	height: 10%;
 `;
 
 const Option = styled.span`
@@ -135,34 +135,35 @@ const OptionContent = styled.span`
 	align-items: center;
 	width: 30%;
 	height: 100%;
+
+	@media only screen and (max-width: 480px) {
+		font-size: 1rem;
+	}
 `;
 
-const Option2 = styled.span`
-	margin-left: 5%;
-	border-left: 2px solid black;
-	border-right: 2px solid black;
-	font-size: 1rem;
-	width: 10%;
-	height: 100%;
+const OptionContent2 = styled.span`
+	font-size: 1.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 30%;
+	height: 100%;
+
+	@media only screen and (max-width: 480px) {
+		font-size: 1rem;
+	}
 `;
 
 const Type = styled.div`
 	border: 3px solid black;
 	margin-top: 2%;
-	margin-left: 8%;
+	margin-left: 5.5%;
 	border-radius: 1rem;
 	flex-grow: 10;
-	padding-top: 1rem;
-	padding-left: 1rem;
 	display: flex;
 	flex-direction: column;
 	width: 82%;
 	height: 92%;
-
-	//	height: 80%;
 `;
 
 const ContentBacground = styled.div`
@@ -186,8 +187,22 @@ const Content = styled.div`
 	letter-spacing: 1rem;
 	word-spacing: 1rem;
 	line-height: 2.5rem;
-	width: 99%;
+	border-radius: 1rem;
 	height: 100%;
-	border: 0.15rem solid black;
+	//border: 0.15rem solid black;
 	background: #f1efef;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	::-webkit-scrollbar {
+		display: none;
+	}
+`;
+
+const Img = styled.img`
+	width: 40%;
+	height: 60%;
+`;
+
+const ContentBox = styled.div`
+	width: 82%;
 `;

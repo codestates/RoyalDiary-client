@@ -7,7 +7,6 @@ function DiaryCard(props: any) {
 
 	return (
 		<Card onClick={() => pickerFnc(diary.id)}>
-			<Title>{diary.title}</Title>
 			<Diaryimage>
 				<img src={diary.imgUrl} width="100%" height="100%" alt="" />
 			</Diaryimage>
@@ -21,10 +20,19 @@ function DiaryCard(props: any) {
 
 const Card = styled.div`
 	width: 30%;
-
+	height: 20%;
 	margin: 0% 1%;
 	&:hover {
 		background: #c5c3c3;
+		cursor: pointer;
+	}
+
+	@media only screen and (max-width: 1200px) {
+		width: 30%;
+	}
+
+	@media only screen and (max-width: 480px) {
+		width: 28%;
 	}
 `;
 const DiaryCreatedAt = styled.span`
@@ -38,16 +46,31 @@ const DiaryCardContent = styled.span`
 	@media only screen and (max-width: 768px) {
 		font-size: 0.8rem;
 	}
+	@media only screen and (max-width: 480px) {
+		display: none;
+	}
 `;
 const Diaryimage = styled.div`
 	border: 1px solid black;
 	width: 100%;
 	height: 8rem;
+	@media only screen and (max-width: 1200px) {
+		width: 80%;
+		height: 7rem;
+	}
+
+	@media only screen and (max-width: 480px) {
+		width: 100%;
+		height: 4.5rem;
+	}
 `;
 const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	font-size: 1rem;
+	@media only screen and (max-width: 1200px) {
+		display: none;
+	}
 `;
 const DiaryInfo = styled.div`
 	display: flex;

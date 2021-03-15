@@ -22,7 +22,7 @@ export default function SubNav(): ReactElement {
 					<Content href="/creatediary">일기쓰기</Content>
 					{userNav ? (
 						<Content className="usernav" href="/diaryview">
-							일기보기
+							나의일기
 						</Content>
 					) : null}
 					<Content href="/diarypublic">훔쳐보기</Content>

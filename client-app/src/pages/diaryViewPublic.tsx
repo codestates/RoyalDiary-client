@@ -4,6 +4,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import DiaryContent from "../components/diaryContent";
 import CommentModal from "../components/createComment";
+import SubNav from "../components/subNav";
 import commentViewer from "../assets/images/diary/commentview.svg";
 import deleteContent from "../assets/images/diary/delete.svg";
 import editDiary from "../assets/images/diary/edit.svg";
@@ -72,6 +73,7 @@ export default function DiaryViewPublic(props: any): ReactElement {
 
 	return (
 		<Main>
+			<SubNav />
 			<DiaryContent diary={diary} />
 			<Buttons className="buttons">
 				<ImgBox>
@@ -106,18 +108,20 @@ export default function DiaryViewPublic(props: any): ReactElement {
 }
 
 const Main = styled.div`
-	background: #f3f3e9;
+	background: #f6f6ee;
 	width: 50%;
 	height: 101%;
 	box-sizing: border-box;
 	flex-direction: column;
 	@media only screen and (max-width: 1200px) {
-		width: 90.4%;
-		border-right: 5px solid black;
+		width: 93.5%;
+		height: 100%;
+		border-right: none;
+		border-bottom: 5px solid black;
 	}
 	@media only screen and (max-width: 480px) {
-		width: 100%;
-		height: 100%;
+		min-width: 400px;
+		height: 70%;
 	}
 `;
 
@@ -128,7 +132,6 @@ const CommentButton = styled.img.attrs({
 	margin-left: 3%;
 	&:hover {
 		cursor: pointer;
-		width: 110%;
 	}
 `;
 const DeleteButton = styled.img.attrs({
@@ -138,7 +141,6 @@ const DeleteButton = styled.img.attrs({
 	margin-left: 3%;
 	&:hover {
 		cursor: pointer;
-		width: 110%;
 	}
 `;
 const EditButton = styled.img.attrs({
@@ -148,13 +150,12 @@ const EditButton = styled.img.attrs({
 	margin-left: 3%;
 	&:hover {
 		cursor: pointer;
-		width: 110%;
 	}
 `;
 
 const Buttons = styled.div`
-	margin-top: 5%;
-	margin-right: 7%;
+	margin-top: 3%;
+	margin-right: 10%;
 	display: flex;
 	justify-content: flex-end;
 `;
@@ -163,11 +164,15 @@ const ImgDescription = styled.div`
 `;
 
 const ImgBox = styled.div`
-	width: 4rem;
+	width: 3rem;
 	margin-right: 0.5rem;
+	@media only screen and (max-width: 480px) {
+		width: 2rem;
+	}
 	&:hover {
 		${ImgDescription} {
 			display: flex;
 		}
+		cursor: pointer;
 	}
 `;

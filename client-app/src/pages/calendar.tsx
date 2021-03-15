@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { ReactElement, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import DiaryRows from "../components/diaryRows";
+import cry from "../assets/images/cry.png";
 
 const token = sessionStorage.getItem("accessToken");
 axios.defaults.baseURL = "https://royal-diary.ml";
@@ -29,13 +30,21 @@ export default function CalendarRows(props: any): ReactElement {
 
 	return (
 		<Main>
-			<Title>다이어리 요약</Title>
+			<Title>최근 받은 댓글</Title>
 			<Comments>
-				{comments
+				{comments !== []
 					? comments.map((el: any) => {
 							return <DiaryRows comments={el} />;
 					  })
-					: "최근 받은 댓글이 없네요 ㅜㅜ"}
+					: ""}
+				{comments.length === 0 ? (
+					<NullDescription>
+						<NullImage src={cry} />
+						<NullContent>댓글이 없구나ㅠㅠ </NullContent>{" "}
+					</NullDescription>
+				) : (
+					""
+				)}
 			</Comments>
 		</Main>
 	);
@@ -49,16 +58,20 @@ const Main = styled.div`
 	box-sizing: border-box;
 	flex-direction: column;
 	@media only screen and (max-width: 1200px) {
-		width: 70%;
+		width: 80%;
 		height: 100%;
-		display: flex;
-		justify-content: center;
+		border-right: none;
+		border-bottom: 5px solid black;
+	}
+	@media only screen and (max-width: 480px) {
+		min-width: 400px;
+		height: 70%;
 	}
 `;
 
 const Comments = styled.div`
 	width: 75%;
-	height: 40%;
+	height: 55%;
 	border: 0.15rem solid black;
 	background: white;
 	margin: auto;
@@ -66,10 +79,24 @@ const Comments = styled.div`
 	flex-direction: column;
 	@media only screen and (max-width: 1200px) {
 		width: 75%;
-		height: 20%;
+		height: 50%;
 		display: flex;
 		justify-content: center;
 	}
+`;
+const NullDescription = styled.div`
+	flex-direction: column;
+	margin: auto;
+	margin-top: 20%;
+	width: 150px;
+`;
+const NullContent = styled.div`
+	font-size: 1.2rem;
+	display: flex;
+	justify-content: center;
+`;
+const NullImage = styled.img`
+	width: 150px;
 `;
 
 const Title = styled.div`
