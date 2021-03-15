@@ -67,6 +67,9 @@ const EntirePage = styled.div`
 	@media only screen and (max-width: 1100px) {
 		width: 100%;
 	}
+	@media only screen and (max-width: 480px) {
+		margin-top: 8rem;
+	}
 `;
 const Main = styled.div`
 	background: #f6f6ee;
@@ -78,7 +81,7 @@ const Main = styled.div`
 	div#wrap {
 		/* border: 3px solid green; */
 		height: 2rem;
-		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
 		padding-right: 1rem;
 		display: flex;
 		justify-content: flex-end;
@@ -162,9 +165,13 @@ const IconImage = styled.img`
 	alt: "";
 	:hover {
 		cursor: pointer;
+		width: 3.3rem;
 	}
 	@media only screen and (max-width: 480px) {
 		width: 2.5rem;
+		:hover {
+			width: 2.8rem;
+		}
 	}
 `;
 const Buttons = styled.div`

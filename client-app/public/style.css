@@ -1,5 +1,16 @@
+html, body {
+  margin: 0px; padding: 0px;
+}
+
 body {
-  background: url(./desktop.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url(./desktop3.png);
+  background-repeat:no-repeat;
+  background-size: 1920px 1100px;
+}
+@media only screen and (max-width: 1200px) {
+  body {
+    background: url(./desktop4.png);
+    background-repeat:no-repeat;
+    background-size: 1200px 1800px;
+  }
 }

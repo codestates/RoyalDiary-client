@@ -289,7 +289,7 @@ export default function Agreement(props: signinProps): ReactElement {
 					sessionStorage.setItem("nickName", nickName);
 					sessionStorage.setItem("signUpIn", JSON.stringify(true)); // 회원가입 하자마자 로그인
 					handleSignin();
-					setModalMessage("회원가입 되었습니다");
+					setModalMessage("회원가입 되었습니다:)");
 					setModalVisible(true);
 				})
 				.catch((error) => {

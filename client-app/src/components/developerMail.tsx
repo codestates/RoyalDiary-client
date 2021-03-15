@@ -35,27 +35,27 @@ const Header = styled.div`
 	/* border: 5px solid black; */
 	border-radius: 1rem;
 	flex-grow: 1;
-	margin: 1rem 3rem 0rem 3rem;
+	margin: 1rem 3rem 0rem 2rem;
 	padding-left: 1rem;
 	display: flex;
 	align-items: center;
 	font-size: 2rem;
 	@media only screen and (max-width: 480px) {
 		font-size: 1.4rem;
-		margin: 0rem 1rem 0rem 1rem;
+		margin: 0rem 1rem 0rem 0rem;
 	}
 `;
 const Title = styled.div`
 	/* border: 5px solid black; */
 	border-radius: 1rem;
-	margin: 1rem 3rem 1rem 3rem;
+	margin: 1rem 3rem 1rem 2rem;
 	padding-left: 1rem;
 	display: flex;
 	align-items: center;
 	font-size: 1.7rem;
 	@media only screen and (max-width: 480px) {
 		font-size: 1.2rem;
-		margin: 0rem 1rem 0.5rem 1rem;
+		margin: 0rem 1rem 0.5rem 0rem;
 	}
 `;
 const TypeMoney = styled.input`
