@@ -165,7 +165,7 @@ const ImgDescription = styled.div`
 `;
 
 const ImgBox = styled.div`
-	width: 3rem;
+	width: 3.5rem;
 	margin-right: 0.5rem;
 	@media only screen and (max-width: 480px) {
 		width: 2rem;
