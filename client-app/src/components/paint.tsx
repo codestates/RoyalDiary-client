@@ -272,7 +272,7 @@ const Color = styled.div`
 	border-radius: 25px;
 	cursor: pointer;
 	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-	@media only screen and (max-width: 480px) {
+	@media only screen and (max-width: 550px) {
 		width: 30px;
 		height: 30px;
 	}
@@ -315,7 +315,6 @@ const ValidityBox = styled.div`
 	/* border: 3px solid red; */
 	height: 1.9rem;
 	padding: 0rem 1rem 0rem 1rem;
-	margin-right: 1rem;
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	border-radius: 10px;
 	justify-content: center;

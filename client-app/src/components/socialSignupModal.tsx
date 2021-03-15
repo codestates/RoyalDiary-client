@@ -143,11 +143,10 @@ export default function SocialInfoModal(props: Props): ReactElement {
 				setTime();
 				return;
 			}
-
 			await axios
 				.post(
 					"https://royal-diary.ml/users/auth",
-					{ auth: socialType, nickname: nickName, email: uemail },
+					{ auth: socialType || socialData.type, nickname: nickName, email: uemail },
 					{
 						headers: { "Content-Type": "application/json" },
 						withCredentials: true,
@@ -157,8 +156,7 @@ export default function SocialInfoModal(props: Props): ReactElement {
 					sessionStorage.setItem("accessToken", res.data.data.accessToken);
 					sessionStorage.setItem("isLogin", JSON.stringify(true));
 					sessionStorage.setItem("nickName", nickName);
-					setModalMessage("추가 정보가 등록되었습니다");
-					window.location.reload(); // 모달창 제거
+					setModalMessage("회원가입 되었습니다:)");
 					setModalVisible(true);
 				})
 				.catch((error) => {
@@ -181,28 +179,23 @@ export default function SocialInfoModal(props: Props): ReactElement {
 	};
 	useEffect(() => {
 		if (socialData !== "" && socialData.type === "google") {
-			const oauthType = socialData.type; // 'kakao', 'google'
+			const oauthType = socialData.type;
 			const socialEmail = socialData.data;
-			// const socialNickName = socialData.data.profile.nickname;
 			setSocialType(oauthType);
 			setEmail(socialEmail);
 			if (socialEmail !== "") {
 				setValidEmail(true);
 				setIsUsableEmail(true);
-				// nickname 일치여부 서버에 확인
 			}
 		}
-
 		if (socialData !== "" && socialData.data.email !== undefined) {
-			const oauthType = socialData.type; // 'kakao'
+			const oauthType = socialData.type;
 			const socialEmail = socialData.data.email;
-			// const socialNickName = socialData.data.profile.nickname;
 			setSocialType(oauthType);
 			setEmail(socialEmail);
 			if (socialEmail !== "") {
 				setValidEmail(true);
 				setIsUsableEmail(true);
-				// nickname 일치여부 서버에 확인
 			}
 		}
 	}, [socialData]);

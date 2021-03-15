@@ -32,6 +32,7 @@ export default function Signin(props: isLoginProps): ReactElement {
 		setIsOpen(true);
 	}
 	const conveySocial = (e: any, socialType: string) => {
+		console.log(socialType);
 		setSocialData({
 			...socialData,
 			data: e,
@@ -238,6 +239,9 @@ const Input = styled.div`
 	div#wrap {
 		height: 2rem;
 		margin-top: 0.5rem;
+		@media only screen and (max-width: 480px) {
+			height: 3rem;
+		}
 	}
 	@media only screen and (max-width: 1200px) {
 		width: 40%;
@@ -247,6 +251,8 @@ const Input = styled.div`
 	}
 	@media only screen and (max-width: 480px) {
 		width: 40%;
+		height: 8rem;
+		padding-top: 0rem;
 	}
 `;
 const InputBox = styled.label`
@@ -271,9 +277,9 @@ const InputBox = styled.label`
 	@media only screen and (max-width: 480px) {
 		width: 90%;
 		margin-left: -2rem;
+		height: 2.5rem;
 	}
 `;
-
 const UserNick = styled.div`
 	/* border: 10px solid red; */
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
@@ -300,7 +306,6 @@ const InputNick = styled.div`
 	}
 `;
 const InputInfo = styled.input`
-	font-size: 1.1rem;
 	border: none;
 	border-bottom: 2px solid black;
 	outline: none;
@@ -308,22 +313,22 @@ const InputInfo = styled.input`
 	height: 1.6rem;
 	margin-top: 0.1rem;
 	margin-left: 0.3rem;
-	/* background-color: #dcdcdc; */
+	font-size: 1.1rem;
 	@media only screen and (max-width: 480px) {
 		width: 100%;
 		font-size: 0.9rem;
-		margin-top: 0.2rem;
+		margin-top: 0.1rem;
+		height: 1.2rem;
 	}
 `;
 const ValidityBox = styled.div`
-	/* border: 3px solid red; */
+	/* border: 3px solid #3b2b2b; */
 	position: relative;
-	height: 30px;
-	padding: 0.2rem 1rem 0.2rem 1rem;
-	/* background: #f08080; */
+	height: 3rem;
+	width: 100%;
+	margin-right: 2rem;
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	border-radius: 10px;
-	justify-content: flex-start;
 	align-items: center;
 	animation: a 2s;
 	@keyframes a {
@@ -335,16 +340,11 @@ const ValidityBox = styled.div`
 		}
 	}
 	@media only screen and (max-width: 480px) {
-		::after {
-			border-top: 0px solid transparent;
-			border-left: none;
-			border-right: none;
-			border-bottom: 10px solid #f08080;
-			content: "";
-			position: absolute;
-			top: -10px;
-			left: 120px;
-		}
+		position: relative;
+		font-size: 0.7rem;
+		width: 10rem;
+		height: 1rem;
+		margin-right: 0rem;
 	}
 `;
 const Button = styled.div`
@@ -409,7 +409,6 @@ const MainBtn = styled.div`
 		/* padding: 10px; */
 		border: #000000 solid 1px;
 	}
-
 	div:nth-child(1) {
 		color: #000000;
 		background-color: #ffffff;
@@ -455,7 +454,3 @@ const LogoutBox = styled.div`
 	align-items: center;
 	justify-content: center;
 `;
-// const fontstyle = {
-// 	fontSize: "1.2rem",
-// 	marginRight: "0.2rem",
-// };

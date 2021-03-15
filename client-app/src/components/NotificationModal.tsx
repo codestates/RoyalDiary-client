@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { useHistory } from "react-router-dom";
+
 import styled from "styled-components";
 import Modal from "react-modal";
 
@@ -11,29 +11,25 @@ interface Props {
 }
 
 export default function NotificationModal(props: Props): ReactElement {
-	const history = useHistory();
 	const { modalIsOpen, setIsOpen, message } = props;
 
 	function closeModal() {
 		if (message === "모든 입력사항은 필수 입니다") {
 			setIsOpen(false);
-		} else if (message === "회원가입 되었습니다") {
+		} else if (message === "회원가입 되었습니다:)") {
+			window.location.href = "/";
 			setIsOpen(false);
-			history.push("/");
 		} else if (message === "오늘은 어떤 일이 있었나요?:)") {
 			setIsOpen(false);
 			window.location.reload(); // 모달창 제거
 		} else if (message === "그림일기가 등록되었습니다") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diaryview"; // 일기 수정으로 남아있던 데이터 삭제
 			setIsOpen(false);
-			history.push("/");
-			window.location.reload(); // 일기 수정으로 남아있던 데이터 삭제
 		} else if (message === "그림일기가 수정되었습니다") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diaryview";
 			setIsOpen(false);
-			history.push("/");
-			window.location.reload(); // 일기 수정으로 남아있던 데이터 삭제
-		} else if (message === "추가 정보가 등록되었습니다") {
-			setIsOpen(false);
-			history.push("/");
 		}
 	}
 

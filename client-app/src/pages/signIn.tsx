@@ -4,7 +4,6 @@ import MainNav from "../components/mainNav";
 import Signin from "../components/signin";
 import childrenImg from "../assets/images/children.png";
 import titleImg from "../assets/images/title.png";
-// import SSignin from "../components/socialSignin";
 
 interface signinProps {
 	changeSignin: (e: boolean) => void;

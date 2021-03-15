@@ -274,7 +274,7 @@ const ValidityBox = styled.div`
 	/* width: 8rem; */
 	height: 1.8rem;
 	padding: 0rem 1rem 0rem 1rem;
-	margin-right: 2rem;
+	margin-right: 2.8rem;
 	/* background: #f08080; */
 	display: ${(props) => (props.theme === true ? "flex" : "none")};
 	border-radius: 10px;
