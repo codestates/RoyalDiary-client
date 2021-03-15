@@ -79,11 +79,15 @@ export default function DiariesView(props: any): ReactElement {
 					: ""}
 			</Cards>
 			<ControllBox>
-				<LeftBtn onClick={() => flipPage(1)} />
+				<IconBox>
+					<LeftBtn onClick={() => flipPage(1)} />
+				</IconBox>
 				<PageNotice>
 					{currPage} / {allPage} [Page]
 				</PageNotice>
-				<RightBtn onClick={() => flipPage(2)} />
+				<IconBox>
+					<RightBtn onClick={() => flipPage(2)} />
+				</IconBox>
 			</ControllBox>
 		</Main>
 	);
@@ -152,24 +156,23 @@ const Buttons = styled.div`
 const LeftBtn = styled.img.attrs({
 	src: left,
 })`
-	width: 5%;
+	width: 100%;
 	&:hover {
-		width: 6.5%;
+		cursor: pointer;
 	}
 `;
 const RightBtn = styled.img.attrs({
 	src: right,
 })`
-	width: 5%;
+	width: 100%;
 	&:hover {
-		width: 6.5%;
+		cursor: pointer;
 	}
 `;
 const ControllBox = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 5%;
 
 	@media only screen and (max-width: 480px) {
 		margin-top: 1%;
@@ -186,4 +189,10 @@ const PageNotice = styled.span`
 	justify-content: center;
 	font-size: 1.2rem;
 	border: 0.15rem solid black;
+	&:hover {
+		cursor: none;
+	}
+`;
+const IconBox = styled.div`
+	width: 2.3rem;
 `;
