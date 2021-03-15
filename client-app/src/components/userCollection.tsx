@@ -34,7 +34,7 @@ export default function User(props: any): ReactElement {
 	}
 
 	return (
-		<Main>
+		<Main className="userComponent">
 			<Info>
 				<UserInfo className="userinfo">
 					<InfoBox>
@@ -97,8 +97,8 @@ export default function User(props: any): ReactElement {
 							: ""}
 					</DiaryList>
 				</DiaryInfo>
-				<EditBtn onClick={() => removeCheck()}>회원 탈퇴</EditBtn>
 			</Info>
+			<EditBtn onClick={() => removeCheck()}>회원 탈퇴</EditBtn>
 		</Main>
 	);
 }
@@ -106,6 +106,7 @@ export default function User(props: any): ReactElement {
 const Main = styled.div`
 	width: 100%;
 	display: flex;
+	flex-direction: column;
 `;
 
 const Info = styled.div`
@@ -122,13 +123,8 @@ const InfoBox = styled.div`
 	border-bottom: 0.15rem solid black;
 	display: flex;
 	@media only screen and (max-width: 768px) {
-		background: skyblue;
 		max-width: 100%;
 		word-break: break-all;
-	}
-	@media only screen and (max-width: 480px) {
-		background: pink;
-		margin: 15%;
 	}
 `;
 
@@ -208,6 +204,9 @@ const Content1 = styled.span`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	@media only screen and (max-width: 480px) {
+		font-size: 1rem;
+	}
 `;
 
 const Content2 = styled.span`
@@ -216,6 +215,9 @@ const Content2 = styled.span`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	@media only screen and (max-width: 480px) {
+		font-size: 1rem;
+	}
 `;
 
 const Collection = styled.div`
@@ -237,16 +239,28 @@ const CollectionTitle = styled.div`
 `;
 
 const Apolo = styled.img`
+	@media only screen and (max-width: 480px) {
+		width: 3rem;
+		height: 5rem;
+	}
 	width: 5rem;
 	height: 7rem;
 	opacity: ${(props) => (props.theme.length > 10 ? "1" : "0.3")};
 `;
 const Candy = styled.img`
+	@media only screen and (max-width: 480px) {
+		width: 3rem;
+		height: 5rem;
+	}
 	width: 5rem;
 	height: 7rem;
 	opacity: ${(props) => (props.theme.length > 3 ? "1" : "0.3")};
 `;
 const Corn = styled.img`
+	@media only screen and (max-width: 480px) {
+		width: 3rem;
+		height: 5rem;
+	}
 	width: 5em;
 	height: 7rem;
 	opacity: ${(props) => (props.theme.length > 1 ? "1" : "0.3")};
@@ -272,7 +286,6 @@ const Item = styled.span`
 		}
 	}
 `;
-
 const UserInfo = styled.div`
 	height: 55%;
 `;
@@ -280,4 +293,16 @@ const DiaryInfo = styled.div``;
 
 const DiaryList = styled.div``;
 
-const EditBtn: any = styled.button``;
+const EditBtn: any = styled.button`
+	width: 5.5rem;
+	margin-bottom: 2rem;
+	margin-left: 15%;
+	border: 0px;
+	font-size: 1.2rem;
+	&:hover {
+		width: 6rem;
+		cursor: pointer;
+		background: black;
+		color: white;
+	}
+`;

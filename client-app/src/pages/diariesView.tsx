@@ -79,11 +79,15 @@ export default function DiariesView(props: any): ReactElement {
 					: ""}
 			</Cards>
 			<ControllBox>
-				<LeftBtn onClick={() => flipPage(1)} />
+				<IconBox>
+					<LeftBtn onClick={() => flipPage(1)} />
+				</IconBox>
 				<PageNotice>
 					{currPage} / {allPage} [Page]
 				</PageNotice>
-				<RightBtn onClick={() => flipPage(2)} />
+				<IconBox>
+					<RightBtn onClick={() => flipPage(2)} />
+				</IconBox>
 			</ControllBox>
 		</Main>
 	);
@@ -100,14 +104,14 @@ const Main = styled.div`
 	box-sizing: border-box;
 	border-right: 5px solid black;
 	@media only screen and (max-width: 1200px) {
-		/* margin-left: 1rem; */
-		width: 70%;
+		width: 80%;
+		height: 100%;
+		border-right: none;
+		border-bottom: 5px solid black;
 	}
 	@media only screen and (max-width: 480px) {
-		/* margin-left: 1rem; */
-		width: 100%;
-		height: 90%;
-		margin: 0px;
+		min-width: 400px;
+		height: 70%;
 	}
 `;
 const Content = styled.div`
@@ -129,8 +133,8 @@ const Cards = styled.div`
 	flex-wrap: wrap;
 	background: white;
 	@media only screen and (max-width: 480px) {
-		margin-top: 15%;
-		height: 50%;
+		margin-top: 3%;
+		height: 75%;
 	}
 `;
 
@@ -149,50 +153,30 @@ const Buttons = styled.div`
 	color: blue;
 `;
 
-const SortViews: any = styled.button`
-	width: 5rem;
-	height: 2rem;
-	border: 0.1rem solid black;
-	background: white;
-	@media only screen and (max-width: 480px) {
-		font-size: 0.8rem;
-		width: 4rem;
-		height: 1.6rem;
-	}
-`;
-const SortDate = styled.button`
-	width: 5rem;
-	height: 2rem;
-	border: 0.1rem solid black;
-	background: white;
-	@media only screen and (max-width: 480px) {
-		font-size: 0.8rem;
-		width: 4rem;
-		height: 1.6rem;
-	}
-`;
-
 const LeftBtn = styled.img.attrs({
 	src: left,
 })`
-	width: 5%;
+	width: 100%;
 	&:hover {
-		width: 6.5%;
+		cursor: pointer;
 	}
 `;
 const RightBtn = styled.img.attrs({
 	src: right,
 })`
-	width: 5%;
+	width: 100%;
 	&:hover {
-		width: 6.5%;
+		cursor: pointer;
 	}
 `;
 const ControllBox = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 5%;
+
+	@media only screen and (max-width: 480px) {
+		margin-top: 1%;
+	}
 `;
 const PageNotice = styled.span`
 	background: white;
@@ -205,4 +189,10 @@ const PageNotice = styled.span`
 	justify-content: center;
 	font-size: 1.2rem;
 	border: 0.15rem solid black;
+	&:hover {
+		cursor: none;
+	}
+`;
+const IconBox = styled.div`
+	width: 2.3rem;
 `;

@@ -99,7 +99,7 @@ function Comment(props: any): any {
 		<CommentStyle theme={updateId}>
 			<CommentUser>
 				<CommentContents>{comment.nickname}님의 한마디 </CommentContents>
-				<CommentCreated>{comment.createdAt}</CommentCreated>
+				<CommentCreated theme={updateId}>{comment.createdAt}</CommentCreated>
 			</CommentUser>
 			<Commentbox>
 				{updateId !== comment.commentId ? (
@@ -170,7 +170,7 @@ function Comment(props: any): any {
 const CommentStyle = styled.div`
 	background: #edede9;
 	width: 90%;
-	height: ${(props) => (props.theme > 0 ? "70%" : "58%")};
+	height: ${(props) => (props.theme > 0 ? "73%" : "55%")};
 	margin: 0.5%;
 	border: 1px solid black;
 	margin-top: 2%;
@@ -192,6 +192,7 @@ const CommentContents = styled.span`
 `;
 const CommentCreated = styled.span`
 	font-size: 1.5rem;
+	display: ${(props) => (props.theme > 0 ? "none" : null)};
 	@media only screen and (max-width: 480px) {
 		display: none;
 	}
