@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import bookImg from "./assets/images/loadingImg.gif";
 import {
 	Manual,
 	SignIn,
@@ -22,7 +23,6 @@ declare global {
 		Kakao: any;
 	}
 }
-
 function App(): ReactElement {
 	const [isSignin, setSignin] = useState(false);
 	const [weatherData, setWeatherData] = useState("");
@@ -32,6 +32,7 @@ function App(): ReactElement {
 	const [pContent, setPcontent] = useState(0);
 	const [diaryInfo, setDiaryInfo] = useState([]);
 	const [content, setContent] = useState([]);
+	// const [loadImg, setLoadingImg] = useState(false);
 
 	const setContentId = (e: any) => {
 		setContent(e);
@@ -57,6 +58,7 @@ function App(): ReactElement {
 	const conveyContent = (e: any) => {
 		setContentInfo(e);
 	};
+
 	const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
 	useEffect(() => {
 		if (isLogin === true) {
@@ -64,9 +66,21 @@ function App(): ReactElement {
 		} else {
 			changeSignin(false);
 		}
-	});
+		const loadImg = document.getElementById("loading");
+		const loadVisible = sessionStorage.getItem("loadingImg");
+		if (loadImg !== null && loadVisible === "visible") {
+			loadImg.style.display = "flex";
+			setTimeout(() => {
+				loadImg.style.display = "none";
+			}, 2900);
+			sessionStorage.removeItem("loadingImg");
+		}
+	}, [isLogin]);
 	return (
 		<Router>
+			<LoadingBox id="loading">
+				<LoadingImg src={bookImg} alt="Loading Img" />
+			</LoadingBox>
 			<Main>
 				<Switch>
 					<Route exact path="/">
@@ -110,19 +124,40 @@ function App(): ReactElement {
 		</Router>
 	);
 }
-// 아래 스타일을 적용한 컴포넌트를 만들어준다.
-
 const Main = styled.div`
-	display: flex;
+	/* border: 10px solid blue; */
 	position: relative;
+	height: 88vh;
+	width: 80.4vw;
+	margin: 2.5rem auto;
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
-	//box-sizing: border-box;
-	/* border: 10px solid blue; */
-	margin: 2.5rem auto;
-	height: 88vh;
-	width: 80.4vw;
+`;
+const LoadingBox = styled.div`
+	/* border: 5px solid purple; */
+	position: absolute;
+	background-color: rgba(240, 240, 240, 0.5);
+	top: 0rem;
+	width: 100%;
+	height: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 99;
+	pointer-events: stroke;
+	@media only screen and (max-width: 1200px) {
+		height: 110rem;
+	}
+	@media only screen and (max-width: 480px) {
+		height: 77.5rem;
+	}
+`;
+const LoadingImg = styled.img`
+	width: 25rem;
+	height: 20rem;
+	margin-bottom: 5rem;
 `;
 
 export default App;

@@ -13,21 +13,44 @@ export default function SubNav(): ReactElement {
 			setUserNav(false);
 		}
 	}, []);
+
+	const movePage = (e: any) => {
+		if (e.target.id === "createDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/createDiary";
+		} else if (e.target.id === "myDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diaryview";
+		} else if (e.target.id === "publicDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diarypublic";
+		} else if (e.target.id === "myInfo") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/userinfo/calendar";
+		} else if (e.target.id === "developer") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/developer";
+		}
+	};
 	return (
 		<Main>
 			{/* <Dropdown className="dropdown"> */}
 			<Dropbtn className="fas fa-book-open">
 				<Contents className="dropdown-content">
 					<Content href="/">홈</Content>
-					<Content href="/creatediary">일기쓰기</Content>
+					<Content id="createDiary" onClick={movePage}>
+						일기쓰기
+					</Content>
 					{userNav ? (
-						<Content className="usernav" href="/diaryview">
-							일기보기
+						<Content className="usernav" id="myDiary" onClick={movePage}>
+							나의일기
 						</Content>
 					) : null}
-					<Content href="/diarypublic">훔쳐보기</Content>
+					<Content id="publicDiary" onClick={movePage}>
+						훔쳐보기
+					</Content>
 					{userNav ? (
-						<Content className="usernav" href="/userinfo/calendar">
+						<Content className="usernav" id="myInfo" onClick={movePage}>
 							나의정보
 						</Content>
 					) : null}

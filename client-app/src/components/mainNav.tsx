@@ -1,14 +1,14 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 interface isLoginProps {
 	isSignin: boolean;
 }
 
 export default function Mainnav(props: isLoginProps): ReactElement {
-	const { isSignin } = props;
 	const history = useHistory();
+	const { isSignin } = props;
 	const [userNav, displayNav] = useState(false);
 	const colorType = {
 		color1: "#c2aeae",
@@ -22,6 +22,24 @@ export default function Mainnav(props: isLoginProps): ReactElement {
 		color9: "#df86e1",
 		color10: "#e88383",
 	};
+	const movePage = (e: any) => {
+		if (e.target.id === "createDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/createDiary";
+		} else if (e.target.id === "myDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diaryview";
+		} else if (e.target.id === "publicDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diarypublic";
+		} else if (e.target.id === "myInfo") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/userinfo/calendar";
+		} else if (e.target.id === "developer") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/developer";
+		}
+	};
 	useEffect(() => {
 		const isLoginSession = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
 		if (isLoginSession === true) {
@@ -31,49 +49,39 @@ export default function Mainnav(props: isLoginProps): ReactElement {
 		}
 	}, [isSignin]);
 
-	const intoDiary = () => {
-		history.push("creatediary");
-		window.location.reload(); // 일기 수정으로 남아있던 데이터 삭제
-	};
 	return (
 		<Main>
 			<Navsole>
 				<Navin color={colorType.color1} />
-				<Navout color={colorType.color6} onClick={intoDiary}>
+				<Navout id="createDiary" color={colorType.color6} onClick={movePage}>
 					일기쓰기
 				</Navout>
 			</Navsole>
 			{userNav ? (
 				<Navsole className="userMenu">
 					<Navin color={colorType.color2} />
-					<Navout color={colorType.color7} onClick={() => history.push("/diaryview")}>
+					<Navout id="myDiary" color={colorType.color7} onClick={movePage}>
 						나의일기
 					</Navout>
 				</Navsole>
 			) : null}
 			<Navsole>
 				<Navin color={colorType.color3} />
-				<Navout color={colorType.color8} onClick={() => history.push("/diarypublic")}>
+				<Navout id="publicDiary" color={colorType.color8} onClick={movePage}>
 					훔쳐보기
 				</Navout>
 			</Navsole>
 			{userNav ? (
 				<Navsole className="userMenu" theme={userNav}>
 					<Navin color={colorType.color4} />
-					<Navout color={colorType.color9} onClick={() => history.push("/userinfo/calendar")}>
+					<Navout id="myInfo" color={colorType.color9} onClick={movePage}>
 						나의정보
 					</Navout>
 				</Navsole>
 			) : null}
-
 			<Navsole>
 				<Navin color={colorType.color5} />
-				<Navout
-					color={colorType.color10}
-					onClick={() => {
-						history.push("/developer");
-					}}
-				>
+				<Navout id="developer" color={colorType.color10} onClick={movePage}>
 					제작자
 				</Navout>
 			</Navsole>
@@ -112,9 +120,11 @@ const Navin = styled.div`
 		display: none;
 	}
 `;
-const Navout = styled.div`
+const Navout = styled.a`
 	// border: 1px solid blue;
 	width: 5rem;
+	text-decoration: none;
+	color: black;
 	background: ${(props) => props.color};
 	@media only screen and (max-width: 480px) {
 		width: 4rem;
