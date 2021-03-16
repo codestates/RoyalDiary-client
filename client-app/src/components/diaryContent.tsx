@@ -189,6 +189,7 @@ const Content = styled.div`
 	line-height: 2.5rem;
 	border-radius: 1rem;
 	height: 100%;
+	padding: 1.5rem;
 	//border: 0.15rem solid black;
 	background: #f1efef;
 	-ms-overflow-style: none;

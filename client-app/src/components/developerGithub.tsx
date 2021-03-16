@@ -14,7 +14,7 @@ export default function DeveloperGithub(): ReactElement {
 								송정현 <br />
 								&nbsp; Github: <a href="https://github.com/atomsong9090">https://github.com/atomsong9090</a>
 								<br />
-								&nbsp; Blog:
+								&nbsp; Blog: <a href="https://velog.io/@yesparrot">https://velog.io/@yesparrot</a>
 							</AddressSolo>
 							<AddressSolo>
 								김용재

@@ -18,13 +18,15 @@ export default function DiariesView(props: any): ReactElement {
 
 	useEffect(() => {
 		async function getData() {
-			await axios.get(`contents/contents`, { headers: { Authorization: `Bearer ${token}` } }).then((res: any) => {
-				if (res.data.data.count === 0) {
-					alert("작성한 일기가 없습니다. 일기작성 페이지로 이동합니다.");
-					history.push("/creatediary");
-				}
-				setList(res.data.data);
-			});
+			setTimeout(async function () {
+				await axios.get(`contents/contents`, { headers: { Authorization: `Bearer ${token}` } }).then((res: any) => {
+					if (res.data.data.count === 0) {
+						alert("작성한 일기가 없습니다. 일기작성 페이지로 이동합니다.");
+						history.push("/creatediary");
+					}
+					setList(res.data.data);
+				});
+			}, 2000);
 		}
 		getData();
 		async function getContentList(pageNum: number) {
@@ -190,7 +192,7 @@ const PageNotice = styled.span`
 	font-size: 1.2rem;
 	border: 0.15rem solid black;
 	&:hover {
-		cursor: none;
+		cursor: default;
 	}
 `;
 const IconBox = styled.div`
