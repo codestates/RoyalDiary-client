@@ -30,7 +30,6 @@ export default function Agreement(props: signinProps): ReactElement {
 	// modal 상태 관리
 	const [modalMessage, setModalMessage] = useState("");
 	const [modalVisible, setModalVisible] = useState(false);
-	// const [signUpModal, setSignUpModal] = useState(false);
 	// 유효성 검사(형식에 맞는지)
 	const [validation, setValidation] = useState({
 		validEmail: false,
@@ -143,7 +142,7 @@ export default function Agreement(props: signinProps): ReactElement {
 					console.log("Internal Server Error occured");
 				});
 		} else {
-			setMessage("전화번호 형식을 확인해주세요");
+			setMessage("전화번호는 010으로 시작, (-)없이 작성");
 			setMsgVisible(true);
 		}
 	};
@@ -311,7 +310,7 @@ export default function Agreement(props: signinProps): ReactElement {
 				<InputInfo>
 					<Linesolo style={FirstLine}>
 						<Item>이름</Item>
-						<Input name="name" type="text" maxLength={12} placeholder="예)홍길동" onChange={handleName} />
+						<Input name="name" type="text" maxLength={12} placeholder="홍길동" onChange={handleName} />
 						<Item>별명</Item>
 						<Input name="nickname" type="text" maxLength={12} placeholder="아기공룡 둘리" onChange={handleNickName} />
 					</Linesolo>
@@ -411,7 +410,7 @@ const ValidityBox = styled.div`
 		content: "";
 		position: absolute;
 		top: -10px;
-		left: 100px;
+		left: 110px;
 	}
 	animation: a 2s;
 	@keyframes a {

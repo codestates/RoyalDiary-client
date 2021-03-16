@@ -1,26 +1,27 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
+import book from "../assets/images/book.png";
 
 export default function SubNav(): ReactElement {
 	const [userNav, setUserNav] = useState(false);
-  const movePage = (e: any) => {
-    if (e.target.id === "createDiary") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/createDiary";
-    } else if (e.target.id === "myDiary") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/diaryview";
-    } else if (e.target.id === "publicDiary") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/diarypublic";
-    } else if (e.target.id === "myInfo") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/userinfo/calendar";
-    } else if (e.target.id === "developer") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/developer";
-    }
- };
+	const movePage = (e: any) => {
+		if (e.target.id === "createDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/createDiary";
+		} else if (e.target.id === "myDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diaryview";
+		} else if (e.target.id === "publicDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diarypublic";
+		} else if (e.target.id === "myInfo") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/userinfo/calendar";
+		} else if (e.target.id === "developer") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/developer";
+		}
+	};
 	useEffect(() => {
 		// sessionStorage.setItem("isLogin", JSON.stringify(true));
 		const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
@@ -31,11 +32,11 @@ export default function SubNav(): ReactElement {
 			setUserNav(false);
 		}
 	}, []);
-  
+
 	return (
 		<Main>
-			{/* <Dropdown className="dropdown"> */}
-			<Dropbtn className="fas fa-book-open">
+			<Dropbtn>
+				<img src={book} alt="" />
 				<Contents className="dropdown-content">
 					<Content href="/">홈</Content>
 					<Content id="createDiary" onClick={movePage}>
@@ -56,11 +57,9 @@ export default function SubNav(): ReactElement {
 					) : null}
 				</Contents>
 			</Dropbtn>
-			{/* </Dropdown> */}
 		</Main>
 	);
 }
-
 const Main = styled.div`
 	/* border: 3px solid red; */
 	position: relative;
@@ -71,13 +70,20 @@ const Main = styled.div`
 `;
 const Dropbtn = styled.i`
 	/* background-color: yellow; */
-	/* color: white; */
+	/* border: 3px solid black; */
+	width: 1rem;
+	height: 1rem;
 	position: absolute;
-	top: 0.5rem;
+	top: 0.8rem;
 	right: 0.5rem;
 	padding: 16px;
 	font-size: 25px;
-	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	img {
+		width: 2rem;
+	}
 	:hover {
 		.dropdown-content {
 			display: block;
@@ -95,6 +101,7 @@ const Contents = styled.div`
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 	:hover {
+		cursor: pointer;
 		display: block;
 	}
 	animation: a 2s;

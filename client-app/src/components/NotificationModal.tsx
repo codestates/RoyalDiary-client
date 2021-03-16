@@ -22,14 +22,6 @@ export default function NotificationModal(props: Props): ReactElement {
 		} else if (message === "오늘은 어떤 일이 있었나요?:)") {
 			setIsOpen(false);
 			window.location.reload(); // 모달창 제거
-		} else if (message === "그림일기가 등록되었습니다") {
-			sessionStorage.setItem("loadingImg", "visible");
-			window.location.href = "/diaryview"; // 일기 수정으로 남아있던 데이터 삭제
-			setIsOpen(false);
-		} else if (message === "그림일기가 수정되었습니다") {
-			sessionStorage.setItem("loadingImg", "visible");
-			window.location.href = "/diaryview";
-			setIsOpen(false);
 		}
 	}
 

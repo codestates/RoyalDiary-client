@@ -3,9 +3,18 @@ import styled from "styled-components";
 import Modal from "react-modal";
 import axios from "axios";
 import { GoogleLogin } from "react-google-login";
+import dotenv from "dotenv";
 import googleLogo from "../assets/images/socialsignin/google.png";
 import kakaoLogo from "../assets/images/socialsignin/kakao.png";
 import NotificationModal from "./NotificationModal";
+
+dotenv.config();
+const googleId = process.env.REACT_APP_GOOGLE_CLIENTID as string;
+const kakaoId = process.env.REACT_APP_KAKAO_CLIENTID;
+window.Kakao.init(kakaoId); // 배포시 .env 에 저장.
+// SDK 초기화 여부를 판단합니다.
+// console.log(window.Kakao.isInitialized());
+// console.log(window.Kakao);
 
 Modal.setAppElement("#root");
 interface Props {
@@ -82,17 +91,6 @@ export default function SocialModal(props: Props): ReactElement {
 					success: (res: any) => {
 						const kakaoAccount = res.kakao_account;
 						const emailNeed = kakaoAccount.email_needs_agreement;
-						// 테스트를 위해 카카오와 접속을 끊음.
-						window.Kakao.API.request({
-							url: "/v1/user/unlink",
-							success(hello: any) {
-								alert("카카오와 접속이 끊어졌습니다.");
-							},
-							fail(err: any) {
-								alert(`fail: ${JSON.stringify(err)}`);
-							},
-						});
-
 						// 이메일이 제공되지 않은 경우. 카카오톡에만 해당.
 						if (emailNeed === true) {
 							conveySocialData(kakaoAccount, "kakao");
@@ -149,7 +147,7 @@ export default function SocialModal(props: Props): ReactElement {
 				<Buttons>
 					<ImgWrapper className="g-signin2">
 						<GoogleLogin
-							clientId="701055359005-1ssquh4o9qbj1m8p4r55op6lc2knb9cs.apps.googleusercontent.com"
+							clientId={googleId}
 							render={(renderProps) => (
 								<GoogleBtn type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}>
 									<img src={googleLogo} alt="" />

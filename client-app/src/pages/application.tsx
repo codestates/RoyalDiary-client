@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
-import Agreement from "../components/signup";
+import Signup from "../components/signup";
 import principalImg from "../assets/images/principal.png";
 import SubNav from "../components/subNav";
 
@@ -40,7 +40,7 @@ export default function Application(props: signinProps): ReactElement {
 					<img src={principalImg} style={imgstyle} alt="" />
 				</Image>
 			</Body>
-			<Agreement changeSignin={changeSignin} />
+			<Signup changeSignin={changeSignin} />
 		</Main>
 	);
 }
