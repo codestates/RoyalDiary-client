@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Cmanual from "../components/manual";
 import logoImg from "../assets/images/royalschool.png";
 
@@ -15,28 +15,27 @@ export default function Manual(): ReactElement {
 		<Main>
 			<Header>
 				<Logo>
-					<img src={logoImg} style={imgstyle} alt="" />
+					<img src={logoImg} alt="" />
 				</Logo>
 				<Title>가정통신문</Title>
 				<Contactinfo>
-					<div>교무실: 032-123-1234</div>
-					<div>행정실: 032-123-1234</div>
-					<div>팩스: 032-123-1234</div>
-					<div>전자우편: 032-123-1234</div>
+					<div>교무실: 02-XXX-XXXX</div>
+					<div>행정실: 02-XXX-XXXX</div>
+					<div>팩스: 02-XXX-XXXX</div>
 				</Contactinfo>
 			</Header>
 			<Notification>
 				<Ntitle>제목: 로얄 그림 일기장 사용 방법 공지</Ntitle>
 				<Ncontent>
 					안녕하십니까? <br />
-					사랑하는 로얄 스쿨 입학생 및 학부모 여러분.
+					사랑하는 로얄 스쿨 입학생 여러분. 로얄 스쿨에 온 것을 진심으로 환영합니다.
 					<br />
-					아래와 같이 로얄 스쿨 그림 일기장 사용법을 고지하고니 여름 방학동안 우리의 아이들이 꾸준히 그림 일기장을
-					<br /> 쓸 수 있도록 도와주시면 감사하겠습니다.
+					로얄 그림 일기장은 옛 감성의 그림 일기로, 매일의 소중한 기억을 그림과 글로 기억하고자 탄생되었습니다. <br />
+					자신의 일기를 친구들과 공유할 수 있으며 서로의 일기에 선생님의 한 마디 같은 댓글과 선생님이 찍어주시던 <br />
+					스탬프로 소통할 수 있습니다. 스탬프를 받고, 또 친구들에게 스탬프를 찍어주며 응원해주세요! 💯
 				</Ncontent>
 			</Notification>
 			<Cmanual />
-			<Developerinfo>개발자 정보, 깃허브주소</Developerinfo>
 			<Footer>
 				<Fdate>{Today()}</Fdate>
 				<Fprincipal>로얄 국민학교장 </Fprincipal>
@@ -64,34 +63,52 @@ const Main = styled.div`
 `;
 const Header = styled.div`
 	// border: 5px solid black;
+	height: 12%;
 	display: flex;
-	flex-grow: 0.01;
 	flex-direction: row;
 	padding-bottom: -1rem;
 `;
 const Logo = styled.div`
-	/* border-right: 3px solid black; */
+	/* border: 3px solid red; */
 	flex-grow: 1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 7rem;
-	height: 7rem;
+	width: 10%;
+	height: 90%;
+	img {
+		width: 80%;
+		height: 80%;
+		@media only screen and (max-width: 480px) {
+			width: 80%;
+			height: 90%;
+		}
+	}
+	@media only screen and (max-width: 480px) {
+		width: 5rem;
+		height: 4rem;
+	}
 `;
 const Title = styled.div`
 	border-left: 3px solid black;
 	border-right: 3px solid black;
-	flex-grow: 10;
+	width: 60%;
 	padding-left: 1rem;
 	margin: -0.1rem;
 	justify-content: center;
 	align-items: center;
+	flex-wrap: wrap;
 	font-size: 2.5rem;
 	font-weight: bold;
 	letter-spacing: 1.7rem;
 	display: flex;
+	@media only screen and (max-width: 630px) {
+		/* width: 23rem; */
+		font-size: 2.2rem;
+	}
 	@media only screen and (max-width: 480px) {
 		letter-spacing: 0.7rem;
+		width: 80%;
 	}
 `;
 const Contactinfo = styled.div`
@@ -118,46 +135,47 @@ const Ntitle = styled.div`
 	letter-spacing: 0.3rem;
 	margin-left: -0.2rem;
 	margin-right: -0.3rem;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	flex-grow: 0.5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 const Ncontent = styled.div`
 	border-bottom: 3px solid black;
-	flex-grow: 0.5;
+	flex-grow: 0.2;
+	padding-top: 0.5rem;
 	padding-left: 1rem;
 	margin-left: -0.1rem;
 	margin-right: -0.2rem;
-	font-size: 0.8rem;
+	font-size: 1rem;
+	line-height: 1.4rem;
+	@media only screen and (max-width: 630px) {
+		/* width: 23rem; */
+		font-size: 0.8rem;
+	}
 	@media only screen and (max-width: 480px) {
 		display: none;
 	}
 `;
-const Developerinfo = styled.div`
-	border-top: 3px solid black;
-	flex-grow: 0.1;
-	margin: auto -0.1rem;
-	font-size: 0.8rem;
-`;
 const Footer = styled.div`
 	border-top: 3px solid black;
 	margin: 0rem -0.1rem;
-	text-align: center;
-	flex-grow: 0.1;
+	height: 5rem;
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	flex-direction: column;
 `;
 const Fdate = styled.div`
 	// border: 5px solid red;
-	flex-grow: 1;
 	letter-spacing: 0.3rem;
 	font-weight: bold;
 	font-size: 1rem;
 `;
 const Fprincipal = styled.div`
 	// border: 5px solid red;
-	flex-grow: 3;
 	font-size: 2rem;
 	font-weight: bold;
 	letter-spacing: 1rem;
 `;
-const imgstyle = { width: "80%", height: "80%" };
