@@ -23,10 +23,6 @@ export default function Diary(props: paintDataProps): ReactElement {
 	// 메세지
 	const [message, setMessage] = useState("");
 	const [msgVisible, setMsgVisible] = useState(false);
-	// 모달 메세지
-	const [modalMessage, setModalMessage] = useState("");
-	const [modalVisible, setModalVisible] = useState(false);
-
 	const saveDiary = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const Id = e.target.id as string;
 		const value = e.target.value as string;
@@ -57,7 +53,7 @@ export default function Diary(props: paintDataProps): ReactElement {
 	const setTime = () => {
 		setTimeout(() => {
 			setMsgVisible(false);
-		}, 2000);
+		}, 1500);
 	};
 	const handleSubmit = async () => {
 		const isLoginSession = JSON.parse(sessionStorage.getItem("isLogin") || "1");
@@ -153,9 +149,12 @@ export default function Diary(props: paintDataProps): ReactElement {
 				)
 				.then((res) => {
 					if (res.data.message === "successfully revised") {
-						setModalMessage("그림일기가 수정되었습니다");
-						setModalVisible(true);
-						// history.push("/");
+						setMessage("그림일기가 수정되었습니다✌");
+						setMsgVisible(true);
+						sessionStorage.setItem("loadingImg", "visible");
+						setTimeout(() => {
+							window.location.href = "/diaryview"; // 일기 수정으로 남아있던 데이터 삭제
+						}, 1500);
 					}
 				})
 				.catch((err) => {
@@ -185,8 +184,12 @@ export default function Diary(props: paintDataProps): ReactElement {
 				)
 				.then((res) => {
 					if (res.data.message === "ok") {
-						setModalMessage("그림일기가 등록되었습니다");
-						setModalVisible(true);
+						setMessage("그림일기가 등록되었습니다✌");
+						setMsgVisible(true);
+						sessionStorage.setItem("loadingImg", "visible");
+						setTimeout(() => {
+							window.location.href = "/diaryview"; // 일기 수정으로 남아있던 데이터 삭제
+						}, 1500);
 					}
 				})
 				.catch((err) => {
@@ -242,7 +245,6 @@ export default function Diary(props: paintDataProps): ReactElement {
 				</PButton>
 				<Button onClick={handleSubmit}>등록버튼</Button>
 			</Buttons>
-			<NotificationModal modalIsOpen={modalVisible} setIsOpen={setModalVisible} message={modalMessage} />
 		</Main>
 	);
 }

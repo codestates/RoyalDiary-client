@@ -16,6 +16,8 @@
     "@types/react-modal": "^3.12.0",
     "@types/react-redux": "^7.1.16",
     "axios": "^0.21.1",
+    "config": "^3.3.6",
+    "dotenv": "^8.2.0",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.14.1",
@@ -35,7 +37,7 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start .env",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -62,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "@types/config": "0.0.38",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
@@ -75,5 +78,6 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1"
-  }
+  },
+  "type": "module"
 }

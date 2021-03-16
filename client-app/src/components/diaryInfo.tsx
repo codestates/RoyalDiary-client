@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import styled, { keyframes, StyledInterface } from "styled-components";
+import styled from "styled-components";
 import cloudy from "../assets/images/weather/1.png";
 import sunny from "../assets/images/weather/2.png";
 import rainy from "../assets/images/weather/3.png";
@@ -141,8 +141,8 @@ export default function Diaryinfo(props: setWeatherProps): ReactElement {
 				</Weather>
 			</DateWeather>
 			<Userinfo>
-				1학년 12반 <br />
-				이름: {userNick}
+				로얄 국민학교 <br />
+				별명: {userNick}
 			</Userinfo>
 		</Main>
 	);
@@ -237,10 +237,10 @@ const Userinfo = styled.div`
 	display: flex;
 	padding-left: 1rem;
 	align-items: center;
-	font-size: 1.25rem;
+	font-size: 1.2rem;
 	width: 25%;
 	@media (max-width: 480px) {
-		font-size: 1rem;
+		font-size: 0.85rem;
 		padding-left: 0.3rem;
 		width: 30%;
 		display: flex;

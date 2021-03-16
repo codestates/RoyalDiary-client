@@ -138,7 +138,9 @@ const Main = styled.div`
 const LoadingBox = styled.div`
 	/* border: 5px solid purple; */
 	position: absolute;
-	background-color: rgba(240, 240, 240, 0.5);
+	/* background-color: rgba(240, 240, 240, 1); */
+	background-color: rgba(0, 0, 0, 0.7);
+
 	top: 0rem;
 	width: 100%;
 	height: 100%;

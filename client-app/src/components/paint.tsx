@@ -2,7 +2,7 @@ import React, { ReactElement, useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import CanvasDraw from "react-canvas-draw";
 import axios from "axios";
-// import pencil from "../assets/images/pencil.png";
+import brush from "../assets/images/brush.png";
 
 interface setImgProps {
 	conveyImgUrl: (e: string) => void;
@@ -179,11 +179,10 @@ export default function CPaint(props: setImgProps): ReactElement {
 				ref={firstCanvas}
 				style={canvasStyle}
 			/>
-			{/* <CanvasDraw brushRadius={1} brushColor={color} hideGrid ref={secondCanvas} style={canvasStyle} /> */}
 			<Control className="colors">
 				<Range type="range" onChange={handleRange} min="0.1" max="20" step="0.1" />
-				{/* <Eraser className="fas fa-eraser" /> */}
-				<Paint className="fas fa-brush" onMouseEnter={handleMouseHover} /* onMouseLeave={handleMouseHover} */ />
+				{/* <Paint className="fas fa-brush" onMouseEnter={handleMouseHover} /> */}
+				<Brush src={brush} onMouseEnter={handleMouseHover} />
 				<Colors theme={showColor}>
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "white" }} />
 					<Color className="singleColor" onClick={handleColorClick} style={{ backgroundColor: "#2c2c2c" }} />
@@ -229,24 +228,22 @@ const canvasStyle = {
 };
 const Control = styled.div`
 	/* border: 3px solid red; */
-	height: 5.5em;
+	height: 8em;
 	margin-top: 0.5rem;
 	padding-left: 1rem;
 	display: flex;
 	justify-content: flex-start;
+	align-items: center;
 `;
 const Range = styled.input`
 	width: 45px;
 	text-align: center;
 	/* padding: 16px; */
 `;
-const Paint = styled.i`
-	/* border: 1px solid black; */
-	width: 20px;
-	padding: 16px;
-	font-size: 25px;
-	display: flex;
-	align-items: center;
+const Brush = styled.img`
+	/* border: 3px solid red; */
+	width: 3rem;
+	height: 3rem;
 `;
 const Colors = styled.div`
 	/* border: 3px solid blue; */
