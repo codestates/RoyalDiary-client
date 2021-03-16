@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import DiaryCard from "../components/diaryCard";
 import left from "../assets/images/left.svg";
 import right from "../assets/images/right.svg";
+import bookImg from "../assets/images/loadingImg.gif";
 
 const token = sessionStorage.getItem("accessToken");
 axios.defaults.baseURL = "https://royal-diary.ml";
@@ -12,7 +13,6 @@ axios.defaults.baseURL = "https://royal-diary.ml";
 export default function DiariesViewPublic(props: any): ReactElement {
 	const { diaryCollect } = props;
 	const [list, setList]: any = useState([]);
-	const [sortByDate, setDate]: any = useState(true);
 	const [currPage, setCurrPage] = useState(1);
 	const history = useHistory();
 
@@ -26,6 +26,7 @@ export default function DiariesViewPublic(props: any): ReactElement {
 			});
 		}
 		getData();
+
 		async function getContentList(pageNum: number) {
 			await axios
 				.get(`contents/publiccontents?page=${pageNum}`, { headers: { Authorization: `Bearer ${token}` } })
@@ -48,14 +49,6 @@ export default function DiariesViewPublic(props: any): ReactElement {
 	if (list) {
 		diaryCollect(list);
 	}
-
-	function checker() {
-		if (!sortByDate) {
-			setDate(true);
-		} else {
-			setDate(false);
-		}
-	}
 	const allPage: number = Math.ceil(list.count / 9);
 
 	const pageList = [];
@@ -65,6 +58,9 @@ export default function DiariesViewPublic(props: any): ReactElement {
 
 	return (
 		<Main>
+			<LoadingBox id="loading">
+				<LoadingImg src={bookImg} alt="Loading Img" />
+			</LoadingBox>
 			<Content>
 				<Title>일기보기</Title>
 				<Buttons>친구들이 공개한 일기를 볼 수 있어요.</Buttons>
@@ -97,7 +93,7 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 0.68;
-	//margin-left: 6rem;
+
 	width: 50%;
 	height: 89vh;
 	box-sizing: border-box;
@@ -188,10 +184,34 @@ const PageNotice = styled.span`
 	font-size: 1.2rem;
 	border: 0.15rem solid black;
 	&:hover {
-		cursor: none;
+		cursor: default;
 	}
 `;
 
 const IconBox = styled.div`
 	width: 2.3rem;
+`;
+
+const LoadingBox = styled.div`
+	position: absolute;
+	background-color: rgba(240, 240, 240, 0.5);
+	top: 0rem;
+	width: 100%;
+	height: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 99;
+	pointer-events: stroke;
+	@media only screen and (max-width: 1200px) {
+		height: 110rem;
+	}
+	@media only screen and (max-width: 480px) {
+		height: 77.5rem;
+	}
+`;
+const LoadingImg = styled.img`
+	width: 25rem;
+	height: 20rem;
+	margin-bottom: 5rem;
 `;

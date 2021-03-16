@@ -3,24 +3,24 @@ import styled from "styled-components";
 
 export default function SubNav(): ReactElement {
 	const [userNav, setUserNav] = useState(false);
-  const movePage = (e: any) => {
-    if (e.target.id === "createDiary") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/createDiary";
-    } else if (e.target.id === "myDiary") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/diaryview";
-    } else if (e.target.id === "publicDiary") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/diarypublic";
-    } else if (e.target.id === "myInfo") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/userinfo/calendar";
-    } else if (e.target.id === "developer") {
-      sessionStorage.setItem("loadingImg", "visible");
-      window.location.href = "/developer";
-    }
- };
+	const movePage = (e: any) => {
+		if (e.target.id === "createDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/createDiary";
+		} else if (e.target.id === "myDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diaryview";
+		} else if (e.target.id === "publicDiary") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/diarypublic";
+		} else if (e.target.id === "myInfo") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/userinfo/calendar";
+		} else if (e.target.id === "developer") {
+			sessionStorage.setItem("loadingImg", "visible");
+			window.location.href = "/developer";
+		}
+	};
 	useEffect(() => {
 		// sessionStorage.setItem("isLogin", JSON.stringify(true));
 		const isLogin = JSON.parse(sessionStorage.getItem("isLogin") || "{}");
@@ -31,7 +31,7 @@ export default function SubNav(): ReactElement {
 			setUserNav(false);
 		}
 	}, []);
-  
+
 	return (
 		<Main>
 			{/* <Dropdown className="dropdown"> */}
