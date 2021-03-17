@@ -5,4 +5,4 @@
 **"어릴적 추억을 불러일으키는 옛날 감성 나만의 그림일기"**
 아래 링크를 누르면 WIKI로 이동합니다.
 
-[WIKI 링크] (https://github.com/codestates/RoyalDiary-client/wiki)
+https://github.com/codestates/RoyalDiary-client/wiki
