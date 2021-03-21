@@ -38,7 +38,7 @@ const Main = styled.div`
 		div#hidden {
 			display: flex;
 			width: 22rem;
-			height: 6rem;
+			height: 2rem;
 			line-height: 1.5rem;
 		}
 	}
@@ -52,12 +52,15 @@ const ManualBox = styled.div`
 	align-items: center;
 	img {
 		width: 100%;
+		@media only screen and (max-width: 480px) {
+			height: 90%;
+		}
 	}
 	@media only screen and (max-width: 630px) {
 		width: 23rem;
 	}
 	@media only screen and (max-width: 480px) {
-		height: 100%;
+		height: 70%;
 	}
 `;
 const ExplainBox = styled.div`
