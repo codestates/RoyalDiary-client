@@ -140,7 +140,6 @@ const LoadingBox = styled.div`
 	position: absolute;
 	/* background-color: rgba(240, 240, 240, 1); */
 	background-color: rgba(0, 0, 0, 0.7);
-
 	top: 0rem;
 	width: 100%;
 	height: 100%;

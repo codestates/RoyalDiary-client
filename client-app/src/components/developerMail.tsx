@@ -25,10 +25,10 @@ const Main = styled.div`
 	/* border: 5px solid black; */
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	height: 35.85rem;
 	@media only screen and (max-width: 480px) {
 		margin: 0rem 1rem 0rem 1rem;
-		height: 19rem;
+		height: 23.1rem;
 	}
 `;
 const Header = styled.div`
@@ -83,7 +83,7 @@ const Content = styled.div`
 	@media only screen and (max-width: 480px) {
 		font-size: 1rem;
 		margin: 0rem 1rem 0rem 1rem;
-		height: 3rem;
+		height: 4rem;
 	}
 `;
 const TypeContent = styled.textarea`

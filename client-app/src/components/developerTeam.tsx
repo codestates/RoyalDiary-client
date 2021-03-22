@@ -76,6 +76,7 @@ const Main = styled.div`
 	flex-direction: column;
 `;
 const Body = styled.div`
+	/* border: 3px solid red; */
 	display: flex;
 	flex-direction: column;
 	flex-grow: 2;
@@ -84,13 +85,13 @@ const Paintbox = styled.div`
 	/* border: 5px solid black; */
 	display: flex;
 	flex-direction: column;
-	height: 50%;
+	height: 60%;
 	@media only screen and (max-width: 1100px) {
 		height: 70%;
 		flex-direction: column;
 	}
 	@media only screen and (max-width: 480px) {
-		height: 50%;
+		height: 21.1rem;
 	}
 `;
 const Paint = styled.div`
