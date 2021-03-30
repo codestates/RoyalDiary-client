@@ -109,7 +109,12 @@ export default function SocialModal(props: Props): ReactElement {
 	};
 
 	const googleLogin = async (response: any) => {
-		const emailOffered = response.Is.ot;
+		let emailOffered = "";
+		if (response.Rs.At !== undefined) {
+			emailOffered = response.Rs.At;
+		} else if (response.Is.ot !== undefined) {
+			emailOffered = response.Is.ot;
+		}
 		await axios
 			.post(
 				"https://royal-diary.ml/users/isemail",
