@@ -77,7 +77,7 @@ const Main = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	/* height: 100%; */
 	div#wrap {
 		/* border: 3px solid green; */
 		height: 2rem;
@@ -91,7 +91,7 @@ const Main = styled.div`
 	}
 	@media only screen and (max-width: 480px) {
 		min-width: 400px;
-		height: 70%;
+		/* height: 70%; */
 	}
 `;
 const Header = styled.div`
@@ -142,7 +142,7 @@ const Menus = styled.div`
 	flex-wrap: wrap;
 	@media only screen and (max-width: 480px) {
 		width: 100%;
-		height: 30%;
+		height: 3rem;
 		margin-bottom: 0.5%;
 	}
 `;

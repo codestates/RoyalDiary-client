@@ -39,7 +39,7 @@ const Main = styled.div`
 		div#hidden {
 			display: flex;
 			width: 22rem;
-			height: 6rem;
+			height: 2rem;
 			line-height: 1.5rem;
 		}
 	}

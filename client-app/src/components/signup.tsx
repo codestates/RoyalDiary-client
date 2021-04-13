@@ -547,6 +547,11 @@ const Checkagreement = styled.div`
 		font-size: 1rem;
 		width: 82%;
 	}
+	@media only screen and (max-width: 380px) {
+		font-size: 1rem;
+		width: 82%;
+		margin: 1rem 0rem 0rem 0rem;
+	}
 `;
 const Footer = styled.div`
 	/* border: 3px solid red; */
@@ -563,8 +568,10 @@ const Logo = styled.div`
 	padding-left: 5rem;
 	img {
 		width: 7rem;
-		/* margin-right: 4rem; */
 		alt: "";
+		@media only screen and (max-width: 480px) {
+			display: none;
+		}
 	}
 	@media only screen and (max-width: 480px) {
 		padding-left: 0rem;
@@ -577,6 +584,9 @@ const Buttons = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	@media only screen and (max-width: 380px) {
+		flex-direction: row;
+	}
 `;
 const Button = styled.button`
 	border: 2px solid black;
@@ -593,5 +603,10 @@ const Button = styled.button`
 		background: white;
 		color: black;
 		transition: all 1s;
+	}
+	@media only screen and (max-width: 380px) {
+		width: 5rem;
+		height: 1.5rem;
+		font-size: 0.8rem;
 	}
 `;

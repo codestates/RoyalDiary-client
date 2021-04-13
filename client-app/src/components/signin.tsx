@@ -114,7 +114,7 @@ export default function Signin(props: isLoginProps): ReactElement {
 				const resMessage = res.data.message;
 				if (resMessage === "successfully signed out!") {
 					if (window.Kakao.Auth.getAccessToken()) {
-						console.log("카카오 인증 엑세스 토큰 존재", window.Kakao.Auth.getAccessToken());
+						console.log("카카오 인증 엑세스 토큰 존재");
 						window.Kakao.Auth.logout(() => {
 							console.log("카카오 로그아웃 완료", window.Kakao.Auth.getAccessToken());
 						});

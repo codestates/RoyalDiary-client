@@ -86,8 +86,8 @@ const Logo = styled.div`
 		}
 	}
 	@media only screen and (max-width: 480px) {
-		width: 5rem;
-		height: 4rem;
+		width: 10%;
+		height: 90%;
 	}
 `;
 const Title = styled.div`
@@ -168,6 +168,9 @@ const Footer = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	@media only screen and (max-width: 480px) {
+		height: 5rem;
+	}
 `;
 const Fdate = styled.div`
 	// border: 5px solid red;

@@ -98,7 +98,7 @@ const ImageNav = styled.div`
 	padding-top: 1rem;
 	padding-left: 2rem;
 	@media only screen and (max-width: 480px) {
-		height: 17rem;
+		height: 40%;
 	}
 `;
 const Image = styled.div`
@@ -114,7 +114,7 @@ const MainImg = styled.img`
 	width: 75%;
 	height: 85%;
 	@media only screen and (max-width: 480px) {
-		width: 120%;
+		width: 20rem;
 		height: 80%;
 	}
 `;
