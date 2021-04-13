@@ -58,6 +58,7 @@ const Main = styled.div`
 	width: 50%;
 	height: 100%;
 	box-sizing: border-box;
+	box-shadow: 10px 5px 5px black;
 	@media only screen and (max-width: 1200px) {
 		width: 80%;
 		height: 100%;

@@ -22,11 +22,10 @@ const Card = styled.div`
 	width: 30%;
 	height: 20%;
 	margin: 0% 1%;
+	background: white;
 	&:hover {
-		background: #c5c3c3;
 		cursor: pointer;
 	}
-
 	@media only screen and (max-width: 1200px) {
 		width: 30%;
 	}
@@ -40,7 +39,6 @@ const DiaryCreatedAt = styled.span`
 		font-size: 0.8rem;
 	}
 `;
-
 const DiaryCardContent = styled.span`
 	margin-right: 1rem;
 	@media only screen and (max-width: 768px) {
@@ -54,6 +52,11 @@ const Diaryimage = styled.div`
 	border: 1px solid black;
 	width: 100%;
 	height: 8rem;
+	:hover {
+		transform: translate(0%, -1em);
+		transition: transform 0.5s ease-in;
+	}
+
 	@media only screen and (max-width: 1200px) {
 		width: 80%;
 		height: 7rem;

@@ -592,5 +592,6 @@ const Button = styled.button`
 		cursor: pointer;
 		background: white;
 		color: black;
+		transition: all 1s;
 	}
 `;

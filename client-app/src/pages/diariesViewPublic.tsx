@@ -62,8 +62,8 @@ export default function DiariesViewPublic(props: any): ReactElement {
 				<LoadingImg src={bookImg} alt="Loading Img" />
 			</LoadingBox>
 			<Content>
-				<Title>일기보기</Title>
-				<Buttons>친구들이 공개한 일기를 볼 수 있어요.</Buttons>
+				<Title>훔쳐보기</Title>
+				<Buttons>친구들이 공개한 일기를 볼 수 있어요</Buttons>
 			</Content>
 
 			<Cards className="card">
@@ -93,11 +93,11 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 0.68;
-
 	width: 50%;
 	height: 89vh;
 	box-sizing: border-box;
 	border-right: 5px solid black;
+	box-shadow: 10px 5px 5px black;
 	@media only screen and (max-width: 1200px) {
 		width: 80%;
 		height: 100%;

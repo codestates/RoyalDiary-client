@@ -28,11 +28,11 @@ export default function Manual(): ReactElement {
 				<Ntitle>제목: 로얄 그림 일기장 사용 방법 공지</Ntitle>
 				<Ncontent>
 					안녕하십니까? <br />
-					사랑하는 로얄 스쿨 입학생 여러분. 로얄 스쿨에 온 것을 진심으로 환영합니다.
+					사랑하는 로얄 스쿨 입학생 여러분. 로얄 스쿨에 온 것을 진심으로 환영해요
 					<br />
-					로얄 그림 일기장은 옛 감성의 그림 일기로, 매일의 소중한 기억을 그림과 글로 기억하고자 탄생되었습니다. <br />
-					자신의 일기를 친구들과 공유할 수 있으며 서로의 일기에 선생님의 한 마디 같은 댓글과 선생님이 찍어주시던 <br />
-					스탬프로 소통할 수 있습니다. 스탬프를 받고, 또 친구들에게 스탬프를 찍어주며 응원해주세요! 💯
+					로얄 그림 일기장은 옛 감성의 그림 일기로, 매일의 소중한 기억을 그림과 글로 기억하고자 탄생되었어요 <br />
+					자신의 일기를 친구들과 공유할 수 있고, 서로의 일기에 따듯한 한마디 댓글과 스탬프를 찍어줄 수 있습니다 <br />
+					스탬프 갯수에 따라 맛있는 간식을 받을 수 있으니, 잊지마세요~ 💯
 				</Ncontent>
 			</Notification>
 			<Cmanual />
@@ -51,6 +51,7 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	box-shadow: 10px 5px 5px black;
 	@media only screen and (max-width: 1200px) {
 		width: 80%;
 		height: 100%;
@@ -144,8 +145,9 @@ const Ntitle = styled.div`
 const Ncontent = styled.div`
 	border-bottom: 3px solid black;
 	flex-grow: 0.2;
-	padding-top: 0.5rem;
-	padding-left: 1rem;
+	/* padding-top: 0.5rem;
+	padding-left: 1rem; */
+	padding: 1rem;
 	margin-left: -0.1rem;
 	margin-right: -0.2rem;
 	font-size: 1rem;

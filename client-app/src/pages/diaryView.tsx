@@ -111,6 +111,7 @@ const Main = styled.div`
 	height: 101%;
 	box-sizing: border-box;
 	flex-direction: column;
+	box-shadow: 10px 7px 5px black;
 	@media only screen and (max-width: 1200px) {
 		width: 93.5%;
 		height: 100%;
@@ -130,7 +131,7 @@ const CommentButton = styled.img.attrs({
 	margin-left: 3%;
 	&:hover {
 		cursor: pointer;
-		width: 110%;
+		/* width: 110%; */
 	}
 `;
 const DeleteButton = styled.img.attrs({
@@ -140,7 +141,7 @@ const DeleteButton = styled.img.attrs({
 	margin-left: 3%;
 	&:hover {
 		cursor: pointer;
-		width: 110%;
+		/* width: 110%; */
 	}
 `;
 const EditButton = styled.img.attrs({
@@ -150,7 +151,7 @@ const EditButton = styled.img.attrs({
 	margin-left: 3%;
 	&:hover {
 		cursor: pointer;
-		width: 110%;
+		/* width: 110%; */
 	}
 `;
 
@@ -173,6 +174,7 @@ const ImgBox = styled.div`
 	&:hover {
 		${ImgDescription} {
 			display: flex;
+			transition: display 1s ease-in;
 		}
 		cursor: pointer;
 	}
