@@ -69,7 +69,7 @@ export default function DiariesView(props: any): ReactElement {
 	return (
 		<Main>
 			<Content>
-				<Title>일기보기</Title>
+				<Title>나의일기</Title>
 				<Buttons>내가 작성한 일기를 볼 수 있어요</Buttons>
 			</Content>
 
@@ -96,6 +96,7 @@ export default function DiariesView(props: any): ReactElement {
 }
 
 const Main = styled.div`
+	/* border: 3px solid red; */
 	background: #f3f3e9;
 	display: flex;
 	flex-direction: column;
@@ -105,6 +106,7 @@ const Main = styled.div`
 	height: 89vh;
 	box-sizing: border-box;
 	border-right: 5px solid black;
+	box-shadow: 10px 5px 5px black;
 	@media only screen and (max-width: 1200px) {
 		width: 80%;
 		height: 100%;
@@ -127,7 +129,8 @@ const Content = styled.div`
 const Cards = styled.div`
 	width: 88%;
 	height: 75%;
-	border: 1px solid black;
+	border: 3px solid black;
+	border-radius: 1rem;
 	margin: 2% auto;
 	display: flex;
 	justify-content: center;
@@ -149,10 +152,9 @@ const Title = styled.span`
 
 const Buttons = styled.div`
 	margin-right: 11%;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	display: flex;
 	align-items: flex-end;
-	color: blue;
 `;
 
 const LeftBtn = styled.img.attrs({

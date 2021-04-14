@@ -602,6 +602,7 @@ const Button = styled.button`
 		cursor: pointer;
 		background: white;
 		color: black;
+		transition: all 1s;
 	}
 	@media only screen and (max-width: 380px) {
 		width: 5rem;

@@ -1,13 +1,11 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 interface isLoginProps {
 	isSignin: boolean;
 }
 
 export default function Mainnav(props: isLoginProps): ReactElement {
-	const history = useHistory();
 	const { isSignin } = props;
 	const [userNav, displayNav] = useState(false);
 	const colorType = {
@@ -126,6 +124,10 @@ const Navout = styled.a`
 	text-decoration: none;
 	color: black;
 	background: ${(props) => props.color};
+	:hover {
+		width: 4rem;
+		transition: width 0.5s ease-out;
+	}
 	@media only screen and (max-width: 480px) {
 		width: 4rem;
 	}

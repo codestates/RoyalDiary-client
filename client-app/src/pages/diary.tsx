@@ -257,6 +257,7 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	box-shadow: 10px 5px 5px black;
 	@media only screen and (max-width: 480px) {
 		/* margin-left: 1rem; */
 		min-width: 400px;
@@ -325,6 +326,7 @@ const Button = styled.button`
 		cursor: pointer;
 		background: black;
 		color: white;
+		transition: all 1s;
 	}
 	@media only screen and (max-width: 480px) {
 		/* margin-left: 1rem; */
@@ -355,6 +357,7 @@ const PublicBtn = styled.button`
 		cursor: pointer;
 		background: black;
 		color: white;
+		transition: all 1s;
 	}
 	@media only screen and (max-width: 480px) {
 		font-size: 0.8rem;
@@ -373,6 +376,7 @@ const PrivateBtn = styled.button`
 		cursor: pointer;
 		background: black;
 		color: white;
+		transition: all 1s;
 	}
 	@media only screen and (max-width: 480px) {
 		font-size: 0.8rem;

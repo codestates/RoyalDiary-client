@@ -52,6 +52,7 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: column;
 	/* flex-wrap: wrap; */
+	box-shadow: 10px 5px 5px black;
 	@media only screen and (max-width: 1200px) {
 		width: 100%;
 		height: 100%;

@@ -102,7 +102,8 @@ const Title = styled.div`
 	flex-grow: 0.4;
 	margin-top: 4%;
 	margin-left: 5.5%;
-	width: 82%;
+	padding-left: 1rem;
+	width: 79%;
 	height: 5%;
 	display: flex;
 	align-items: center;
@@ -128,13 +129,12 @@ const Option = styled.span`
 	align-items: center;
 `;
 const OptionContent = styled.span`
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	border-right: 2px solid black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 30%;
-	height: 100%;
+	width: 23%;
 
 	@media only screen and (max-width: 480px) {
 		font-size: 1rem;
@@ -146,8 +146,7 @@ const OptionContent2 = styled.span`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 30%;
-	height: 100%;
+	width: 4rem;
 
 	@media only screen and (max-width: 480px) {
 		font-size: 1rem;
@@ -183,9 +182,9 @@ const Content = styled.div`
 	font-family: "Nanum Brush Script", cursive;
 	text-transform: uppercase;
 	overflow: scroll;
-	font-size: 2rem;
-	letter-spacing: 1rem;
-	word-spacing: 1rem;
+	font-size: 1.8rem;
+	letter-spacing: 0.8rem;
+	/* word-spacing: 1rem; */
 	line-height: 2.5rem;
 	border-radius: 1rem;
 	height: 100%;
@@ -200,10 +199,5 @@ const Content = styled.div`
 `;
 
 const Img = styled.img`
-	width: 40%;
-	height: 60%;
-`;
-
-const ContentBox = styled.div`
-	width: 82%;
+	width: 3rem;
 `;

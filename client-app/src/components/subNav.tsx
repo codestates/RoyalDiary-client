@@ -81,13 +81,20 @@ const Dropbtn = styled.i`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 	img {
 		width: 2rem;
+		@media only screen and (max-width: 480px) {
+			width: 1.5rem;
+		}
 	}
 	:hover {
 		.dropdown-content {
 			display: block;
 		}
+	}
+	@media only screen and (max-width: 480px) {
+		right: 0;
 	}
 `;
 const Contents = styled.div`
